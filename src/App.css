@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
 
-.App {
-  position: relative;
-  /* z-index: -10; */
-}
-
 body{
   background-color: #16171B;
 }
@@ -17,4 +12,10 @@ body{
 .font-700{
   font-family: 'DM Sans', sans-serif;
   font-weight: 700;
+}
+
+.PhoneInputInput{
+  background-color: #16171B !important;
+  outline: none;
+  padding-left: 10px;
 }
