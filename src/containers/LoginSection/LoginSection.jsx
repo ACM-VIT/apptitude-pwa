@@ -19,7 +19,7 @@ const loginSection = () => {
       <div className="flex flex-col items-center">
         <div
           onClick={googleHandler}
-          className="flex w-96 xxs:w-80 xxs:px-6 h-14 rounded-md bg-primary mb-6 cursor-pointer"
+          className="flex w-96 xxs:w-80 xxs:px-6 h-14 rounded-md google mb-6 cursor-pointer"
         >
           <img
             className="pl-6 pr-20 xxs:pl-4 xxs:pr-10"

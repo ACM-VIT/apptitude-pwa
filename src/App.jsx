@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
 
 // Containers
 import LoginSection from "./containers/LoginSection/LoginSection";
+import PhoneNo from "./containers/OtpSection/PhoneNo";
 
 // Styling
 import "./App.css";
@@ -9,8 +11,11 @@ import "./App.css";
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <LoginSection />
+      <div>
+        <Switch>
+          <Route path="/phone" exact component={PhoneNo} />
+          <Route path="/" exact component={LoginSection} />
+        </Switch>
       </div>
     );
   }

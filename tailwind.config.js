@@ -12,7 +12,7 @@ module.exports = {
     extend: {
       backgroundColor: (theme) => ({
         ...theme("colors"),
-        primary: "#CD5D67",
+        primary: "#DBAB48",
       }),
     },
   },
