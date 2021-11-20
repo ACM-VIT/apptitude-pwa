@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import { Link } from "react-router-dom";
-// import CountDown from "../../components/countDown/countDown";
 
 const phoneNo = () => {
   const [value, setValue] = useState();
@@ -10,12 +8,10 @@ const phoneNo = () => {
 
   const otpHandler = () => {
     window.location.href = "/otp";
-    // CountDown.onStartTimer();
   };
 
   return (
     <div className="mt-28 mx-5">
-      {/* <div className="flex justify-center items-center"> */}
       <div className="xs:flex xs:flex-col xs:items-center sm:flex sm:flex-col sm:items-center">
         <div className="text-white font-700 text-3xl">Phone number</div>
         <div className="text-white font-400 text-sm mt-3 mb-1">
@@ -29,7 +25,6 @@ const phoneNo = () => {
             defaultCountry="IN"
           />
         </div>
-        {/* </div> */}
       </div>
       <div className="xs:flex xs:justify-center xs:items-center sm:flex sm:justify-center sm:items-center">
         <div
