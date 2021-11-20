@@ -3,7 +3,9 @@
 body{
   background-color: #16171B;
 }
-
+.google{
+  background-color: #4080EA;
+}
 .font-400{
   font-family: 'DM Sans', sans-serif;
   font-weight: 400;

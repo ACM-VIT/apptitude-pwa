@@ -20,7 +20,7 @@ const phoneNo = () => {
         <div>
           <PhoneInput
             value={value}
-            className="text-white w-96 xxs:w-72 h-14 px-2 rounded-md border border-red-400 "
+            className="text-white w-96 xxs:w-72 h-14 px-2 rounded-md border border-yellow-400 "
             onChange={setValue}
             defaultCountry="IN"
           />
