@@ -13,7 +13,15 @@ module.exports = {
       backgroundColor: (theme) => ({
         ...theme("colors"),
         primary: "#DBAB48",
+        main: "#16171B",
       }),
+
+      textColor: {
+        secondary: "#787878",
+      },
+      margin: {
+        416: "26rem",
+      },
     },
   },
   variants: {

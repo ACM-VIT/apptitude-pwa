@@ -26,13 +26,11 @@ const phoneNo = () => {
           />
         </div>
       </div>
-      <div className="flex items-center">
-        <div
-          onClick={otpHandler}
-          className="absolute bottom-20 flex w-96 h-14 xxs:w-72 rounded-md bg-primary cursor-pointer text-white font-400 items-center justify-center sm:mx-auto left-0 right-0 mx-5"
-        >
-          Get OTP
-        </div>
+      <div
+        onClick={otpHandler}
+        className="absolute bottom-10 flex w-96 h-14 xxs:w-72 rounded-md bg-primary cursor-pointer text-white font-400 items-center justify-center sm:mx-auto left-0 right-0 mx-5"
+      >
+        Get OTP
       </div>
     </div>
   );
