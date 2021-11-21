@@ -1,7 +1,7 @@
 /* eslint-disable react/button-has-type */
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import arrow from "../../assets/images/arrow.svg";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import ellipse from "../../assets/images/Ellipse1.svg";
 import team from "../../assets/images/team.svg";
 import "./TeamCreated.css";
@@ -9,15 +9,22 @@ import teammember from "../../assets/images/teammember.svg";
 import copy from "../../assets/images/copy.svg";
 
 const TeamCreated = function () {
-  const [copySuccess, setCopySuccess] = useState("");
-  const copyToClipBoard = async (copyMe) => {
-    try {
-      await navigator.clipboard.writeText(copyMe);
-      setCopySuccess("Copied!");
-      console.log(copyMe);
-    } catch (err) {
-      setCopySuccess("Failed to copy!");
-    }
+  const [copySuccess, setCopySuccess] = useState(false);
+  // const copyToClipBoard = async (copyMe) => {
+  //   try {
+  //     await navigator.clipboard.writeText(copyMe);
+  //     setCopySuccess("Copied!");
+  //     console.log(copyMe);
+  //   } catch (err) {
+  //     setCopySuccess("Failed to copy!");
+  //   }
+  // };
+  const teamCode = 54353;
+  const onCopyText = () => {
+    setCopySuccess(true);
+    setTimeout(() => {
+      setCopySuccess(false);
+    }, 1000);
   };
   return (
     <div className="mt-24 mx-3 sm:mx-0">
@@ -62,12 +69,18 @@ const TeamCreated = function () {
             >
               422560
             </button>{" "} */}
-          <button onClick={(e) => copyToClipBoard(e.target.innerText)}>
+          {/* <button onClick={(e) => copyToClipBoard(e.target.innerText)}>
             <div className="flex">
               422560
               <img src={copy} alt="copy" className="ml-2.5" />
             </div>
-          </button>
+          </button> */}
+          <CopyToClipboard text={teamCode} onCopy={onCopyText}>
+            <div className="flex">
+              {teamCode}
+              <img src={copy} alt="copy" className="ml-2.5" />
+            </div>
+          </CopyToClipboard>
         </div>
       </div>
 
