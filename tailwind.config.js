@@ -3,7 +3,7 @@ module.exports = {
   darkMode: false,
   theme: {
     screens: {
-      xxs: { min: "320px", max: "400px" },
+      xxs: { min: "320px", max: "425px" },
       sm: { min: "640px", max: "767px" },
       md: { min: "768px", max: "1023px" },
       lg: { min: "1024px", max: "1279px" },
@@ -14,6 +14,9 @@ module.exports = {
         ...theme("colors"),
         primary: "#DBAB48",
       }),
+      spacing: {
+        96: "27.75rem",
+      },
     },
   },
   variants: {
