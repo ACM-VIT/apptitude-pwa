@@ -24,7 +24,8 @@ module.exports = {
       },
       margin: {
         416: "26rem",
-      } 
+      },
+    },
   },
   variants: {
     extend: {},

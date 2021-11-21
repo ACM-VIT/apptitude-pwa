@@ -28,8 +28,9 @@ const CreateTeam = function () {
           <div>
             <input
               value={create}
-              className="text-white bg-transparent w-full h-14 px-2 rounded-md border border-yellow-400 "
+              className="text-white bg-transparent w-full h-14 px-2 rounded-md border border-yellow-400 focus:outline-none focus:border-yellow-400 "
               onChange={(e) => setName(e.target.value)}
+              placeholder="ex. Webtitude"
             />
           </div>
         </div>
