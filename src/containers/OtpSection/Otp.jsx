@@ -1,6 +1,8 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable prefer-template */
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Countdown from "react-countdown";
 
 // assets
 import BackArrow from "../../assets/images/backArrow.svg";
@@ -9,66 +11,51 @@ import BackArrow from "../../assets/images/backArrow.svg";
 import "./Otp.css";
 
 const otp = () => {
-  // OTP CountDown
-  const Ref = useRef(null);
-
-  const [timer, setTimer] = useState("0:00");
-
-  const getTimeRemaining = (e) => {
-    const total = Date.parse(e) - Date.parse(new Date());
-    const seconds = Math.floor((total / 1000) % 60);
-    const minutes = Math.floor((total / 1000 / 60) % 60);
-    return {
-      total,
-      minutes,
-      seconds,
-    };
-  };
-
-  const startTimer = (e) => {
-    const { total, minutes, seconds } = getTimeRemaining(e);
-    if (total >= 0) {
-      setTimer(minutes + ":" + (seconds > 9 ? seconds : "0" + seconds));
-    }
-  };
-
-  const clearTimer = (e) => {
-    setTimer("0:45");
-
-    if (Ref.current) clearInterval(Ref.current);
-    const id = setInterval(() => {
-      startTimer(e);
-    }, 1000);
-    Ref.current = id;
-  };
-
-  const getDeadTime = () => {
-    const deadline = new Date();
-
-    deadline.setSeconds(deadline.getSeconds() + 45);
-    return deadline;
-  };
-
-  const onStartTimer = () => {
-    clearTimer(getDeadTime());
-  };
-
-  const onClickReset = () => {};
+  const [minutesDisplay, setMinutesDisplay] = useState("");
+  const [secondsDisplay, setSecondsDisplay] = useState("");
 
   const resendHandler = () => {
-    clearTimer(getDeadTime());
+    window.location.href = "/otp";
   };
 
   const verifyHandler = () => {
     console.log("OPT button clicked");
   };
 
-  useEffect(() => {
-    clearTimer(getDeadTime());
+  const renderer = ({ minutes, seconds, completed }) => {
+    if (completed) {
+      setMinutesDisplay("0");
+      setSecondsDisplay("0");
+      return <span className="text-secondary font-400">0:00</span>;
+    }
+    if (seconds < 10) {
+      return `0:0${seconds}`;
+    }
+    return (
+      <div>
+        {minutes}:{seconds}
+      </div>
+    );
+  };
 
-    // window.onbeforeunload = function () {
-    // return false;
-    // };
+  const getLocalStorageValue = (s) => localStorage.getItem(s);
+
+  const [data, setData] = useState({ date: Date.now(), delay: 45000 });
+  const wantedDelay = 45000;
+
+  useEffect(() => {
+    const savedDate = getLocalStorageValue("end_date");
+    if (savedDate != null && !isNaN(savedDate)) {
+      const currentTime = Date.now();
+      const delta = parseInt(savedDate, 10) - currentTime;
+
+      if (delta > wantedDelay) {
+        if (localStorage.getItem("end_date").length > 0)
+          localStorage.removeItem("end_date");
+      } else {
+        setData({ date: currentTime, delay: delta });
+      }
+    }
   }, []);
 
   return (
@@ -88,12 +75,24 @@ const otp = () => {
             className="text-white outline-none bg-main w-96 xxs:w-full h-14 px-2 rounded-md border border-yellow-400 "
           />
         </div>
-        <div
-          className={`${
-            timer === "0:00" ? "text-secondary" : "text-white"
-          } flex justify-end mt-2 font-400`}
-        >
-          {timer}
+        <div className="flex text-white justify-end font-400">
+          <div>
+            <Countdown
+              date={data.date + data.delay}
+              renderer={renderer}
+              onStart={(delta) => {
+                if (localStorage.getItem("end_date") == null)
+                  localStorage.setItem(
+                    "end_date",
+                    JSON.stringify(data.date + data.delay)
+                  );
+              }}
+              onComplete={() => {
+                if (localStorage.getItem("end_date") != null)
+                  localStorage.removeItem("end_date");
+              }}
+            />
+          </div>
         </div>
       </div>
       <div className="xxs:w-full relative mt-416 bottom-20">
@@ -101,10 +100,10 @@ const otp = () => {
           <div
             onClick={resendHandler}
             className={`${
-              timer === "0:00"
+              minutesDisplay === "0" && secondsDisplay === "0"
                 ? "text-white cursor-pointer"
-                : "btn-disable text-secondary "
-            }flex justify-center items-center mb-4 font-400 text-center`}
+                : "text-secondary btn-disable"
+            } flex justify-center items-center mb-4 font-400 text-center`}
           >
             Resend OTP
           </div>

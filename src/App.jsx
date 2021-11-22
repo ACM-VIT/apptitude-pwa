@@ -9,6 +9,7 @@ import CreateTeam from "./containers/CreateTeam/CreateTeam";
 import TeamCreated from "./containers/TeamCreated/TeamCreated";
 import TeamJoined from "./containers/TeamJoined/TeamJoined";
 import otp from "./containers/OtpSection/Otp";
+import ProfileSection from "./containers/ProfileSection/ProfileSection";
 
 // Styling
 import "./App.css";
@@ -18,6 +19,7 @@ class App extends Component {
     return (
       <div>
         <Switch>
+          <Route path="/profile" exact component={ProfileSection} />
           <Route path="/otp" exact component={otp} />
           <Route path="/phone" exact component={PhoneNo} />
           <Route path="/" exact component={LoginSection} />

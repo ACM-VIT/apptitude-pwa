@@ -28,6 +28,7 @@ const phoneNo = () => {
       </div>
       <div className="xs:flex xs:justify-center xs:items-center sm:flex sm:justify-center sm:items-center">
         <div
+          id="getotp"
           onClick={otpHandler}
           className="xs:absolute xs:bottom-20 mt-416 flex w-96 h-14 xxs:w-full rounded-md bg-primary cursor-pointer text-white font-400 items-center justify-center"
         >
