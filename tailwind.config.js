@@ -16,7 +16,9 @@ module.exports = {
         primary: "#DBAB48",
         main: "#16171B",
       }),
-
+      spacing: {
+        96: "27.75rem",
+      },
       textColor: {
         secondary: "#787878",
       },
