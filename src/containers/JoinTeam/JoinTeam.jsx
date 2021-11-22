@@ -1,9 +1,35 @@
+/* eslint-disable no-restricted-syntax */
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import arrow from "../../assets/images/arrow.svg";
 
 const JoinTeam = function () {
   const [join, getName] = useState("");
+  const [error, setError] = useState("");
+  const code = [
+    {
+      code: 827984324,
+    },
+    {
+      code: 243243242,
+    },
+    {
+      code: 324324,
+    },
+  ];
+  function joinCode() {
+    if (join.length > 0) {
+      for (const i in code) {
+        if (join === code[i].code.toString()) {
+          setError("");
+          return;
+        }
+      }
+      setError("Team code does not exist");
+    } else {
+      setError("Please enter a code");
+    }
+  }
   return (
     <>
       <Link to="/createTeam">
@@ -32,8 +58,14 @@ const JoinTeam = function () {
               placeholder="ex. Webtitude"
             />
           </div>
+          <div>
+            <div className="text-red-400 text-sm font-400 mt-2">{error}</div>
+          </div>
         </div>
-        <div className="absolute bottom-20 flex  h-14 px-2 rounded-md bg-primary cursor-pointer text-white font-400 items-center justify-center left-2.5 right-2.5">
+        <div
+          onClick={() => joinCode()}
+          className="absolute bottom-20 flex  h-14 px-2 rounded-md bg-primary cursor-pointer text-white font-400 items-center justify-center left-2.5 right-2.5"
+        >
           Join Team
         </div>
       </div>
