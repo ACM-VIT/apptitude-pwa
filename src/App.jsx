@@ -10,6 +10,8 @@ import TeamCreated from "./containers/TeamCreated/TeamCreated";
 import TeamJoined from "./containers/TeamJoined/TeamJoined";
 import otp from "./containers/OtpSection/Otp";
 import ProfileSection from "./containers/ProfileSection/ProfileSection";
+import ProbStatements from "./containers/ProblemStatements/ProbStatements";
+import FeatureGenerator from "./containers/FeatureGenerator/FeatureGenerator";
 
 // Styling
 import "./App.css";
@@ -27,6 +29,8 @@ class App extends Component {
           <Route path="/createTeam" component={CreateTeam} />
           <Route path="/teamCreated" component={TeamCreated} />
           <Route path="/teamJoined" component={TeamJoined} />
+          <Route path="/problems" component={ProbStatements} />
+          <Route path="/features" component={FeatureGenerator} />
         </Switch>
       </div>
     );
