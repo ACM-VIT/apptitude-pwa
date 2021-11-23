@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Navbar from "../../components/Navbar/Navbar";
 
 const FeatureGenerator = function () {
   function generateFeature() {}
   return (
     <div className="mt-24">
-      <div className="flex flex-col w-full px-8">
+      <div className="flex flex-col w-full px-7">
         <div className="flex flex-row justify-between text-base xs:text-lg sm:text-xl">
           <Link to="/problems">
             <div className="text-white font-700 opacity-50 hover:opacity-100">
@@ -25,10 +26,11 @@ const FeatureGenerator = function () {
       </div>
       <div
         onClick={generateFeature}
-        className="absolute bottom-20 flex h-14 px-2 rounded-md bg-primary cursor-pointer text-white font-400 items-center justify-center left-2.5 right-2.5"
+        className="absolute flex items-center justify-center bottom-32 h-14 px-2 rounded-md bg-primary cursor-pointer text-black font-400 left-2.5 right-2.5"
       >
         Generate features
       </div>
+      <Navbar />
     </div>
   );
 };
