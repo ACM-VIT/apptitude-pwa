@@ -6,7 +6,7 @@ const FeatureGenerator = function () {
   return (
     <div className="mt-24">
       <div className="flex flex-col w-full px-8">
-        <div className="flex flex-row justify-between text-base">
+        <div className="flex flex-row justify-between text-base xs:text-lg sm:text-xl">
           <Link to="/problems">
             <div className="text-white font-700 opacity-50 hover:opacity-100">
               Problem statements
