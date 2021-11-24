@@ -19,7 +19,7 @@ const Timeline = function () {
           className="vertical-timeline-element"
           contentStyle={{
             background: "rgba(219,171,72)",
-            color: "#fff",
+            color: "#000000",
             marginRight: "10px",
             marginLeft: "40px",
             borderRadius: "16px",
@@ -50,7 +50,7 @@ const Timeline = function () {
           className="vertical-timeline-element"
           contentStyle={{
             background: "rgba(219,171,72)",
-            color: "#fff",
+            color: "#000000",
             marginRight: "10px",
             marginLeft: "40px",
             borderRadius: "16px",
@@ -81,7 +81,7 @@ const Timeline = function () {
           className="vertical-timeline-element"
           contentStyle={{
             background: "rgba(219,171,72)",
-            color: "#fff",
+            color: "#000000",
             marginRight: "10px",
             marginLeft: "40px",
             borderRadius: "16px",
