@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 import firebase from "firebase/compat/app";
 import { getAnalytics } from "firebase/analytics";
-// import * as firebase from "firebase/app";
 import "firebase/compat/auth";
 import dotenv from "dotenv";
 dotenv.config();
@@ -26,8 +25,16 @@ const googleProvider = new firebase.auth.GoogleAuthProvider();
 export const signInWithGoogle = () => {
   auth
     .signInWithPopup(googleProvider)
-    .then((res) => {
-      console.log(res.user);
+    .then(() => {
+      auth.currentUser
+        .getIdToken(true)
+        .then((idToken) => {
+          sessionStorage.setItem("AM", idToken);
+          window.location.href = "/phone";
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
     })
     .catch((error) => {
       console.log(error.message);

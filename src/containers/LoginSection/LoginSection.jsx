@@ -37,7 +37,7 @@ const loginSection = () => {
             Sign in with Google
           </button>
         </div>
-        <div
+        {/* <div
           onClick={appleHandler}
           className="flex w-96 xxs:px-6 xs:w-80 xxs:w-full h-14 rounded-md bg-white mb-6 cursor-pointer"
         >
@@ -52,7 +52,7 @@ const loginSection = () => {
           >
             Sign in with Apple
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

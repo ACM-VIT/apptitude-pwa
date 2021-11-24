@@ -3,6 +3,13 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 
 const phoneNo = () => {
+  if (
+    sessionStorage.getItem("AM") === null ||
+    sessionStorage.getItem("AM") === ""
+  ) {
+    window.location.href = "/";
+  }
+
   const [value, setValue] = useState();
   console.log(value);
 

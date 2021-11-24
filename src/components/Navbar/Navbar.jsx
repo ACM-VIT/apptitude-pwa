@@ -18,13 +18,14 @@ import uploadfill from "../../assets/images/uploadfill.svg";
 
 const Navbar = () => {
   const { pathname } = window.location;
+  console.log(pathname);
   const path = pathname === "/" ? "dashboard" : pathname.substr(1);
   const pagePath = path.split("/")[0];
   console.log(pagePath);
   return (
     <div className="absolute bottom-0 navbg h-24 w-full">
       <div className="flex justify-between xxs:mx-5 xs:mx-5 sm:mx-20 items-center h-20">
-        <Link to="/">
+        <Link to="/timeline">
           <img
             className={pagePath === "timeline" ? "" : "hidden"}
             src={clockfill}
@@ -36,43 +37,67 @@ const Navbar = () => {
             alt="timeline"
           />
         </Link>
-        <Link to="/">
+        <Link to="/problems">
           <img
-            className={pagePath === "/" ? "" : "hidden"}
+            className={
+              pagePath === "problems" ||
+              pagePath === "features" ||
+              pagePath === "countdown"
+                ? ""
+                : "hidden"
+            }
             src={categoryfill}
             alt="category"
           />
           <img
-            className={pagePath === "/" ? "hidden" : ""}
+            className={
+              pagePath === "problems" ||
+              pagePath === "features" ||
+              pagePath === "countdown"
+                ? "hidden"
+                : ""
+            }
             src={category}
             alt="category"
           />
         </Link>
-        <Link to="/">
+        <Link to="/submission">
           <img
-            className={pagePath === "/" ? "" : "hidden"}
+            className={pagePath === "submission" ? "" : "hidden"}
             src={uploadfill}
             alt="upload"
           />
           <img
-            className={pagePath === "/" ? "hidden" : ""}
+            className={pagePath === "submission" ? "hidden" : ""}
             src={upload}
             alt="upload"
           />
         </Link>
-        <Link to="/">
+        <Link to="/sponsors">
           <img
-            className={pagePath === "/" ? "" : "hidden"}
+            className={
+              pagePath === "sponsors" ||
+              pagePath === "about" ||
+              pagePath === "prizes"
+                ? ""
+                : "hidden"
+            }
             src={docfill}
             alt="doc"
           />
           <img
-            className={pagePath === "/" ? "hidden" : ""}
+            className={
+              pagePath === "sponsors" ||
+              pagePath === "about" ||
+              pagePath === "prizes"
+                ? "hidden"
+                : ""
+            }
             src={doc}
             alt="doc"
           />
         </Link>
-        <Link to="/">
+        <Link to="/profile">
           <img
             className={pagePath === "profile" ? "" : "hidden"}
             src={profilefill}
