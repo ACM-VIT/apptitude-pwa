@@ -1,0 +1,11 @@
+.grad {
+  background: -webkit-linear-gradient(
+    116.71deg,
+    #8d5d14 -8.37%,
+    #ffd060 48.6%,
+    #8d5d14 102.74%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
