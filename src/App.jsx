@@ -9,6 +9,9 @@ import CreateTeam from "./containers/CreateTeam/CreateTeam";
 import TeamCreated from "./containers/TeamCreated/TeamCreated";
 import TeamJoined from "./containers/TeamJoined/TeamJoined";
 import otp from "./containers/OtpSection/Otp";
+import Sponsers from "./containers/Sponsers/Sponsers";
+import Prizes from "./containers/Sponsers/Prizes";
+import AboutUs from "./containers/Sponsers/AboutUs";
 
 // Styling
 import "./App.css";
@@ -25,6 +28,9 @@ class App extends Component {
           <Route path="/createTeam" component={CreateTeam} />
           <Route path="/teamCreated" component={TeamCreated} />
           <Route path="/teamJoined" component={TeamJoined} />
+          <Route path="/sponsers" component={Sponsers} />
+          <Route path="/prizes" component={Prizes} />
+          <Route path="/aboutUs" component={AboutUs} />
         </Switch>
       </div>
     );
