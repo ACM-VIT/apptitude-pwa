@@ -1,6 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import arrow from "../../assets/images/arrow.svg";
+import firstprize from "../../assets/images/firstprize.svg";
+import secondprize from "../../assets/images/secondprize.svg";
+import thirdprize from "../../assets/images/thirdprize.svg";
+import celotrack from "../../assets/images/celotrack.svg";
+import bestfresher from "../../assets/images/bestfresher.svg";
+import inhack from "../../assets/images/inhack.svg";
 
 const Sponsers = function () {
   return (
@@ -14,7 +20,7 @@ const Sponsers = function () {
       </Link>
       <div className="mt-28 mx-3 sm:mx-0">
         <div className="flex flex-col w-full">
-          <div className="flex flex-row justify-between px-10">
+          <div className="flex flex-row justify-between px-10 mb-10">
             <div className="text-secondary text-white font-400 text-1xl pt-1.5 ">
               <Link to="/sponsers">Sponsers</Link>
             </div>
@@ -24,6 +30,34 @@ const Sponsers = function () {
             <div className="text-secondary text-white font-400 text-1xl pt-1.5 ">
               <Link to="/aboutUs">About Us</Link>
             </div>
+          </div>
+          <div className="flex flex-col justify-center items-center">
+            <img
+              src={firstprize}
+              alt="First Prize"
+              className="w-40 h-40 mb-8"
+            />
+            <img
+              src={secondprize}
+              alt="Second Prize"
+              className="w-40 h-40 mb-8"
+            />
+            <img
+              src={thirdprize}
+              alt="Third Prize"
+              className="w-40 h-40 mb-8"
+            />
+            <img
+              src={celotrack}
+              alt="Celo Sponser Track"
+              className="w-40 h-40 mb-8"
+            />
+            <img
+              src={bestfresher}
+              alt="Best Fresher's Team"
+              className="w-40 h-40 mb-8"
+            />
+            <img src={inhack} alt="In-hack Event" className="w-40 h-40 mb-8" />
           </div>
         </div>
       </div>
