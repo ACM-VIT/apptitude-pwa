@@ -27,7 +27,14 @@ export const signInWithGoogle = () => {
   auth
     .signInWithPopup(googleProvider)
     .then((res) => {
-      console.log(res.user);
+      auth.currentUser
+        .getIdToken(true)
+        .then((idToken) => {
+          console.log("Token");
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
     })
     .catch((error) => {
       console.log(error.message);
