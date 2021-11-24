@@ -31,7 +31,7 @@ class App extends Component {
           <Route path="/" exact component={LoginSection} />
           <Route path="/sponsers" component={Sponsers} />
           <Route path="/prizes" component={Prizes} />
-          <Route path="/aboutUs" component={AboutUs} />
+          <Route path="/aboutus" component={AboutUs} />
           <Route path="/jointeam" component={JoinTeam} />
           <Route path="/createteam" component={CreateTeam} />
           <Route path="/teamcreated" component={TeamCreated} />

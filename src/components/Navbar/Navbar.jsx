@@ -23,7 +23,7 @@ const Navbar = () => {
   const pagePath = path.split("/")[0];
   console.log(pagePath);
   return (
-    <div className="absolute bottom-0 navbg h-24 w-full">
+    <div className="fixed bottom-0 navbg h-24 w-full">
       <div className="flex justify-between xxs:mx-5 xs:mx-5 sm:mx-20 items-center h-20">
         <Link to="/timeline">
           <img
@@ -73,11 +73,11 @@ const Navbar = () => {
             alt="upload"
           />
         </Link>
-        <Link to="/sponsors">
+        <Link to="/sponsers">
           <img
             className={
-              pagePath === "sponsors" ||
-              pagePath === "about" ||
+              pagePath === "sponsers" ||
+              pagePath === "aboutus" ||
               pagePath === "prizes"
                 ? ""
                 : "hidden"
@@ -87,8 +87,8 @@ const Navbar = () => {
           />
           <img
             className={
-              pagePath === "sponsors" ||
-              pagePath === "about" ||
+              pagePath === "sponsers" ||
+              pagePath === "aboutus" ||
               pagePath === "prizes"
                 ? "hidden"
                 : ""
