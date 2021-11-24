@@ -42,7 +42,7 @@ const countdown = () => {
       <Countdown
         date={data.date + data.delay}
         renderer={renderer}
-        onStart={(delta) => {
+        onStart={() => {
           if (localStorage.getItem("end_date") == null)
             localStorage.setItem(
               "end_date",
