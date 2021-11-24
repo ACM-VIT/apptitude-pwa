@@ -1,0 +1,14 @@
+.vertical-timeline-custom-line::before {
+  background: #fff;
+  width: 2px;
+  margin-left: 2px;
+}
+
+.vertical-timeline-custom-line
+  .vertical-timeline-element
+  .vertical-timeline-element-icon {
+  box-shadow: 0 0 0 10px #16171b, inset 0 2px 0 rgba(0, 0, 0, 0.08),
+    0 3px 0 4px rgba(0, 0, 0, 0.05);
+  height: 12px;
+  width: 12px;
+}
