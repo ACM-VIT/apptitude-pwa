@@ -1,16 +1,9 @@
 .container {
-  margin-top: 7rem;
+  margin-top: 2.5rem;
   margin-bottom: 2rem;
   position: relative;
   /* z-index: -10; */
   color: white;
-}
-
-.tab {
-  padding: 1em;
-  justify-content: center;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .tabscontainer {

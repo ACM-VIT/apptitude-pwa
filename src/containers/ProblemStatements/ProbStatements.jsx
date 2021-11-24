@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Data from "./Data";
 import "./ProbStatements.css";
 import Navbar from "../../components/Navbar/Navbar";
+import Tab from "../../components/Tab/Tab";
 
 const ProbStatements = function () {
   return (
@@ -24,9 +25,7 @@ const ProbStatements = function () {
         <article id="problems" className="container">
           <div className="tabscontainer">
             {Data.map((ques) => (
-              <li className="tabs" key={ques.id}>
-                question={ques.question}
-              </li>
+              <Tab key={ques.id} id={ques.id} title={ques.question} />
             ))}
           </div>
         </article>

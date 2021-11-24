@@ -11,4 +11,8 @@ export default [
     id: "three",
     question: "Session on Basics of React Native",
   },
+  {
+    id: "three",
+    question: "Session on Basics of React Native",
+  },
 ];
