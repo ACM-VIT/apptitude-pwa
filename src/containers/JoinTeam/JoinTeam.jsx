@@ -32,7 +32,7 @@ const JoinTeam = function () {
   }
   return (
     <>
-      <Link to="/createTeam">
+      <Link to="/createteam">
         <img
           src={arrow}
           alt="arrow"
@@ -44,7 +44,7 @@ const JoinTeam = function () {
           <div className="flex flex-row justify-between ">
             <div className="text-white font-700 text-2xl">Join Team</div>
             <div className=" text-white font-400 text-1xl pt-1.5 border-b border-yellow-400">
-              <Link to="/createTeam">Create Team</Link>
+              <Link to="/createteam">Create Team</Link>
             </div>
           </div>
           <div className="text-white font-400 text-sm mt-3 mb-1">

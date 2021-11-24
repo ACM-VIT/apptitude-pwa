@@ -15,7 +15,7 @@ const TeamJoined = function () {
           Websneef
         </div>
         <div>
-          <div className="text-white font-400 text-sm">Created</div>
+          <div className="text-white font-400 text-sm">Joined</div>
         </div>
         <img
           src={ellipse}

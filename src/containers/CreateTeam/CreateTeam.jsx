@@ -1,26 +1,42 @@
 /* eslint-disable no-restricted-syntax */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+// import axios from "axios";
 import arrow from "../../assets/images/arrow.svg";
 
 const CreateTeam = function () {
   const [create, setName] = useState("");
-  const [error, setError] = useState("");
-  const name = [
-    {
-      name: "vijay",
-    },
-    {
-      name: "anil",
-    },
-    {
-      name: "kumble",
-    },
-  ];
+  const [errors, setError] = useState("");
+  const [data, setData] = useState([]);
+  // const data = [
+  //   {
+  //     name: "vijay",
+  //   },
+  //   {
+  //     name: "anil",
+  //   },
+  //   {
+  //     name: "kumble",
+  //   },
+  // ];
+  // useEffect(() => {
+  //   axios
+  //     .get("https://apptitude2021.herokuapp.com/team/", {
+  //       headers: {
+  //         "content-type": "application/json",
+  //         // Authorization: `Bearer ${TK}`,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       const something = response.data;
+  //       setData(something.arr);
+  //     })
+  //     .catch((error) => console.error(error.response.data));
+  // }, []);
   function generateCode() {
     if (create.length > 0) {
-      for (const i in name) {
-        if (create === name[i].name) {
+      for (const i in data) {
+        if (create === data[i].name) {
           setError("Team already exists");
           return;
         }
@@ -29,10 +45,27 @@ const CreateTeam = function () {
     } else {
       setError("Please enter a team name");
     }
+    // axios
+    //   .post(
+    //     "https://apptitude2021.herokuapp.com/team",
+    //     {
+    //       name: create,
+    //     },
+    //     {
+    //       headers: {
+    //         "content-type": "application/json",
+    //         // authorization: `Bearer ${token}`,
+    //       },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((error) => {});
   }
   return (
     <>
-      <Link to="/joinTeam">
+      <Link to="/jointeam">
         <img
           src={arrow}
           alt="arrow"
@@ -44,7 +77,7 @@ const CreateTeam = function () {
           <div className="flex flex-row justify-between ">
             <div className="text-white font-700 text-2xl">Create Team</div>
             <div className=" text-white font-400 text-1xl pt-1.5 border-b border-yellow-400">
-              <Link to="/joinTeam">Join Team</Link>
+              <Link to="/jointeam">Join Team</Link>
             </div>
           </div>
           <div className="text-white font-400 text-sm mt-3 mb-1">
@@ -59,7 +92,7 @@ const CreateTeam = function () {
             />
           </div>
           <div>
-            <div className="text-red-400 text-sm font-400 mt-2">{error}</div>
+            <div className="text-red-400 text-sm font-400 mt-2">{errors}</div>
           </div>
         </div>
         <div

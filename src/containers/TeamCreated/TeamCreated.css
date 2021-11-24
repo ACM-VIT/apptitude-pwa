@@ -18,3 +18,28 @@
   z-index:-1;
 
 }
+
+@media screen and (min-width: 320px) and (max-width: 400px) and (min-height: 700px) {
+  .vertical-break-team{
+    height: 15rem;
+    top: 16rem;
+  }
+  .vertical-break-teammember{
+    top: 15rem;
+  }
+  .vertical-break-ellipse{
+    top: 7rem;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 400px) and (min-height: 500px) and (max-height: 570px) {
+  .vertical-break-team{
+    height: 10rem;
+    top: 12rem;
+  }
+  .vertical-break-teammember{
+    top: 10rem;
+  }
+  .vertical-break-ellipse{
+    top: 4rem;
+  }
+}
