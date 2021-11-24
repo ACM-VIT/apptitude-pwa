@@ -10,6 +10,9 @@ import TeamCreated from "./containers/TeamCreated/TeamCreated";
 import TeamJoined from "./containers/TeamJoined/TeamJoined";
 import otp from "./containers/OtpSection/Otp/Otp";
 import ProfileSection from "./containers/ProfileSection/ProfileSection";
+import ProbStatements from "./containers/ProblemStatements/ProbStatements";
+import FeatureGenerator from "./containers/FeatureGenerator/FeatureGenerator";
+import Countdown from "./containers/Countdown/Countdown";
 
 // Styling
 import "./App.css";
@@ -23,10 +26,13 @@ class App extends Component {
           <Route path="/otp" exact component={otp} />
           <Route path="/phone" exact component={PhoneNo} />
           <Route path="/" exact component={LoginSection} />
-          <Route path="/joinTeam" component={JoinTeam} />
-          <Route path="/createTeam" component={CreateTeam} />
-          <Route path="/teamCreated" component={TeamCreated} />
-          <Route path="/teamJoined" component={TeamJoined} />
+          <Route path="/jointeam" component={JoinTeam} />
+          <Route path="/createteam" component={CreateTeam} />
+          <Route path="/teamcreated" component={TeamCreated} />
+          <Route path="/teamjoined" component={TeamJoined} />
+          <Route path="/problems" component={ProbStatements} />
+          <Route path="/features" component={FeatureGenerator} />
+          <Route path="/countdown" component={Countdown} />
         </Switch>
       </div>
     );

@@ -27,7 +27,7 @@ const TeamCreated = function () {
     }, 1000);
   };
   return (
-    <div className="mt-24 mx-3 sm:mx-0">
+    <div className="xxs:mt-16 xs:mt-24 mx-3 sm:mx-0">
       <div className="flex flex-col w-full justify-center items-center">
         <div className="text-white font-400 text-base">Team</div>
         <div className="text-white font-700 text-4xl mb-px mt-0.5">
@@ -39,17 +39,17 @@ const TeamCreated = function () {
         <img
           src={ellipse}
           alt="ellipse"
-          className="absolute w-96 h-96 top-32 zindexminus"
+          className="absolute w-96 h-96 top-20 vertical-break-ellipse xs:top-32 zindexminus"
         />
         <img
           src={teammember}
           alt="team"
-          className="absolute w-44 h-32 img top-56 zindexguy"
+          className="absolute w-44 h-32 vertical-break-teammember img top-48 xs:top-60 zindexguy"
         />
         <img
           src={team}
           alt="team"
-          className="absolute w-64 h-44 img top-64 zindex"
+          className="absolute w-64 h-40 vertical-break-team xs:h-60 img top-56 xs:top-64 zindex"
         />
       </div>
       {/* <img
