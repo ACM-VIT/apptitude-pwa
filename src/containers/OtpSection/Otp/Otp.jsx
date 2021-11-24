@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Countdown from "react-countdown";
 
 // assets
-import BackArrow from "../../assets/images/backArrow.svg";
+import BackArrow from "../../../assets/images/backArrow.svg";
 
 // Styles
 import "./Otp.css";
@@ -59,11 +59,11 @@ const otp = () => {
   }, []);
 
   return (
-    <div className="mt-12 mx-5">
+    <div className="relative h-screen pt-12 mx-5">
       <Link to="/phone">
         <img className="mb-8" src={BackArrow} alt="arrow" />
       </Link>
-      <div className="xs:flex xs:flex-col xs:items-center sm:flex sm:flex-col sm:items-center">
+      <div className="sm:flex sm:flex-col sm:items-center">
         <div className="text-white font-700 text-3xl">Enter OTP</div>
         <div className="text-white font-400 text-sm mt-3 mb-1">
           OTP has been sent to your mobile no.
@@ -72,7 +72,7 @@ const otp = () => {
         <div>
           <input
             type="text"
-            className="text-white outline-none bg-main w-96 xxs:w-full h-14 px-2 rounded-md border border-yellow-400 "
+            className="text-white outline-none bg-main w-96 xs:w-full xxs:w-full h-14 px-2 rounded-md border border-yellow-400"
           />
         </div>
         <div className="flex text-white justify-end font-400">
@@ -95,8 +95,8 @@ const otp = () => {
           </div>
         </div>
       </div>
-      <div className="xxs:w-full relative mt-416 bottom-20">
-        <div className="flex flex-col">
+      <div className="">
+        <div className="absolute bottom-10 flex flex-col items-center justify-center left-0 right-0">
           <div
             onClick={resendHandler}
             className={`${
@@ -109,7 +109,7 @@ const otp = () => {
           </div>
           <div
             onClick={verifyHandler}
-            className="flex w-96 h-14 xxs:w-full rounded-md bg-primary cursor-pointer text-white font-400 items-center justify-center xs:mx-auto sm:mx-auto"
+            className="flex w-96 h-14 xs:w-full xxs:w-full rounded-md bg-primary cursor-pointer text-white font-400 items-center justify-center xs:mx-auto sm:mx-auto"
           >
             Verify
           </div>

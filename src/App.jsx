@@ -3,12 +3,12 @@ import { Route, Switch } from "react-router-dom";
 
 // Containers
 import LoginSection from "./containers/LoginSection/LoginSection";
-import PhoneNo from "./containers/OtpSection/PhoneNo";
+import PhoneNo from "./containers/OtpSection/PhoneNo/PhoneNo";
 import JoinTeam from "./containers/JoinTeam/JoinTeam";
 import CreateTeam from "./containers/CreateTeam/CreateTeam";
 import TeamCreated from "./containers/TeamCreated/TeamCreated";
 import TeamJoined from "./containers/TeamJoined/TeamJoined";
-import otp from "./containers/OtpSection/Otp";
+import otp from "./containers/OtpSection/Otp/Otp";
 import ProfileSection from "./containers/ProfileSection/ProfileSection";
 
 // Styling
