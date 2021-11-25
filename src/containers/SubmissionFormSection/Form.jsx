@@ -5,6 +5,7 @@ import CountDown from "../../components/CountDown/CountDown";
 
 // Styles
 import "./Form.css";
+import Navbar from "../../components/Navbar/Navbar";
 
 const secret = sessionStorage.getItem("AM");
 const submissionForm = () => {
@@ -60,49 +61,45 @@ const submissionForm = () => {
   };
 
   return (
-    <div className="container p-2 h-screen flex flex-col items-center justify-center xs:flex xs:flex-col xs:items-center xs:justify-center">
-      <div className="flex justify-between w-80">
-        <span className="text-white text-4xl">Submission</span>
+    <div className=" pt-28 mx-5 h-screen flex flex-col items-center justify-start">
+      <div className="flex justify-between w-full max-w-96">
+        <span className="text-white font-700 text-3xl">Submission</span>
         <span
           className={`mt-2 text-${timer}-500 text-sm flex justify-center items-center float-right align-bottom`}
         >
           <CountDown date="2021-11-25T12:00:00" />
         </span>
       </div>
-      <div className="h-4/6">
+      <div className="mt-5 flex w-full flex-col justify-between h-full">
         <div>
           <div className="py-5">
-            <div className="text-white">Google Drive Link</div>
+            <div className="text-white mb-2">Google Drive Link</div>
             <input
               id="driveLink"
               value={googleDriveURL}
               onChange={(e) => setGoogleDriveURL(e.target.value)}
-              className="outline-none text-white bg-main w-80 xs:w-80 xxs:w-80 h-10 px-8 rounded-md border border-yellow-400 flex justify-center items-center center align-top	"
+              className="outline-none text-white bg-main w-full max-w-96 h-10 px-8 rounded-md border border-yellow-400 flex justify-center items-center center align-top	"
               type="text"
             />
           </div>
           <div className="submission-form__body__form__input-group py-5">
-            <div className="text-white">Github Repo Link</div>
+            <div className="text-white mb-2">Github Repo Link</div>
             <input
               value={githubURL}
               onChange={(e) => setGithubURL(e.target.value)}
               id="repoLink"
-              className="outline-none text-white bg-main w-80 xs:w-80 xxs:w-80 h-10 px-8 rounded-md border border-yellow-400"
+              className="outline-none w-full text-white bg-main h-10 px-8 rounded-md border border-yellow-400"
             />
           </div>
         </div>
-      </div>
-      <div className="submission-form__footer flex">
-        <div className="submission-form__footer__button flex">
-          <button
-            type="submit"
-            onClick={() => submitForm()}
-            className="bg-yellow-400 font-700 text-lg w-full h-10 flex xxs:w-full rounded-md"
-          >
-            Submit
-          </button>
+        <div
+          onClick={() => submitForm()}
+          className="bg-yellow-400 font-700 text-lg w-full h-14 flex justify-center items-center rounded-md mb-32"
+        >
+          Submit
         </div>
       </div>
+      <Navbar />
     </div>
   );
 };
