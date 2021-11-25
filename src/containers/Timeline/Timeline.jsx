@@ -27,9 +27,13 @@ const Timeline = function () {
 
   useEffect(() => {
     axios
-      .get("https://apptitude2021.herokuapp.com/timeline", {
-        headers,
-      })
+      .get(
+        "https://apptitude2021.herokuapp.com/timeline",
+        {},
+        {
+          headers,
+        }
+      )
       .then((response) => {
         const timeline = response.data;
         setData1(timeline.data.day1);
@@ -40,7 +44,7 @@ const Timeline = function () {
   }, []);
 
   return (
-    <div className="pt-16">
+    <div className="pt-16 scrollbar">
       <div className="text-white text-3xl font-700 text-3xl pl-8 pb-7">
         Timeline
       </div>
