@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
+import { SnackbarProvider } from "notistack";
 import App from "./App";
 
 const app = (
@@ -11,6 +12,8 @@ const app = (
 );
 
 ReactDOM.render(
-  <React.StrictMode>{app}</React.StrictMode>,
+  <SnackbarProvider maxSnack={2}>
+    <React.StrictMode>{app}</React.StrictMode>
+  </SnackbarProvider>,
   document.getElementById("root")
 );

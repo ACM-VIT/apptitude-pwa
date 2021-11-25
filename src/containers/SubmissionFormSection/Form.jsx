@@ -26,6 +26,31 @@ const submissionForm = () => {
     return regex.test(url);
   };
 
+  // regex to check if URL is of google drive
+  const checkGoogleDriveURL = (url) => {
+    const regex = /^(https?:\/\/)?(www\.)?drive\.google\.com\/.+/;
+    return regex.test(url);
+  };
+
+  const [errorMessageG, setErrorMessageG] = useState("");
+  const [errorMessageD, setErrorMessageD] = useState("");
+
+  const validate = (value, link) => {
+    if (link === "github") {
+      if (checkGithubURL(value)) {
+        setErrorMessageG("Is Valid URL");
+        setGithubURL(value);
+      } else {
+        setErrorMessageG("Is Not Valid");
+      }
+    } else if (checkGoogleDriveURL(value)) {
+      setErrorMessageD("Is Valid URL");
+      setGoogleDriveURL(value);
+    } else {
+      setErrorMessageD("Is Not Valid URL");
+    }
+  };
+
   useEffect(() => {
     // color code the timer
     const today = new Date();
@@ -44,15 +69,17 @@ const submissionForm = () => {
      * make the request to backend to submit the github and video
      */
     axios
-      .post(
-        "https://apptitude2021.herokuapp.com/submit/",
+      .put(
+        "https://apptitude2021.herokuapp.com/submit",
         {
           github: githubURL,
           video: googleDriveURL,
         },
         {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${secret}`,
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${secret}`,
+          },
         }
       )
       .then((response) => {
@@ -75,21 +102,40 @@ const submissionForm = () => {
           <div className="py-5">
             <div className="text-white mb-2">Google Drive Link</div>
             <input
-              id="driveLink"
-              value={googleDriveURL}
-              onChange={(e) => setGoogleDriveURL(e.target.value)}
-              className="outline-none text-white bg-main w-full max-w-96 h-10 px-8 rounded-md border border-yellow-400 flex justify-center items-center center align-top	"
               type="text"
+              onChange={(e) => validate(e.target.value, "googledrive")}
+              id="driveLink"
+              className="outline-none text-white bg-main w-full
+              max-w-96 h-10 px-8 rounded-md border border-yellow-400 flex
+              justify-center items-center center align-top "
             />
+            <span
+              style={{
+                fontWeight: "bold",
+                color: "red",
+              }}
+            >
+              {errorMessageD}
+            </span>
           </div>
           <div className="submission-form__body__form__input-group py-5">
             <div className="text-white mb-2">Github Repo Link</div>
             <input
-              value={githubURL}
-              onChange={(e) => setGithubURL(e.target.value)}
-              id="repoLink"
-              className="outline-none w-full text-white bg-main h-10 px-8 rounded-md border border-yellow-400"
+              type="text"
+              onChange={(e) => validate(e.target.value, "github")}
+              id="driveLink"
+              className="outline-none text-white bg-main w-full
+              max-w-96 h-10 px-8 rounded-md border border-yellow-400 flex
+              justify-center items-center center align-top "
             />
+            <span
+              style={{
+                fontWeight: "bold",
+                color: "red",
+              }}
+            >
+              {errorMessageG}
+            </span>
           </div>
         </div>
         <div
