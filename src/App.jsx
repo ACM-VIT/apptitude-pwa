@@ -15,6 +15,7 @@ import ProfileSection from "./containers/ProfileSection/ProfileSection";
 // import ProbStatements from "./containers/ProblemStatements/ProbStatements";
 import FeatureGenerator from "./containers/FeatureGenerator/FeatureGenerator";
 import Countdown from "./containers/Countdown/Countdown";
+import Timeline from "./containers/Timeline/Timeline";
 import SubmissionPage from "./containers/SubmissionFormSection/Form";
 
 // Styling
@@ -39,6 +40,7 @@ class App extends Component {
           {/* <Route path="/problems" component={ProbStatements} /> */}
           <Route path="/features" component={FeatureGenerator} />
           <Route path="/countdown" component={Countdown} />
+          <Route path="/timeline" component={Timeline} />
         </Switch>
       </div>
     );
