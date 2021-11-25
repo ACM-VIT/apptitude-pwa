@@ -1,15 +1,19 @@
 /* eslint-disable react/button-has-type */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import ellipse from "../../assets/images/Ellipse1.svg";
 import team from "../../assets/images/team.svg";
 import "./TeamCreated.css";
 import teammember from "../../assets/images/teammember.svg";
 import copy from "../../assets/images/copy.svg";
+const secret = sessionStorage.getItem("AM");
 
 const TeamCreated = function () {
   const [copySuccess, setCopySuccess] = useState(false);
+  const [name, setName] = useState("");
+  const [teamCode, setCode] = useState("");
   // const copyToClipBoard = async (copyMe) => {
   //   try {
   //     await navigator.clipboard.writeText(copyMe);
@@ -19,7 +23,22 @@ const TeamCreated = function () {
   //     setCopySuccess("Failed to copy!");
   //   }
   // };
-  const teamCode = 54353;
+  useEffect(() => {
+    axios
+      .get("https://apptitude2021.herokuapp.com/team/", {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${secret}`,
+        },
+      })
+      .then((response) => {
+        const something = response.data;
+        console.log(something.data);
+        setName(something.data.name);
+        setCode(`${something.data.code}`);
+      })
+      .catch((error) => console.error(error.response.data));
+  }, []);
   const onCopyText = () => {
     setCopySuccess(true);
     setTimeout(() => {
@@ -30,9 +49,7 @@ const TeamCreated = function () {
     <div className="xxs:mt-16 xs:mt-24 mx-3 sm:mx-0">
       <div className="flex flex-col w-full justify-center items-center">
         <div className="text-white font-400 text-base">Team</div>
-        <div className="text-white font-700 text-4xl mb-px mt-0.5">
-          Websneef
-        </div>
+        <div className="text-white font-700 text-4xl my-1">{name}</div>
         <div>
           <div className="text-white font-400 text-sm">Created</div>
         </div>
@@ -61,7 +78,7 @@ const TeamCreated = function () {
         <div className="absolute bottom-52 text-white font-400 text-base -mb-1">
           Your Team Code is
         </div>
-        <div className="absolute bottom-40 text-white font-700 text-3xl">
+        <div className="absolute bottom-40 text-white font-700 text-2xl ml-1">
           {/* <button
               onClick={() =>
                 navigator.clipboard.writeText("Copy this text to clipboard")
@@ -83,10 +100,11 @@ const TeamCreated = function () {
           </CopyToClipboard>
         </div>
       </div>
-
-      <div className="absolute bottom-20 flex  h-14 px-2 rounded-md bg-primary cursor-pointer text-black font-400 items-center justify-center left-2.5 right-2.5">
-        Next
-      </div>
+      <Link to="/timeline">
+        <div className="absolute bottom-20 flex  h-14 px-2 rounded-md bg-primary cursor-pointer text-black font-400 items-center justify-center left-2.5 right-2.5">
+          Next
+        </div>
+      </Link>
     </div>
   );
 };
