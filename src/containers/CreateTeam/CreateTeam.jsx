@@ -1,67 +1,48 @@
 /* eslint-disable no-restricted-syntax */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-// import axios from "axios";
+import axios from "axios";
 import arrow from "../../assets/images/arrow.svg";
 
+const secret = sessionStorage.getItem("AM");
 const CreateTeam = function () {
   const [create, setName] = useState("");
   const [errors, setError] = useState("");
-  const [data, setData] = useState([]);
-  // const data = [
-  //   {
-  //     name: "vijay",
-  //   },
-  //   {
-  //     name: "anil",
-  //   },
-  //   {
-  //     name: "kumble",
-  //   },
-  // ];
-  // useEffect(() => {
-  //   axios
-  //     .get("https://apptitude2021.herokuapp.com/team/", {
-  //       headers: {
-  //         "content-type": "application/json",
-  //         // Authorization: `Bearer ${TK}`,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       const something = response.data;
-  //       setData(something.arr);
-  //     })
-  //     .catch((error) => console.error(error.response.data));
-  // }, []);
+  // const [data, setData] = useState([]);
+
   function generateCode() {
-    if (create.length > 0) {
-      for (const i in data) {
-        if (create === data[i].name) {
-          setError("Team already exists");
-          return;
-        }
-      }
-      setError("");
-    } else {
-      setError("Please enter a team name");
-    }
-    // axios
-    //   .post(
-    //     "https://apptitude2021.herokuapp.com/team",
-    //     {
-    //       name: create,
-    //     },
-    //     {
-    //       headers: {
-    //         "content-type": "application/json",
-    //         // authorization: `Bearer ${token}`,
-    //       },
+    // if (create.length > 0) {
+    //   for (const i in data) {
+    //     if (create === data[i].name) {
+    //       setError("Team already exists");
+    //       return;
     //     }
-    //   )
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((error) => {});
+    //   }
+    //   setError("");
+    // } else {
+    //   setError("Please enter a team name");
+    // }
+    axios
+      .post(
+        "https://apptitude2021.herokuapp.com/team",
+        {
+          name: create,
+        },
+        {
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${secret}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        window.location.href = "/teamcreated";
+      })
+      .catch((error) => {
+        console.log(error.response.data.detail);
+        setError(`${error.response.data.detail}`);
+      });
   }
   return (
     <>

@@ -17,8 +17,8 @@ const phoneNo = () => {
   const [checkotp, setCheckOtp] = useState(false);
   const [minutesDisplay, setMinutesDisplay] = useState("");
   const [secondsDisplay, setSecondsDisplay] = useState("");
-  const [value, setValue] = useState();
-  const [otp, setOtp] = useState();
+  const [value, setValue] = useState("+919876543210");
+  const [otp, setOtp] = useState("123456");
   const [otpSent, setOtpSent] = useState(false);
   const [data, setData] = useState({ date: Date.now(), delay: 45000 });
 
@@ -64,11 +64,11 @@ const phoneNo = () => {
           "User can't be created. This user already exists"
         ) {
           console.log("User already exist!!!");
-          // check if team exists
-          // true
-          // false
+
           axios
-            .get("https://apptitude2021.herokuapp.com/team/name")
+            .get("https://apptitude2021.herokuapp.com/team/name", {
+              headers,
+            })
             .then((res) => {
               console.log(res.data);
               // Team exist
@@ -82,8 +82,8 @@ const phoneNo = () => {
               ) {
                 window.location.href = "/createteam";
               } else {
-                // sessionStorage.removeItem("AM");
-                // window.location.href = "/";
+                sessionStorage.removeItem("AM");
+                window.location.href = "/";
                 console.log("From else of axios get");
                 console.log(error.response.data.detail);
               }
@@ -113,6 +113,19 @@ const phoneNo = () => {
 
   const getLocalStorageValue = (s) => localStorage.getItem(s);
 
+  const [verifier, setVerifier] = useState(false);
+
+  useEffect(() => {
+    window.recaptchaVerifier = new RecaptchaVerifier(
+      "getotp",
+      {
+        size: "invisible",
+        callback: () => {},
+      },
+      auth
+    );
+  }, [verifier]);
+
   useEffect(() => {
     window.recaptchaVerifier = new RecaptchaVerifier(
       "getotp",
@@ -138,13 +151,13 @@ const phoneNo = () => {
   }, []);
 
   const phoneNumber = value;
-  const appVerifier = window.recaptchaVerifier;
 
   const otpHandler = () => {
-    signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+    signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
       .then((confirmationResult) => {
         window.confirmationResult = confirmationResult;
         console.log("Verification code sent");
+        setVerifier(true);
         console.log(phoneNumber);
         setCheckOtp(true);
       })
@@ -164,6 +177,7 @@ const phoneNo = () => {
         setOtpSent(true);
         sessionStorage.setItem("PH", result.user.phoneNumber);
         check();
+        console.log("After check");
       })
       .catch(() => {
         console.log("Verification failed");
@@ -171,6 +185,12 @@ const phoneNo = () => {
         sessionStorage.removeItem("AM");
       });
   };
+
+  const reloadFunc = () => {
+    window.location.reload();
+  };
+
+  console.log(checkotp);
 
   return checkotp === false ? (
     <div className="relative h-screen pt-28 mx-5">
@@ -204,7 +224,8 @@ const phoneNo = () => {
     </div>
   ) : (
     <div className="relative h-screen pt-12 mx-5">
-      <div onClick={setCheckOtp === false}>
+      <div onClick={() => setCheckOtp(false)}>
+        {/* <div onClick={setCheckOtp(false)}> */}
         <img className="mb-8" src={BackArrow} alt="arrow" />
       </div>
       <div className="sm:flex sm:flex-col sm:items-center">
@@ -245,7 +266,8 @@ const phoneNo = () => {
       <div className="">
         <div className="absolute bottom-10 flex flex-col items-center justify-center left-0 right-0">
           <div
-            onClick={otpHandler}
+            onClick={reloadFunc}
+            id="getotp"
             className={`${
               minutesDisplay === "0" && secondsDisplay === "0"
                 ? "text-white cursor-pointer"

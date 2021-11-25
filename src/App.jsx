@@ -16,6 +16,7 @@ import ProfileSection from "./containers/ProfileSection/ProfileSection";
 // import FeatureGenerator from "./containers/FeatureGenerator/FeatureGenerator";
 import Countdown from "./containers/Countdown/Countdown";
 import Timeline from "./containers/Timeline/Timeline";
+import SubmissionPage from "./containers/SubmissionFormSection/Form";
 
 // Styling
 import "./App.css";
@@ -35,6 +36,7 @@ class App extends Component {
           <Route path="/createteam" component={CreateTeam} />
           <Route path="/teamcreated" component={TeamCreated} />
           <Route path="/teamjoined" component={TeamJoined} />
+          <Route path="/submission" component={SubmissionPage} />
           {/* <Route path="/problems" component={ProbStatements} /> */}
           {/* <Route path="/features" component={FeatureGenerator} /> */}
           <Route path="/countdown" component={Countdown} />
