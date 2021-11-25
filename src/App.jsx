@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 import React, { useState, useEffect } from "react";
 import { Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
 
@@ -13,7 +12,7 @@ import Sponsers from "./containers/Sponsers/Sponsers";
 import Prizes from "./containers/Sponsers/Prizes";
 import AboutUs from "./containers/Sponsers/AboutUs";
 import ProfileSection from "./containers/ProfileSection/ProfileSection";
-// import ProbStatements from "./containers/ProblemStatements/ProbStatements";
+import ProbStatements from "./containers/ProblemStatements/ProbStatements";
 import FeatureGenerator from "./containers/FeatureGenerator/FeatureGenerator";
 import Countdown from "./containers/Countdown/Countdown";
 import Timeline from "./containers/Timeline/Timeline";
@@ -23,7 +22,7 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 // Styling
 import "./App.css";
 
-const App = () => {
+const App = function () {
   const [authLogin, setAuthLogin] = useState(false);
   useEffect(() => {
     if (sessionStorage.getItem("AM")) {
@@ -67,7 +66,11 @@ const App = () => {
           component={SubmissionPage}
           redirect="/"
         />
-        {/* <ProtectedRoute path="/problems" component={ProbStatements} redirect="/" /> */}
+        <ProtectedRoute
+          path="/problems"
+          component={ProbStatements}
+          redirect="/"
+        />
         <ProtectedRoute
           path="/features"
           component={FeatureGenerator}
