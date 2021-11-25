@@ -6,6 +6,7 @@ import CountDown from "../../components/CountDown/CountDown";
 // Styles
 import "./Form.css";
 import Navbar from "../../components/Navbar/Navbar";
+import { set } from "@firebase/database";
 
 const secret = sessionStorage.getItem("AM");
 const submissionForm = () => {
@@ -26,6 +27,12 @@ const submissionForm = () => {
     return regex.test(url);
   };
 
+  // regex to check if URL is of gitlab.com
+  const checkGitlabURL = (url) => {
+    const regex = /^(https?:\/\/)?(www\.)?gitlab\.com\/.+/;
+    return regex.test(url);
+  };
+
   // regex to check if URL is of google drive
   const checkGoogleDriveURL = (url) => {
     const regex = /^(https?:\/\/)?(www\.)?drive\.google\.com\/.+/;
@@ -37,17 +44,17 @@ const submissionForm = () => {
 
   const validate = (value, link) => {
     if (link === "github") {
-      if (checkGithubURL(value)) {
-        setErrorMessageG("Is Valid URL");
+      if (checkGithubURL(value) || checkGitlabURL(value)) {
         setGithubURL(value);
+        setErrorMessageG("");
       } else {
-        setErrorMessageG("Is Not Valid");
+        setErrorMessageG("Is Invalid URL");
       }
     } else if (checkGoogleDriveURL(value)) {
-      setErrorMessageD("Is Valid URL");
       setGoogleDriveURL(value);
+      setErrorMessageD("");
     } else {
-      setErrorMessageD("Is Not Valid URL");
+      setErrorMessageD("Is Invalid URL");
     }
   };
 
@@ -65,26 +72,33 @@ const submissionForm = () => {
   });
 
   const submitForm = () => {
-    /**
-     * make the request to backend to submit the github and video
-     */
-    axios
-      .put(
-        "https://apptitude2021.herokuapp.com/submit",
-        {
-          github: githubURL,
-          video: googleDriveURL,
-        },
-        {
-          headers: {
-            "content-type": "application/json",
-            authorization: `Bearer ${secret}`,
+    // check if both URLs are valid
+    if (githubURL && googleDriveURL) {
+      /**
+       * make the request to backend to submit the github and video
+       */
+      axios
+        .put(
+          "https://apptitude2021.herokuapp.com/submit",
+          {
+            github: githubURL,
+            video: googleDriveURL,
           },
-        }
-      )
-      .then((response) => {
-        console.log(response);
-      });
+          {
+            headers: {
+              "content-type": "application/json",
+              authorization: `Bearer ${secret}`,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+        });
+      setIsSubmitted(true);
+    } else {
+      setErrorMessageG("Please enter a valid URL");
+      setErrorMessageD("Please enter a valid URL");
+    }
   };
 
   return (
