@@ -3,7 +3,7 @@ import { VerticalTimelineElement } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 
 // eslint-disable-next-line react/function-component-definition
-function Day2({ name, starttime, endtime }) {
+function Day2({ name, starttime, endtime, desc }) {
   return (
     <VerticalTimelineElement
       className="vertical-timeline-element"
@@ -22,18 +22,16 @@ function Day2({ name, starttime, endtime }) {
         color: "#000000",
       }}
     >
-      <div className="flex flex-row">
-        <div className="w-4/12 flex flex-col justify-center">
-          <div className="font-500 text-xl ml-1.5">SAT</div>
+      <div className="flex flex-row gap-4">
+        <div className=" flex flex-col justify-center">
+          <div className="font-500 text-xl ">SAT</div>
           <div className="font-700 text-2xl">27th</div>
         </div>
 
         <div className="flex flex-col">
-          <div className="font-700 text-xl">Speaker Session</div>
-          <div className="font-400 text-xs">{name}</div>
-          <div className="font-400 text-xs mt-6 -mb-5">
-            ${starttime}-${endtime}
-          </div>
+          <div className="font-700 text-xl">{name}</div>
+          <div className="font-400 text-xs">{desc}</div>
+          <div className="font-400 text-xs mt-6 -mb-5">{starttime}</div>
         </div>
       </div>
     </VerticalTimelineElement>

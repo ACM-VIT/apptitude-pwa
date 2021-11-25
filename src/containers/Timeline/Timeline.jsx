@@ -44,32 +44,37 @@ const Timeline = function () {
       <div className="text-white text-3xl font-700 text-3xl pl-8 pb-7">
         Timeline
       </div>
-      <VerticalTimeline className="vertical-timeline-custom-line">
-        {data1.map((info, key) => (
-          <Day1
-            key={key.id}
-            name={info.name}
-            starttime={info.startTime}
-            endtime={info.endTime}
-          />
-        ))}
-        {data1.map((info, key) => (
-          <Day2
-            key={key.id}
-            name={info.name}
-            starttime={info.startTime}
-            endtime={info.endTime}
-          />
-        ))}
-        {data3.map((info, key) => (
-          <Day3
-            key={key.id}
-            name={info.name}
-            starttime={info.startTime}
-            endtime={info.endTime}
-          />
-        ))}
-      </VerticalTimeline>
+      <div className="mb-36">
+        <VerticalTimeline className="vertical-timeline-custom-line">
+          {data1.map((info, key) => (
+            <Day1
+              key={key.id}
+              name={info.name}
+              starttime={info.startTime}
+              endtime={info.endTime}
+              desc={info.description}
+            />
+          ))}
+          {data2.map((info, key) => (
+            <Day2
+              key={key.id}
+              name={info.name}
+              starttime={info.startTime}
+              endtime={info.endTime}
+              desc={info.description}
+            />
+          ))}
+          {data3.map((info, key) => (
+            <Day3
+              key={key.id}
+              name={info.name}
+              starttime={info.startTime}
+              endtime={info.endTime}
+              desc={info.description}
+            />
+          ))}
+        </VerticalTimeline>
+      </div>
       <Navbar />
     </div>
   );
