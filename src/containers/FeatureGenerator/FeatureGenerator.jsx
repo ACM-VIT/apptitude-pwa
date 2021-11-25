@@ -1,9 +1,70 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
+const secret = sessionStorage.getItem("AM");
 
 const FeatureGenerator = function () {
-  function generateFeature() {}
+  // check if generate fixtures are called
+  const [generateFixtures, setGenerateFixtures] = useState(false);
+
+  // save easy, medium and hard feature in state
+  const [easy, setEasy] = useState([]);
+  const [medium, setMedium] = useState([]);
+  const [hard, setHard] = useState([]);
+
+  // store number of times generate fixtures is called
+  const [generateFixturesCount, setGenerateFixturesCount] = useState(0);
+
+  const loadProblemStatements = () => {
+    axios
+      .put(
+        `https://apptitude2021.herokuapp.com/feats/generate`,
+        {},
+        {
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${secret}`,
+          },
+        }
+      )
+
+      .then((res) => {
+        /**
+         * "status": "Success",
+         * "data": {
+         *   "features": {
+         *     "easy": "string",
+         *     "medium": "string",
+         *     "hard": "string"
+         *   },
+         *   "featGenCnt": 0
+         * }
+         */
+        if (res.status === "success") {
+          const { data } = res;
+          setEasy(data.features.easy);
+          setMedium(data.features.medium);
+          setHard(data.features.hard);
+          setGenerateFixturesCount(data.featGenCnt);
+          setGenerateFixtures(generateFixtures + 1);
+
+          /**
+           * use easy, medium, hard to display the problem statements
+           */
+
+          if (generateFixtures === 3) {
+            // chances exhausted
+            // @frontend come here
+          }
+        }
+      })
+      .catch((error) => {
+        console.error(error.response.data.detail);
+        // show error / warning
+        // @frontend
+      });
+  };
   return (
     <div className="mt-24">
       <div className="flex flex-col w-full px-7">
@@ -24,12 +85,15 @@ const FeatureGenerator = function () {
         Click on generate features to generate features, solving this will be
         added as bonus points
       </div>
-      <div
-        onClick={generateFeature}
+      <button
+        type="submit"
+        onClick={() => {
+          loadProblemStatements();
+        }}
         className="absolute flex items-center justify-center bottom-32 h-14 px-2 rounded-md bg-primary cursor-pointer text-black font-400 left-2.5 right-2.5"
       >
         Generate features
-      </div>
+      </button>
       <Navbar />
     </div>
   );
