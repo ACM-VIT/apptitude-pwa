@@ -8,7 +8,6 @@ import celotrack from "../../assets/images/celotrack.svg";
 import bestfresher from "../../assets/images/bestfresher.svg";
 import inhack from "../../assets/images/inhack.svg";
 import Navbar from "../../components/Navbar/Navbar";
-// import "./Prizes.css";
 
 const Sponsers = function () {
   return (
@@ -24,7 +23,7 @@ const Sponsers = function () {
       <div className="mt-24 mx-3 mb-32">
         <div className="flex flex-row justify-between px-10 mb-12">
           <div className="text-secondary text-white font-400 text-1xl pt-1.5 ">
-            <Link to="/sponsers">Sponsers</Link>
+            <Link to="/sponsers">Sponsors</Link>
           </div>
           <div className=" text-white font-700 text-1xl pt-1.5 border-b border-yellow-400">
             <Link to="/prizes">Prizes</Link>
