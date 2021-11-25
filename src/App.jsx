@@ -23,7 +23,6 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 // Styling
 import "./App.css";
 
-
 const App = () => {
   const [authLogin, setAuthLogin] = useState(false);
   useEffect(() => {
@@ -69,7 +68,11 @@ const App = () => {
           redirect="/"
         />
         {/* <ProtectedRoute path="/problems" component={ProbStatements} redirect="/" /> */}
-        <ProtectedRoute path="/features" component={FeatureGenerator} redirect="/" />
+        <ProtectedRoute
+          path="/features"
+          component={FeatureGenerator}
+          redirect="/"
+        />
         <ProtectedRoute path="/countdown" component={Countdown} redirect="/" />
       </Switch>
     </BrowserRouter>

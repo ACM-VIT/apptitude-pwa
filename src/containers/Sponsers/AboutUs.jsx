@@ -5,7 +5,7 @@ import Navbar from "../../components/Navbar/Navbar";
 
 const Sponsers = function () {
   return (
-    <div>
+    <div className="scrollbar">
       <Link to="/problems">
         <img
           src={arrow}

@@ -27,8 +27,8 @@ const Sponsers = function () {
               <Link to="/aboutus">About Us</Link>
             </div>
           </div>
-          <div>
-            <img src={celo} alt="celo" className="w-36 h-36" />
+          <div className="flex justify-center items-center">
+            <img src={celo} alt="celo" className="mx-auto" />
           </div>
         </div>
       </div>
