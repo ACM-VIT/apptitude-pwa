@@ -111,8 +111,6 @@ const phoneNo = () => {
     );
   };
 
-  const getLocalStorageValue = (s) => localStorage.getItem(s);
-
   const [verifier, setVerifier] = useState(false);
 
   useEffect(() => {
@@ -135,19 +133,6 @@ const phoneNo = () => {
       },
       auth
     );
-
-    const savedDate = getLocalStorageValue("end_date");
-    if (savedDate != null && !isNaN(savedDate)) {
-      const currentTime = Date.now();
-      const delta = parseInt(savedDate, 10) - currentTime;
-
-      if (delta > wantedDelay) {
-        if (localStorage.getItem("end_date").length > 0)
-          localStorage.removeItem("end_date");
-      } else {
-        setData({ date: currentTime, delay: delta });
-      }
-    }
   }, []);
 
   const phoneNumber = value;
@@ -245,21 +230,7 @@ const phoneNo = () => {
         </div>
         <div className="flex text-white justify-end font-400">
           <div>
-            <Countdown
-              date={data.date + data.delay}
-              renderer={renderer}
-              onStart={() => {
-                if (localStorage.getItem("end_date") == null)
-                  localStorage.setItem(
-                    "end_date",
-                    JSON.stringify(data.date + data.delay)
-                  );
-              }}
-              onComplete={() => {
-                if (localStorage.getItem("end_date") != null)
-                  localStorage.removeItem("end_date");
-              }}
-            />
+            <Countdown date={data.date + data.delay} renderer={renderer} />
           </div>
         </div>
       </div>
