@@ -1,113 +1,74 @@
-import React from "react";
+import { React, useEffect, useState } from "react";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
+import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 
 import "./Timeline.css";
+import Day1 from "../../components/days/day1";
+import Day2 from "../../components/days/day2";
+import Day3 from "../../components/days/day3";
+
+function days() {}
 
 const Timeline = function () {
+  const [data1, setData1] = useState([]);
+  const [data2, setData2] = useState([]);
+  const [data3, setData3] = useState([]);
+
+  const secret = sessionStorage.getItem("AM");
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${secret}`,
+  };
+
+  useEffect(() => {
+    axios
+      .get("https://apptitude2021.herokuapp.com/timeline", {
+        headers,
+      })
+      .then((response) => {
+        const timeline = response.data;
+        setData1(timeline.data.day1);
+        setData2(timeline.data.day2);
+        setData3(timeline.data.day3);
+      })
+      .catch((error) => console.error(error.response.data));
+  }, []);
+
   return (
     <div className="pt-16">
       <div className="text-white text-3xl font-700 text-3xl pl-8 pb-7">
         Timeline
       </div>
       <VerticalTimeline className="vertical-timeline-custom-line">
-        <VerticalTimelineElement
-          className="vertical-timeline-element"
-          contentStyle={{
-            background: "rgba(219,171,72)",
-            color: "#000000",
-            marginRight: "10px",
-            marginLeft: "40px",
-            borderRadius: "16px",
-          }}
-          contentArrowStyle={{ borderRight: "7px rgb(0,0,0)" }}
-          iconStyle={{
-            marginLeft: "15px",
-            flexShrink: "10px",
-            background: "rgba(219, 171, 72, 1)",
-            color: "#000000",
-          }}
-        >
-          <div className="flex flex-row">
-            <div className="w-4/12 flex flex-col justify-center">
-              <div className="font-500 text-xl ml-1.5">THU</div>
-              <div className="font-700 text-2xl">25th</div>
-            </div>
-            <div className="flex flex-col">
-              <div className="font-700 text-xl">Speaker Session</div>
-              <div className="font-400 text-xs">
-                How to grow your social network by SS-Roy
-              </div>
-              <div className="font-400 text-xs mt-6 -mb-5">8am-10pm</div>
-            </div>
-          </div>
-        </VerticalTimelineElement>
-        <VerticalTimelineElement
-          className="vertical-timeline-element"
-          contentStyle={{
-            background: "rgba(219,171,72)",
-            color: "#000000",
-            marginRight: "10px",
-            marginLeft: "40px",
-            borderRadius: "16px",
-          }}
-          contentArrowStyle={{ borderRight: "7px rgb(0,0,0)" }}
-          iconStyle={{
-            marginLeft: "15px",
-            flexShrink: "10px",
-            background: "rgba(219, 171, 72, 1)",
-            color: "#000000",
-          }}
-        >
-          <div className="flex flex-row">
-            <div className="w-4/12 flex flex-col justify-center">
-              <div className="font-500 text-xl ml-1.5">THU</div>
-              <div className="font-700 text-2xl">25th</div>
-            </div>
-            <div className="flex flex-col">
-              <div className="font-700 text-xl">Speaker Session</div>
-              <div className="font-400 text-xs">
-                How to grow your social network by SS-Roy
-              </div>
-              <div className="font-400 text-xs mt-6 -mb-5">8am-10pm</div>
-            </div>
-          </div>
-        </VerticalTimelineElement>
-        <VerticalTimelineElement
-          className="vertical-timeline-element"
-          contentStyle={{
-            background: "rgba(219,171,72)",
-            color: "#000000",
-            marginRight: "10px",
-            marginLeft: "40px",
-            borderRadius: "16px",
-          }}
-          contentArrowStyle={{ borderRight: "7px rgb(0,0,0)" }}
-          iconStyle={{
-            marginLeft: "15px",
-            flexShrink: "10px",
-            background: "rgba(219, 171, 72, 1)",
-            color: "#000000",
-          }}
-        >
-          <div className="flex flex-row">
-            <div className="w-4/12 flex flex-col justify-center">
-              <div className="font-500 text-xl ml-1.5">THU</div>
-              <div className="font-700 text-2xl">25th</div>
-            </div>
-            <div className="flex flex-col">
-              <div className="font-700 text-xl">Speaker Session</div>
-              <div className="font-400 text-xs">
-                How to grow your social network by SS-Roy
-              </div>
-              <div className="font-400 text-xs mt-6 -mb-5">8am-10pm</div>
-            </div>
-          </div>
-        </VerticalTimelineElement>
+        {data1.map((info, key) => (
+          <Day1
+            key={key.id}
+            name={info.name}
+            starttime={info.startTime}
+            endtime={info.endTime}
+          />
+        ))}
+        {data1.map((info, key) => (
+          <Day2
+            key={key.id}
+            name={info.name}
+            starttime={info.startTime}
+            endtime={info.endTime}
+          />
+        ))}
+        {data3.map((info, key) => (
+          <Day3
+            key={key.id}
+            name={info.name}
+            starttime={info.startTime}
+            endtime={info.endTime}
+          />
+        ))}
       </VerticalTimeline>
       <Navbar />
     </div>
