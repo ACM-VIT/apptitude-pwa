@@ -17,8 +17,8 @@ const phoneNo = () => {
   const [checkotp, setCheckOtp] = useState(false);
   const [minutesDisplay, setMinutesDisplay] = useState("");
   const [secondsDisplay, setSecondsDisplay] = useState("");
-  const [value, setValue] = useState();
-  const [otp, setOtp] = useState();
+  const [value, setValue] = useState("+919876543210");
+  const [otp, setOtp] = useState("123456");
   const [otpSent, setOtpSent] = useState(false);
   const [data, setData] = useState({ date: Date.now(), delay: 45000 });
 
@@ -68,7 +68,9 @@ const phoneNo = () => {
           // true
           // false
           axios
-            .get("https://apptitude2021.herokuapp.com/team/name")
+            .get("https://apptitude2021.herokuapp.com/team/name", {
+              headers,
+            })
             .then((res) => {
               console.log(res.data);
               // Team exist
@@ -151,8 +153,8 @@ const phoneNo = () => {
       .catch((error) => {
         console.log(error);
         console.log("Error in sending OTP");
-        window.location.href = "/";
-        sessionStorage.removeItem("AM");
+        // window.location.href = "/";
+        // sessionStorage.removeItem("AM");
       });
   };
 

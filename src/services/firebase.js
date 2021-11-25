@@ -26,7 +26,6 @@ export const app = firebase.initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 export const database = getDatabase(app);
-console.log(database);
 
 export const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
