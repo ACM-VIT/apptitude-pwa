@@ -17,8 +17,8 @@ const phoneNo = () => {
   const [checkotp, setCheckOtp] = useState(false);
   const [minutesDisplay, setMinutesDisplay] = useState("");
   const [secondsDisplay, setSecondsDisplay] = useState("");
-  const [value, setValue] = useState();
-  const [otp, setOtp] = useState();
+  const [value, setValue] = useState("+919876543210");
+  const [otp, setOtp] = useState("123456");
   const [otpSent, setOtpSent] = useState(false);
   const [data, setData] = useState({ date: Date.now(), delay: 45000 });
 
