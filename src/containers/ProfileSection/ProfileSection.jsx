@@ -54,7 +54,7 @@ const ProfileSection = () => {
         </div>
         <div className="flex flex-col mt-20 ">
           <div className="text-secondary font-400 text-base mb-1">
-            Team name
+            Member {members.length ? "" : "s"}
           </div>
           {members.map((member) => (
             <div
