@@ -60,11 +60,11 @@ const submissionForm = () => {
   };
 
   return (
-    <div className="container p-5 h-screen flex flex-col items-center justify-center xs:flex xs:flex-col xs:items-center xs:justify-center">
-      <div>
+    <div className="container p-2 h-screen flex flex-col items-center justify-center xs:flex xs:flex-col xs:items-center xs:justify-center">
+      <div className="flex justify-between w-80">
         <span className="text-white text-4xl">Submission</span>
         <span
-          className={`mt-2 text-${timer}-500 text-sm float-right align-bottom`}
+          className={`mt-2 text-${timer}-500 text-sm flex justify-center items-center float-right align-bottom`}
         >
           <CountDown date="2021-11-25T12:00:00" />
         </span>
@@ -77,7 +77,7 @@ const submissionForm = () => {
               id="driveLink"
               value={googleDriveURL}
               onChange={(e) => setGoogleDriveURL(e.target.value)}
-              className="outline-none text-white bg-main w-96 xs:w-90 xxs:w-65 h-10 px-2 rounded-md border border-yellow-400"
+              className="outline-none text-white bg-main w-80 xs:w-80 xxs:w-80 h-10 px-8 rounded-md border border-yellow-400 flex justify-center items-center center align-top	"
               type="text"
             />
           </div>
@@ -87,17 +87,17 @@ const submissionForm = () => {
               value={githubURL}
               onChange={(e) => setGithubURL(e.target.value)}
               id="repoLink"
-              className="outline-none text-white bg-main w-96 xs:w-90 xxs:w-65 h-10 px-2 rounded-md border border-yellow-400"
+              className="outline-none text-white bg-main w-80 xs:w-80 xxs:w-80 h-10 px-8 rounded-md border border-yellow-400"
             />
           </div>
         </div>
       </div>
-      <div className="submission-form__footer">
-        <div className="submission-form__footer__button">
+      <div className="submission-form__footer flex">
+        <div className="submission-form__footer__button flex">
           <button
             type="submit"
             onClick={() => submitForm()}
-            className="bg-yellow-400 font-700 text-lg w-96 h-10 xxs:w-full rounded-md"
+            className="bg-yellow-400 font-700 text-lg w-full h-10 flex xxs:w-full rounded-md"
           >
             Submit
           </button>
