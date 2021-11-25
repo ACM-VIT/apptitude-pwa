@@ -8,12 +8,15 @@ import team from "../../assets/images/team.svg";
 import "./TeamCreated.css";
 import teammember from "../../assets/images/teammember.svg";
 import copy from "../../assets/images/copy.svg";
+import { useSnackbar } from 'notistack';
+import { logRoles } from "@testing-library/dom";
 const secret = sessionStorage.getItem("AM");
 
 const TeamCreated = function () {
   const [copySuccess, setCopySuccess] = useState(false);
   const [name, setName] = useState("");
   const [teamCode, setCode] = useState("");
+  const { enqueueSnackbar } = useSnackbar();
   // const copyToClipBoard = async (copyMe) => {
   //   try {
   //     await navigator.clipboard.writeText(copyMe);
@@ -23,6 +26,31 @@ const TeamCreated = function () {
   //     setCopySuccess("Failed to copy!");
   //   }
   // };
+
+  const showSuccSnack = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'success',
+      preventDuplicate: true,
+      autoHideDuration: 2000,
+      anchorOrigin: {
+        vertical: 'top',
+        horizontal: 'center',
+    },
+    });
+  }
+
+  const showErrorSnack = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'error',
+      preventDuplicate: true,
+      autoHideDuration: 2000,
+      anchorOrigin: {
+        vertical: 'top',
+        horizontal: 'center',
+    },
+    });
+  }
+
   useEffect(() => {
     axios
       .get("https://apptitude2021.herokuapp.com/team/", {
@@ -32,14 +60,18 @@ const TeamCreated = function () {
         },
       })
       .then((response) => {
+        localStorage.setItem("tixt", "true");
         const something = response.data;
         console.log(something.data);
         setName(something.data.name);
         setCode(`${something.data.code}`);
       })
-      .catch((error) => console.error(error.response.data));
+      .catch((error) => {
+        showErrorSnack("Something went wrong!");
+      });
   }, []);
   const onCopyText = () => {
+    showSuccSnack("Your Team Code has been copied!")
     setCopySuccess(true);
     setTimeout(() => {
       setCopySuccess(false);
