@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&family=DM+Sans:wght@400;700&display=swap");
+
 .grad {
   background: -webkit-linear-gradient(
     116.71deg,
@@ -8,4 +10,8 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+.font-500 {
+  font-family: "DM Mono", sans-serif;
+  font-weight: 500;
 }

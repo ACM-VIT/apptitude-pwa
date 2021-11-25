@@ -7,14 +7,7 @@ import Navbar from "../../components/Navbar/Navbar";
 const Sponsers = function () {
   return (
     <>
-      <Link to="/problems">
-        <img
-          src={arrow}
-          alt="arrow"
-          className="absolute w-6 h-8 top-10 left-4"
-        />
-      </Link>
-      <div className="mt-24 mx-3">
+      <div className="pt-28 mx-3">
         <div className="flex flex-col w-full">
           <div className="flex flex-row justify-between px-10">
             <div className=" text-white font-700 text-1xl pt-1.5 border-b border-yellow-400">
@@ -27,8 +20,8 @@ const Sponsers = function () {
               <Link to="/aboutus">About Us</Link>
             </div>
           </div>
-          <div>
-            <img src={celo} alt="celo" className="w-36 h-36" />
+          <div className="flex justify-center items-center">
+            <img src={celo} alt="celo" className="mx-auto" />
           </div>
         </div>
       </div>

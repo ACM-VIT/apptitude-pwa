@@ -76,6 +76,7 @@ const App = function () {
           component={FeatureGenerator}
           redirect="/"
         />
+        <ProtectedRoute path="/timeline" component={Timeline} redirect="/" />
         <ProtectedRoute path="/countdown" component={Countdown} redirect="/" />
       </Switch>
     </BrowserRouter>
