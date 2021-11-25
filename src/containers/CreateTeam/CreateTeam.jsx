@@ -1,38 +1,28 @@
 /* eslint-disable no-restricted-syntax */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-// import axios from "axios";
+import axios from "axios";
 import arrow from "../../assets/images/arrow.svg";
 
+const secret = sessionStorage.getItem("AM");
 const CreateTeam = function () {
   const [create, setName] = useState("");
   const [errors, setError] = useState("");
   const [data, setData] = useState([]);
-  // const data = [
-  //   {
-  //     name: "vijay",
-  //   },
-  //   {
-  //     name: "anil",
-  //   },
-  //   {
-  //     name: "kumble",
-  //   },
-  // ];
-  // useEffect(() => {
-  //   axios
-  //     .get("https://apptitude2021.herokuapp.com/team/", {
-  //       headers: {
-  //         "content-type": "application/json",
-  //         // Authorization: `Bearer ${TK}`,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       const something = response.data;
-  //       setData(something.arr);
-  //     })
-  //     .catch((error) => console.error(error.response.data));
-  // }, []);
+  useEffect(() => {
+    axios
+      .get("https://apptitude2021.herokuapp.com/team", {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${secret}`,
+        },
+      })
+      .then((response) => {
+        const something = response.data;
+        setData(something.arr);
+      })
+      .catch((error) => console.error(error.response.data));
+  }, []);
   function generateCode() {
     if (create.length > 0) {
       for (const i in data) {
@@ -45,23 +35,26 @@ const CreateTeam = function () {
     } else {
       setError("Please enter a team name");
     }
-    // axios
-    //   .post(
-    //     "https://apptitude2021.herokuapp.com/team",
-    //     {
-    //       name: create,
-    //     },
-    //     {
-    //       headers: {
-    //         "content-type": "application/json",
-    //         // authorization: `Bearer ${token}`,
-    //       },
-    //     }
-    //   )
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((error) => {});
+    axios
+      .post(
+        "https://apptitude2021.herokuapp.com/team",
+        {
+          name: create,
+        },
+        {
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${secret}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        window.location.href = "/timeline";
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   return (
     <>

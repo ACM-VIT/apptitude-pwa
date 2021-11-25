@@ -114,14 +114,14 @@ const phoneNo = () => {
   const getLocalStorageValue = (s) => localStorage.getItem(s);
 
   useEffect(() => {
-    window.recaptchaVerifier = new RecaptchaVerifier(
-      "getotp",
-      {
-        size: "invisible",
-        callback: () => {},
-      },
-      auth
-    );
+    // window.recaptchaVerifier = new RecaptchaVerifier(
+    //   "getotp",
+    //   {
+    //     size: "invisible",
+    //     callback: () => {},
+    //   },
+    //   auth
+    // );
 
     const savedDate = getLocalStorageValue("end_date");
     if (savedDate != null && !isNaN(savedDate)) {
@@ -140,21 +140,21 @@ const phoneNo = () => {
   const phoneNumber = value;
   const appVerifier = window.recaptchaVerifier;
 
-  const otpHandler = () => {
-    signInWithPhoneNumber(auth, phoneNumber, appVerifier)
-      .then((confirmationResult) => {
-        window.confirmationResult = confirmationResult;
-        console.log("Verification code sent");
-        console.log(phoneNumber);
-        setCheckOtp(true);
-      })
-      .catch((error) => {
-        console.log(error);
-        console.log("Error in sending OTP");
-        window.location.href = "/";
-        sessionStorage.removeItem("AM");
-      });
-  };
+  // const  = () => {
+  //   signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+  //     .then((confirmationResult) => {
+  //       window.confirmationResult = confirmationResult;
+  //       console.log("Verification code sent");
+  //       console.log(phoneNumber);
+  //       setCheckOtp(true);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       console.log("Error in sending OTP");
+  //       window.location.href = "/";
+  //       sessionStorage.removeItem("AM");
+  //     });
+  // };
 
   const verifyHandler = () => {
     console.log("Verify button clicked");
@@ -172,37 +172,38 @@ const phoneNo = () => {
       });
   };
 
-  return checkotp === false ? (
-    <div className="relative h-screen pt-28 mx-5">
-      <div className="xs:flex xs:flex-col xs:items-center sm:flex sm:flex-col sm:items-center">
-        <div className="text-white font-700 text-3xl">Phone Number</div>
-        <div className="text-white font-400 text-sm mt-3 mb-1">
-          Enter Mobile Number (with country code)
-        </div>
-        <div className="">
-          <PhoneInput
-            value={value}
-            className="text-white w-96 xxs:w-full xs:w-80 h-14 px-2 rounded-md border border-yellow-400 "
-            onChange={setValue}
-            defaultCountry="IN"
-          />
-        </div>
-      </div>
-      <div className="xs:flex xs:justify-center xs:items-center sm:flex sm:justify-center sm:items-center">
-        <div className="absolute bottom-10 right-0 left-0">
-          <div className="xs:flex xs:justify-center xs:items-center sm:flex sm:justify-center sm:items-center">
-            <div
-              onClick={otpHandler}
-              id="getotp"
-              className="flex w-96 h-14 xxs:w-full xs:w-80 rounded-md bg-primary cursor-pointer text-white font-400 items-center justify-center"
-            >
-              Get OTP
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  ) : (
+  // return checkotp === false ? (
+  //   <div className="relative h-screen pt-28 mx-5">
+  //     <div className="xs:flex xs:flex-col xs:items-center sm:flex sm:flex-col sm:items-center">
+  //       <div className="text-white font-700 text-3xl">Phone Number</div>
+  //       <div className="text-white font-400 text-sm mt-3 mb-1">
+  //         Enter Mobile Number (with country code)
+  //       </div>
+  //       <div className="">
+  //         <PhoneInput
+  //           value={value}
+  //           className="text-white w-96 xxs:w-full xs:w-80 h-14 px-2 rounded-md border border-yellow-400 "
+  //           onChange={setValue}
+  //           defaultCountry="IN"
+  //         />
+  //       </div>
+  //     </div>
+  //     <div className="xs:flex xs:justify-center xs:items-center sm:flex sm:justify-center sm:items-center">
+  //       <div className="absolute bottom-10 right-0 left-0">
+  //         <div className="xs:flex xs:justify-center xs:items-center sm:flex sm:justify-center sm:items-center">
+  //           <div
+  //             onClick={}
+  //             id="getotp"
+  //             className="flex w-96 h-14 xxs:w-full xs:w-80 rounded-md bg-primary cursor-pointer text-white font-400 items-center justify-center"
+  //           >
+  //             Get OTP
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   </div>
+  // ) : (
+  return (
     <div className="relative h-screen pt-12 mx-5">
       <div onClick={setCheckOtp === false}>
         <img className="mb-8" src={BackArrow} alt="arrow" />
@@ -245,7 +246,7 @@ const phoneNo = () => {
       <div className="">
         <div className="absolute bottom-10 flex flex-col items-center justify-center left-0 right-0">
           <div
-            onClick={otpHandler}
+            // onClick={}
             className={`${
               minutesDisplay === "0" && secondsDisplay === "0"
                 ? "text-white cursor-pointer"
@@ -255,7 +256,7 @@ const phoneNo = () => {
             Resend OTP
           </div>
           <div
-            onClick={verifyHandler}
+            onClick={check}
             className="flex w-96 h-14 xs:w-full xxs:w-full rounded-md bg-primary cursor-pointer text-white font-400 items-center justify-center xs:mx-auto sm:mx-auto"
           >
             Verify
