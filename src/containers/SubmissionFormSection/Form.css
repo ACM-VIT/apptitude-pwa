@@ -1,0 +1,16 @@
+/* Background img */
+#repoLink {
+  background-image: url("../../assets/images/github.svg");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-position-x: 3%;
+  background-size: 5%;
+}
+
+#driveLink {
+  background-image: url("../../assets/images/gdrive.svg");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-position-x: 3%;
+  background-size: 5%;
+}
