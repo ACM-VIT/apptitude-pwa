@@ -68,7 +68,9 @@ const phoneNo = () => {
           // true
           // false
           axios
-            .get("https://apptitude2021.herokuapp.com/team/name")
+            .get("https://apptitude2021.herokuapp.com/team/name", {
+              headers,
+            })
             .then((res) => {
               console.log(res.data);
               // Team exist
@@ -151,8 +153,8 @@ const phoneNo = () => {
       .catch((error) => {
         console.log(error);
         console.log("Error in sending OTP");
-        window.location.href = "/";
-        sessionStorage.removeItem("AM");
+        // window.location.href = "/";
+        // sessionStorage.removeItem("AM");
       });
   };
 
