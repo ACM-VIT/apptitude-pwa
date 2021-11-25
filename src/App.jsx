@@ -12,7 +12,7 @@ import Sponsers from "./containers/Sponsers/Sponsers";
 import Prizes from "./containers/Sponsers/Prizes";
 import AboutUs from "./containers/Sponsers/AboutUs";
 import ProfileSection from "./containers/ProfileSection/ProfileSection";
-// import ProbStatements from "./containers/ProblemStatements/ProbStatements";
+import ProbStatements from "./containers/ProblemStatements/ProbStatements";
 import FeatureGenerator from "./containers/FeatureGenerator/FeatureGenerator";
 import Countdown from "./containers/Countdown/Countdown";
 import Timeline from "./containers/Timeline/Timeline";
@@ -66,7 +66,11 @@ const App = function () {
           component={SubmissionPage}
           redirect="/"
         />
-        {/* <ProtectedRoute path="/problems" component={ProbStatements} redirect="/" /> */}
+        <ProtectedRoute
+          path="/problems"
+          component={ProbStatements}
+          redirect="/"
+        />
         <ProtectedRoute
           path="/features"
           component={FeatureGenerator}
