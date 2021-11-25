@@ -137,7 +137,7 @@ const submissionForm = () => {
             <input
               type="text"
               onChange={(e) => validate(e.target.value, "github")}
-              id="driveLink"
+              id="repoLink"
               className="outline-none text-white bg-main w-full
               max-w-96 h-10 px-8 rounded-md border border-yellow-400 flex
               justify-center items-center center align-top "
