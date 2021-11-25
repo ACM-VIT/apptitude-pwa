@@ -4,6 +4,7 @@ import PhoneInput from "react-phone-number-input";
 import Countdown from "react-countdown";
 import axios from "axios";
 import "react-phone-number-input/style.css";
+import { useSnackbar } from 'notistack';
 
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from "../../../services/firebase";
@@ -17,10 +18,11 @@ const phoneNo = () => {
   const [checkotp, setCheckOtp] = useState(false);
   const [minutesDisplay, setMinutesDisplay] = useState("");
   const [secondsDisplay, setSecondsDisplay] = useState("");
-  const [value, setValue] = useState("+919876543210");
-  const [otp, setOtp] = useState("123456");
+  const [value, setValue] = useState("+91");
+  const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [data, setData] = useState({ date: Date.now(), delay: 45000 });
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const wantedDelay = 45000;
 
@@ -51,19 +53,18 @@ const phoneNo = () => {
         }
       )
       .then((res) => {
-        console.log(res.data);
         window.location.href = "/createteam";
         sessionStorage.removeItem("NM");
         sessionStorage.removeItem("UID");
         sessionStorage.removeItem("PH");
       })
       .catch((err) => {
-        console.log(err.response.data.detail);
+        showErrorSnack(err.response.data.detail);
         if (
           err.response.data.detail ===
           "User can't be created. This user already exists"
         ) {
-          console.log("User already exist!!!");
+          showErrorSnack("User already exist!!!");
 
           axios
             .get("https://apptitude2021.herokuapp.com/team/name", {
@@ -111,46 +112,59 @@ const phoneNo = () => {
     );
   };
 
-  const [verifier, setVerifier] = useState(false);
+
 
   useEffect(() => {
     window.recaptchaVerifier = new RecaptchaVerifier(
       "getotp",
       {
-        size: "invisible",
-        callback: () => {},
-      },
-      auth
-    );
-  }, [verifier]);
-
-  useEffect(() => {
-    window.recaptchaVerifier = new RecaptchaVerifier(
-      "getotp",
-      {
-        size: "invisible",
-        callback: () => {},
+        'size': 'invisible',
+        callback: () => { },
       },
       auth
     );
   }, []);
 
+  const showErrorSnack = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'error',
+      preventDuplicate: true,
+      autoHideDuration: 2000,
+      anchorOrigin: {
+        vertical: 'top',
+        horizontal: 'center',
+    },
+    });
+  }
+
   const phoneNumber = value;
 
   const otpHandler = () => {
+    window.recaptchaVerifier = new RecaptchaVerifier(
+      "getotp",
+      {
+        'size': 'invisible',
+        callback: () => { },
+      },
+      auth
+    );
     signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
       .then((confirmationResult) => {
+        let el = window.document.getElementById('__ff-recaptcha-container');
+        if (el != null) {
+          el.style.visibility = 'hidden';
+        }
         window.confirmationResult = confirmationResult;
         console.log("Verification code sent");
-        setVerifier(true);
         console.log(phoneNumber);
         setCheckOtp(true);
       })
       .catch((error) => {
         console.log(error);
-        console.log("Error in sending OTP");
-        window.location.href = "/";
-        sessionStorage.removeItem("AM");
+        showErrorSnack("Something went wrong in sending OTP!");
+        window.recaptchaVerifier.render().then(function(widgetId) {
+          grecaptcha.reset(widgetId);
+        }); 
       });
   };
 
@@ -164,18 +178,13 @@ const phoneNo = () => {
         check();
         console.log("After check");
       })
-      .catch(() => {
+      .catch((err) => {
+        showErrorSnack("Invalid OTP!");
         console.log("Verification failed");
-        window.location.href = "/";
-        sessionStorage.removeItem("AM");
       });
   };
 
-  const reloadFunc = () => {
-    window.location.reload();
-  };
 
-  console.log(checkotp);
 
   return checkotp === false ? (
     <div className="relative h-screen pt-28 mx-5">
@@ -186,10 +195,13 @@ const phoneNo = () => {
         </div>
         <div className="">
           <PhoneInput
+          limitMaxLength={true}
             value={value}
             className="text-white w-96 xxs:w-full xs:w-80 h-14 px-2 rounded-md border border-yellow-400 "
             onChange={setValue}
             defaultCountry="IN"
+            country="IN"
+            useNationalFormatForDefaultCountryValue={true}
           />
         </div>
       </div>
@@ -210,7 +222,6 @@ const phoneNo = () => {
   ) : (
     <div className="relative h-screen pt-12 mx-5">
       <div onClick={() => setCheckOtp(false)}>
-        {/* <div onClick={setCheckOtp(false)}> */}
         <img className="mb-8" src={BackArrow} alt="arrow" />
       </div>
       <div className="sm:flex sm:flex-col sm:items-center">
@@ -237,13 +248,22 @@ const phoneNo = () => {
       <div className="">
         <div className="absolute bottom-10 flex flex-col items-center justify-center left-0 right-0">
           <div
-            onClick={reloadFunc}
+            onClick={() => {
+              window.recaptchaVerifier = new RecaptchaVerifier(
+                "getotp",
+                {
+                  size: "invisible",
+                  callback: () => { },
+                },
+                auth
+              );
+              otpHandler();
+            }}
             id="getotp"
-            className={`${
-              minutesDisplay === "0" && secondsDisplay === "0"
-                ? "text-white cursor-pointer"
-                : "text-secondary btn-disable"
-            } flex justify-center items-center mb-4 font-400 text-center`}
+            className={`${minutesDisplay === "0" && secondsDisplay === "0"
+              ? "text-white cursor-pointer"
+              : "text-secondary btn-disable"
+              } flex justify-center items-center mb-4 font-400 text-center`}
           >
             Resend OTP
           </div>
