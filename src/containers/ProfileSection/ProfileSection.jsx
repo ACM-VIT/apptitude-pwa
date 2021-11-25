@@ -32,20 +32,6 @@ const ProfileSection = () => {
       setCopySuccess(false);
     }, 1000);
   };
-  useEffect(() => {
-    axios
-      .get("https://apptitude2021.herokuapp.com/team/", {
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        const something = response.data;
-        setData(something.arr);
-      })
-      .catch((error) => console.error(error.response.data));
-  }, []);
   return (
     <div>
       <div className="relative h-screen pt-28 mx-5">
