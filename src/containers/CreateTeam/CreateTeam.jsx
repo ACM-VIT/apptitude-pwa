@@ -1,13 +1,14 @@
 /* eslint-disable no-restricted-syntax */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-// import axios from "axios";
+import axios from "axios";
 import arrow from "../../assets/images/arrow.svg";
 
 const CreateTeam = function () {
   const [create, setName] = useState("");
   const [errors, setError] = useState("");
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
+  const token = sessionStorage.getItem("AM");
   // const data = [
   //   {
   //     name: "vijay",
@@ -34,34 +35,36 @@ const CreateTeam = function () {
   //     .catch((error) => console.error(error.response.data));
   // }, []);
   function generateCode() {
-    if (create.length > 0) {
-      for (const i in data) {
-        if (create === data[i].name) {
-          setError("Team already exists");
-          return;
-        }
-      }
-      setError("");
-    } else {
-      setError("Please enter a team name");
-    }
-    // axios
-    //   .post(
-    //     "https://apptitude2021.herokuapp.com/team",
-    //     {
-    //       name: create,
-    //     },
-    //     {
-    //       headers: {
-    //         "content-type": "application/json",
-    //         // authorization: `Bearer ${token}`,
-    //       },
+    // if (create.length > 0) {
+    //   for (const i in data) {
+    //     if (create === data[i].name) {
+    //       setError("Team already exists");
+    //       return;
     //     }
-    //   )
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((error) => {});
+    //   }
+    //   setError("");
+    // } else {
+    //   setError("Please enter a team name");
+    // }
+    axios
+      .post(
+        "https://apptitude2021.herokuapp.com/team",
+        {
+          name: create,
+        },
+        {
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   return (
     <>

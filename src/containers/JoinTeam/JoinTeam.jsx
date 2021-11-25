@@ -17,6 +17,20 @@ const JoinTeam = function () {
       code: 324324,
     },
   ];
+  // useEffect(() => {
+  //   axios
+  //     .get("https://apptitude2021.herokuapp.com/team/", {
+  //       headers: {
+  //         "content-type": "application/json",
+  //         // Authorization: `Bearer ${TK}`,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       const something = response.data;
+  //       setData(something.arr);
+  //     })
+  //     .catch((error) => console.error(error.response.data));
+  // }, []);
   function joinCode() {
     if (join.length > 0) {
       for (const i in code) {
@@ -30,6 +44,26 @@ const JoinTeam = function () {
       setError("Please enter a code");
     }
   }
+  //   axios
+  //     .post(
+  //       "https://apptitude2021.herokuapp.com/team",
+  //       {
+  //         name: create,
+  //       },
+  //       {
+  //         headers: {
+  //           "content-type": "application/json",
+  //           authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }
   return (
     <>
       <Link to="/createteam">

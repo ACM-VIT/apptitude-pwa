@@ -1,12 +1,15 @@
 /* eslint-disable react/function-component-definition */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 import copyYellow from "../../assets/images/copy-yellow.svg";
 
 const ProfileSection = () => {
   const [copySuccess, setCopySuccess] = useState(false);
-
+  const token = sessionStorage.getItem("AM");
+  const [data, setData] = useState([]);
+  console.log(data);
   const teamCode = 54353;
   const onCopyText = () => {
     setCopySuccess(true);
@@ -14,6 +17,20 @@ const ProfileSection = () => {
       setCopySuccess(false);
     }, 1000);
   };
+  useEffect(() => {
+    axios
+      .get("https://apptitude2021.herokuapp.com/team/", {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const something = response.data;
+        setData(something.arr);
+      })
+      .catch((error) => console.error(error.response.data));
+  }, []);
   return (
     <div>
       <div className="relative h-screen pt-28 mx-5">
