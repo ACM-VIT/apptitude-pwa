@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 import React, { useState, useEffect } from "react";
 import { Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
 
@@ -23,8 +22,7 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 // Styling
 import "./App.css";
 
-
-const App = () => {
+const App = function () {
   const [authLogin, setAuthLogin] = useState(false);
   useEffect(() => {
     if (sessionStorage.getItem("AM")) {
@@ -69,7 +67,11 @@ const App = () => {
           redirect="/"
         />
         {/* <ProtectedRoute path="/problems" component={ProbStatements} redirect="/" /> */}
-        <ProtectedRoute path="/features" component={FeatureGenerator} redirect="/" />
+        <ProtectedRoute
+          path="/features"
+          component={FeatureGenerator}
+          redirect="/"
+        />
         <ProtectedRoute path="/countdown" component={Countdown} redirect="/" />
       </Switch>
     </BrowserRouter>
