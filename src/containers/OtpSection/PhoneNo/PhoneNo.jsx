@@ -33,6 +33,14 @@ const phoneNo = () => {
     window.location.href = "/";
   }
 
+  if (localStorage.getItem("nixt") !== null) {
+    if (localStorage.getItem("tixt") !== null) {
+      window.location.href = "/timeline";
+      return;
+    }
+    window.location.href = "/createteam";
+  }
+
   const secret = sessionStorage.getItem("AM");
   const headers = {
     "Content-Type": "application/json",
@@ -53,12 +61,16 @@ const phoneNo = () => {
         }
       )
       .then((res) => {
+        localStorage.setItem("nixt", "true");
         window.location.href = "/createteam";
         sessionStorage.removeItem("NM");
         sessionStorage.removeItem("UID");
         sessionStorage.removeItem("PH");
       })
       .catch((err) => {
+        if (err.response.status === 500) {
+          showErrorSnack("Something went wrong!");
+        }
         showErrorSnack(err.response.data.detail);
         if (
           err.response.data.detail ===
