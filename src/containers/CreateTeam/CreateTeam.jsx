@@ -8,33 +8,20 @@ const secret = sessionStorage.getItem("AM");
 const CreateTeam = function () {
   const [create, setName] = useState("");
   const [errors, setError] = useState("");
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    axios
-      .get("https://apptitude2021.herokuapp.com/team", {
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${secret}`,
-        },
-      })
-      .then((response) => {
-        const something = response.data;
-        setData(something.arr);
-      })
-      .catch((error) => console.error(error.response.data));
-  }, []);
+  // const [data, setData] = useState([]);
+
   function generateCode() {
-    if (create.length > 0) {
-      for (const i in data) {
-        if (create === data[i].name) {
-          setError("Team already exists");
-          return;
-        }
-      }
-      setError("");
-    } else {
-      setError("Please enter a team name");
-    }
+    // if (create.length > 0) {
+    //   for (const i in data) {
+    //     if (create === data[i].name) {
+    //       setError("Team already exists");
+    //       return;
+    //     }
+    //   }
+    //   setError("");
+    // } else {
+    //   setError("Please enter a team name");
+    // }
     axios
       .post(
         "https://apptitude2021.herokuapp.com/team",
@@ -50,10 +37,11 @@ const CreateTeam = function () {
       )
       .then((res) => {
         console.log(res);
-        window.location.href = "/timeline";
+        window.location.href = "/teamcreated";
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data.detail);
+        setError(`${error.response.data.detail}`);
       });
   }
   return (
