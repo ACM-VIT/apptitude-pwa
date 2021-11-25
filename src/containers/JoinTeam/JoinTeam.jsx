@@ -1,22 +1,24 @@
 /* eslint-disable no-restricted-syntax */
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import arrow from "../../assets/images/arrow.svg";
+const secret = sessionStorage.getItem("AM");
 
 const JoinTeam = function () {
-  const [join, getName] = useState("");
+  const [join, setName] = useState("");
   const [error, setError] = useState("");
-  const code = [
-    {
-      code: 827984324,
-    },
-    {
-      code: 243243242,
-    },
-    {
-      code: 324324,
-    },
-  ];
+  // const code = [
+  //   {
+  //     code: 827984324,
+  //   },
+  //   {
+  //     code: 243243242,
+  //   },
+  //   {
+  //     code: 324324,
+  //   },
+  // ];
   // useEffect(() => {
   //   axios
   //     .get("https://apptitude2021.herokuapp.com/team/", {
@@ -32,38 +34,37 @@ const JoinTeam = function () {
   //     .catch((error) => console.error(error.response.data));
   // }, []);
   function joinCode() {
-    if (join.length > 0) {
-      for (const i in code) {
-        if (join === code[i].code.toString()) {
-          setError("");
-          return;
+    // if (join.length > 0) {
+    //   for (const i in code) {
+    //     if (join === code[i].code.toString()) {
+    //       setError("");
+    //       return;
+    //     }
+    //   }
+    //   setError("Team code does not exist");
+    // } else {
+    //   setError("Please enter a code");
+    // }
+
+    axios
+      .put(
+        `https://apptitude2021.herokuapp.com/team/${join}`,
+        {},
+        {
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${secret}`,
+          },
         }
-      }
-      setError("Team code does not exist");
-    } else {
-      setError("Please enter a code");
-    }
+      )
+      .then((res) => {
+        console.log(res);
+        window.location.href = "/teamjoined";
+      })
+      .catch((err) => {
+        setError(`${err.response.data.detail}`);
+      });
   }
-  //   axios
-  //     .post(
-  //       "https://apptitude2021.herokuapp.com/team",
-  //       {
-  //         name: create,
-  //       },
-  //       {
-  //         headers: {
-  //           "content-type": "application/json",
-  //           authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     )
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }
   return (
     <>
       <Link to="/createteam">
@@ -88,8 +89,8 @@ const JoinTeam = function () {
             <input
               value={join}
               className="text-white bg-transparent w-full h-14 px-2 rounded-md border border-yellow-400 focus:outline-none focus:border-yellow-400  "
-              onChange={(e) => getName(e.target.value)}
-              placeholder="ex. Webtitude"
+              onChange={(e) => setName(e.target.value)}
+              placeholder="ex. 71183111207"
             />
           </div>
           <div>

@@ -4,36 +4,12 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import arrow from "../../assets/images/arrow.svg";
 
+const secret = sessionStorage.getItem("AM");
 const CreateTeam = function () {
   const [create, setName] = useState("");
   const [errors, setError] = useState("");
   // const [data, setData] = useState([]);
-  const token = sessionStorage.getItem("AM");
-  // const data = [
-  //   {
-  //     name: "vijay",
-  //   },
-  //   {
-  //     name: "anil",
-  //   },
-  //   {
-  //     name: "kumble",
-  //   },
-  // ];
-  // useEffect(() => {
-  //   axios
-  //     .get("https://apptitude2021.herokuapp.com/team/", {
-  //       headers: {
-  //         "content-type": "application/json",
-  //         // Authorization: `Bearer ${TK}`,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       const something = response.data;
-  //       setData(something.arr);
-  //     })
-  //     .catch((error) => console.error(error.response.data));
-  // }, []);
+
   function generateCode() {
     // if (create.length > 0) {
     //   for (const i in data) {
@@ -55,15 +31,17 @@ const CreateTeam = function () {
         {
           headers: {
             "content-type": "application/json",
-            authorization: `Bearer ${token}`,
+            authorization: `Bearer ${secret}`,
           },
         }
       )
       .then((res) => {
         console.log(res);
+        window.location.href = "/teamcreated";
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data.detail);
+        setError(`${error.response.data.detail}`);
       });
   }
   return (
