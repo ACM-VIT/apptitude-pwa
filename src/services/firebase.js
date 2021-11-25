@@ -1,8 +1,13 @@
+/* eslint-disable no-underscore-dangle */
 // Import the functions you need from the SDKs you need
+// import firebase from "firebase/app";
 import firebase from "firebase/compat/app";
 import { getAnalytics } from "firebase/analytics";
+// import "firebase/auth";
 import "firebase/compat/auth";
+import { getDatabase } from "firebase/database";
 import dotenv from "dotenv";
+
 dotenv.config();
 
 const firebaseConfig = {
@@ -17,19 +22,28 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
+export const app = firebase.initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
+export const database = getDatabase(app);
+console.log(database);
 
 export const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 export const signInWithGoogle = () => {
   auth
     .signInWithPopup(googleProvider)
-    .then(() => {
+    .then((res) => {
       auth.currentUser
         .getIdToken(true)
         .then((idToken) => {
+          const Uid = res.user._delegate.uid;
+          const name = res.user.displayName;
+
           sessionStorage.setItem("AM", idToken);
+          sessionStorage.setItem("NM", name);
+          sessionStorage.setItem("UID", Uid);
+
           window.location.href = "/phone";
         })
         .catch((error) => {
@@ -40,3 +54,5 @@ export const signInWithGoogle = () => {
       console.log(error.message);
     });
 };
+
+export { firebase };
