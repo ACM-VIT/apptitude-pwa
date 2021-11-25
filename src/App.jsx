@@ -14,13 +14,15 @@ import Prizes from "./containers/Sponsers/Prizes";
 import AboutUs from "./containers/Sponsers/AboutUs";
 import ProfileSection from "./containers/ProfileSection/ProfileSection";
 // import ProbStatements from "./containers/ProblemStatements/ProbStatements";
-// import FeatureGenerator from "./containers/FeatureGenerator/FeatureGenerator";
+import FeatureGenerator from "./containers/FeatureGenerator/FeatureGenerator";
 import Countdown from "./containers/Countdown/Countdown";
+import Timeline from "./containers/Timeline/Timeline";
 import SubmissionPage from "./containers/SubmissionFormSection/Form";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 // Styling
 import "./App.css";
+
 
 const App = () => {
   const [authLogin, setAuthLogin] = useState(false);
@@ -67,7 +69,7 @@ const App = () => {
           redirect="/"
         />
         {/* <ProtectedRoute path="/problems" component={ProbStatements} redirect="/" /> */}
-        {/* <ProtectedRoute path="/features" component={FeatureGenerator} redirect="/" /> */}
+        <ProtectedRoute path="/features" component={FeatureGenerator} redirect="/" />
         <ProtectedRoute path="/countdown" component={Countdown} redirect="/" />
       </Switch>
     </BrowserRouter>
