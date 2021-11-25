@@ -13,7 +13,7 @@ import Prizes from "./containers/Sponsers/Prizes";
 import AboutUs from "./containers/Sponsers/AboutUs";
 import ProfileSection from "./containers/ProfileSection/ProfileSection";
 // import ProbStatements from "./containers/ProblemStatements/ProbStatements";
-// import FeatureGenerator from "./containers/FeatureGenerator/FeatureGenerator";
+import FeatureGenerator from "./containers/FeatureGenerator/FeatureGenerator";
 import Countdown from "./containers/Countdown/Countdown";
 import SubmissionPage from "./containers/SubmissionFormSection/Form";
 
@@ -37,7 +37,7 @@ class App extends Component {
           <Route path="/teamjoined" component={TeamJoined} />
           <Route path="/submission" component={SubmissionPage} />
           {/* <Route path="/problems" component={ProbStatements} /> */}
-          {/* <Route path="/features" component={FeatureGenerator} /> */}
+          <Route path="/features" component={FeatureGenerator} />
           <Route path="/countdown" component={Countdown} />
         </Switch>
       </div>
