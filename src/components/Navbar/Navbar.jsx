@@ -35,7 +35,7 @@ const Navbar = () => {
             alt="timeline"
           />
         </Link>
-        <Link to="/problems">
+        <Link to="/countdown">
           <img
             className={
               pagePath === "problems" ||
