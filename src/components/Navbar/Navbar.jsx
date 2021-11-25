@@ -18,10 +18,8 @@ import uploadfill from "../../assets/images/uploadfill.svg";
 
 const Navbar = () => {
   const { pathname } = window.location;
-  console.log(pathname);
   const path = pathname === "/" ? "dashboard" : pathname.substr(1);
   const pagePath = path.split("/")[0];
-  console.log(pagePath);
   return (
     <div className="fixed bottom-0 navbg h-24 w-full">
       <div className="flex justify-between xxs:mx-5 xs:mx-5 sm:mx-20 items-center h-20">

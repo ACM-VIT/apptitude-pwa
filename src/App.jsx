@@ -8,13 +8,12 @@ import JoinTeam from "./containers/JoinTeam/JoinTeam";
 import CreateTeam from "./containers/CreateTeam/CreateTeam";
 import TeamCreated from "./containers/TeamCreated/TeamCreated";
 import TeamJoined from "./containers/TeamJoined/TeamJoined";
-import otp from "./containers/OtpSection/Otp/Otp";
 import Sponsers from "./containers/Sponsers/Sponsers";
 import Prizes from "./containers/Sponsers/Prizes";
 import AboutUs from "./containers/Sponsers/AboutUs";
 import ProfileSection from "./containers/ProfileSection/ProfileSection";
-import ProbStatements from "./containers/ProblemStatements/ProbStatements";
-import FeatureGenerator from "./containers/FeatureGenerator/FeatureGenerator";
+// import ProbStatements from "./containers/ProblemStatements/ProbStatements";
+// import FeatureGenerator from "./containers/FeatureGenerator/FeatureGenerator";
 import Countdown from "./containers/Countdown/Countdown";
 
 // Styling
@@ -26,7 +25,6 @@ class App extends Component {
       <div>
         <Switch>
           <Route path="/profile" exact component={ProfileSection} />
-          <Route path="/otp" exact component={otp} />
           <Route path="/phone" exact component={PhoneNo} />
           <Route path="/" exact component={LoginSection} />
           <Route path="/sponsers" component={Sponsers} />
@@ -36,8 +34,8 @@ class App extends Component {
           <Route path="/createteam" component={CreateTeam} />
           <Route path="/teamcreated" component={TeamCreated} />
           <Route path="/teamjoined" component={TeamJoined} />
-          <Route path="/problems" component={ProbStatements} />
-          <Route path="/features" component={FeatureGenerator} />
+          {/* <Route path="/problems" component={ProbStatements} /> */}
+          {/* <Route path="/features" component={FeatureGenerator} /> */}
           <Route path="/countdown" component={Countdown} />
         </Switch>
       </div>
