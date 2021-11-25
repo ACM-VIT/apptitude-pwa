@@ -21,3 +21,11 @@ body {
   outline: none;
   padding-left: 10px;
 }
+
+.scrollbar ::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

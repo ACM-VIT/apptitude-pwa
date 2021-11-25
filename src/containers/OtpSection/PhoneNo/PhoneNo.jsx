@@ -4,7 +4,7 @@ import PhoneInput from "react-phone-number-input";
 import Countdown from "react-countdown";
 import axios from "axios";
 import "react-phone-number-input/style.css";
-import { useSnackbar } from 'notistack';
+import { useSnackbar } from "notistack";
 
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from "../../../services/firebase";
@@ -112,14 +112,12 @@ const phoneNo = () => {
     );
   };
 
-
-
   useEffect(() => {
     window.recaptchaVerifier = new RecaptchaVerifier(
       "getotp",
       {
-        'size': 'invisible',
-        callback: () => { },
+        size: "invisible",
+        callback: () => {},
       },
       auth
     );
@@ -127,15 +125,15 @@ const phoneNo = () => {
 
   const showErrorSnack = (message) => {
     enqueueSnackbar(message, {
-      variant: 'error',
+      variant: "error",
       preventDuplicate: true,
       autoHideDuration: 2000,
       anchorOrigin: {
-        vertical: 'top',
-        horizontal: 'center',
-    },
+        vertical: "top",
+        horizontal: "center",
+      },
     });
-  }
+  };
 
   const phoneNumber = value;
 
@@ -143,16 +141,16 @@ const phoneNo = () => {
     window.recaptchaVerifier = new RecaptchaVerifier(
       "getotp",
       {
-        'size': 'invisible',
-        callback: () => { },
+        size: "invisible",
+        callback: () => {},
       },
       auth
     );
     signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
       .then((confirmationResult) => {
-        let el = window.document.getElementById('__ff-recaptcha-container');
+        let el = window.document.getElementById("__ff-recaptcha-container");
         if (el != null) {
-          el.style.visibility = 'hidden';
+          el.style.visibility = "hidden";
         }
         window.confirmationResult = confirmationResult;
         console.log("Verification code sent");
@@ -162,9 +160,9 @@ const phoneNo = () => {
       .catch((error) => {
         console.log(error);
         showErrorSnack("Something went wrong in sending OTP!");
-        window.recaptchaVerifier.render().then(function(widgetId) {
+        window.recaptchaVerifier.render().then(function (widgetId) {
           grecaptcha.reset(widgetId);
-        }); 
+        });
       });
   };
 
@@ -184,8 +182,6 @@ const phoneNo = () => {
       });
   };
 
-
-
   return checkotp === false ? (
     <div className="relative h-screen pt-28 mx-5">
       <div className="xs:flex xs:flex-col xs:items-center sm:flex sm:flex-col sm:items-center">
@@ -195,7 +191,7 @@ const phoneNo = () => {
         </div>
         <div className="">
           <PhoneInput
-          limitMaxLength={true}
+            limitMaxLength={true}
             value={value}
             className="text-white w-96 xxs:w-full xs:w-80 h-14 px-2 rounded-md border border-yellow-400 "
             onChange={setValue}
@@ -253,17 +249,18 @@ const phoneNo = () => {
                 "getotp",
                 {
                   size: "invisible",
-                  callback: () => { },
+                  callback: () => {},
                 },
                 auth
               );
               otpHandler();
             }}
             id="getotp"
-            className={`${minutesDisplay === "0" && secondsDisplay === "0"
-              ? "text-white cursor-pointer"
-              : "text-secondary btn-disable"
-              } flex justify-center items-center mb-4 font-400 text-center`}
+            className={`${
+              minutesDisplay === "0" && secondsDisplay === "0"
+                ? "text-white cursor-pointer"
+                : "text-secondary btn-disable"
+            } flex justify-center items-center mb-4 font-400 text-center`}
           >
             Resend OTP
           </div>
