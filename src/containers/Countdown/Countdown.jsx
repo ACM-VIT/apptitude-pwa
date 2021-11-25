@@ -38,7 +38,7 @@ const Countdown = function () {
             intervalDelay={0}
           />
         </div>
-        <div className="flex flex-row text-white text-lg sm:text-xl pt-4 px-8 space-x-9 sm:space-x-14">
+        <div className="flex flex-row text-white text-lg sm:text-xl pt-4 px-8 space-x-11 sm:space-x-14">
           <div>Days</div>
           <div>hrs</div>
           <div>mins</div>

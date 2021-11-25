@@ -44,7 +44,7 @@ const Timeline = function () {
   }, []);
 
   return (
-    <div className="pt-16 scrollbar">
+    <div className="pt-28 scrollbar">
       <div className="text-white text-3xl font-700 text-3xl pl-8 pb-7">
         Timeline
       </div>

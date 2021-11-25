@@ -6,14 +6,7 @@ import Navbar from "../../components/Navbar/Navbar";
 const Sponsers = function () {
   return (
     <div className="scrollbar">
-      <Link to="/problems">
-        <img
-          src={arrow}
-          alt="arrow"
-          className="absolute w-6 h-8 top-10 left-4"
-        />
-      </Link>
-      <div className="mt-24 mx-3 mb-40">
+      <div className="pt-28 mx-3 mb-40">
         <div className="flex flex-row justify-between px-10">
           <div className="text-secondary font-400 text-1xl pt-1.5 ">
             <Link to="/sponsers">Sponsors</Link>
