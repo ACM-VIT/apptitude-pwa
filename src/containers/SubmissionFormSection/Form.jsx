@@ -66,7 +66,7 @@ const submissionForm = () => {
         <span
           className={`mt-2 text-${timer}-500 text-sm flex justify-center items-center float-right align-bottom`}
         >
-          <CountDown date="2021-11-25T12:00:00" />
+          <CountDown date="2021-11-28T17:00:00" />
         </span>
       </div>
       <div className="h-4/6">
