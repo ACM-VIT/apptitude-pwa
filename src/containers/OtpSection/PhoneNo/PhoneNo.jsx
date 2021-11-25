@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import PhoneInput from "react-phone-number-input";
 import Countdown from "react-countdown";
+import axios from "axios";
 import "react-phone-number-input/style.css";
 
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
@@ -30,8 +31,69 @@ const phoneNo = () => {
     window.location.href = "/";
   }
 
-  const phoneNumber = value;
-  const appVerifier = window.recaptchaVerifier;
+  const secret = sessionStorage.getItem("AM");
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${secret}`,
+  };
+
+  const check = () => {
+    axios
+      .post(
+        "https://apptitude2021.herokuapp.com/participant",
+
+        {
+          name: sessionStorage.getItem("NM"),
+          phoneNo: sessionStorage.getItem("PH"),
+        },
+        {
+          headers,
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        window.location.href = "/createteam";
+        sessionStorage.removeItem("NM");
+        sessionStorage.removeItem("UID");
+        sessionStorage.removeItem("PH");
+      })
+      .catch((err) => {
+        console.log(err.response.data.detail);
+        if (
+          err.response.data.detail ===
+          "User can't be created. This user already exists"
+        ) {
+          console.log("User already exist!!!");
+          // check if team exists
+          // true
+          // false
+          axios
+            .get("https://apptitude2021.herokuapp.com/team/name")
+            .then((res) => {
+              console.log(res.data);
+              // Team exist
+              window.location.href = "/timeline";
+            })
+            .catch((error) => {
+              // Team doesn't exist
+              if (
+                error.response.data.detail ===
+                "No team available. Join a team first"
+              ) {
+                window.location.href = "/createteam";
+              } else {
+                // sessionStorage.removeItem("AM");
+                // window.location.href = "/";
+                console.log("From else of axios get");
+                console.log(error.response.data.detail);
+              }
+            });
+        } else {
+          console.log("From else");
+          window.location.href = "/";
+        }
+      });
+  };
 
   const renderer = ({ minutes, seconds, completed }) => {
     if (completed) {
@@ -75,7 +137,8 @@ const phoneNo = () => {
     }
   }, []);
 
-  const check = () => {};
+  const phoneNumber = value;
+  const appVerifier = window.recaptchaVerifier;
 
   const otpHandler = () => {
     signInWithPhoneNumber(auth, phoneNumber, appVerifier)
@@ -87,22 +150,25 @@ const phoneNo = () => {
       })
       .catch((error) => {
         console.log(error);
+        console.log("Error in sending OTP");
         window.location.href = "/";
         sessionStorage.removeItem("AM");
       });
   };
 
   const verifyHandler = () => {
-    console.log("OPT button clicked");
+    console.log("Verify button clicked");
     window.confirmationResult
       .confirm(otp)
       .then((result) => {
         setOtpSent(true);
         sessionStorage.setItem("PH", result.user.phoneNumber);
-        window.location.href = "/createteam";
+        check();
       })
       .catch(() => {
         console.log("Verification failed");
+        window.location.href = "/";
+        sessionStorage.removeItem("AM");
       });
   };
 
@@ -161,7 +227,7 @@ const phoneNo = () => {
             <Countdown
               date={data.date + data.delay}
               renderer={renderer}
-              onStart={(delta) => {
+              onStart={() => {
                 if (localStorage.getItem("end_date") == null)
                   localStorage.setItem(
                     "end_date",
