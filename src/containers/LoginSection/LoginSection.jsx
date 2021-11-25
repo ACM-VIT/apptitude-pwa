@@ -1,5 +1,4 @@
 import React from "react";
-
 import { signInWithGoogle } from "../../services/firebase";
 
 // Assets
@@ -7,9 +6,6 @@ import googleLogo from "../../assets/images/googleLogo.svg";
 import appleLogo from "../../assets/images/appleLogo.svg";
 
 const loginSection = () => {
-  // const googleHandler = () => {
-  //   console.log("Login button clicked");
-  // };
   const appleHandler = () => {
     console.log("Login button clicked");
   };
@@ -22,7 +18,6 @@ const loginSection = () => {
       <div className="absolute bottom-10 flex flex-col items-center justify-center left-0 right-0">
         <div
           onClick={signInWithGoogle}
-          // onClick={googleHandler}
           className="flex w-96 xs:w-80 xxs:w-full xxs:px-6 h-14 rounded-md google mb-6 cursor-pointer"
         >
           <img
@@ -33,6 +28,7 @@ const loginSection = () => {
           <button
             className="font-400 text-base text-white pl-8 xs:pl-0 xxs:pl-12"
             type="submit"
+            id="sign-in"
           >
             Sign in with Google
           </button>

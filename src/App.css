@@ -1,23 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap");
 
-body{
-  background-color: #16171B;
+body {
+  background-color: #16171b;
 }
-.google{
-  background-color: #4080EA;
+.google {
+  background-color: #4080ea;
 }
-.font-400{
-  font-family: 'DM Sans', sans-serif;
+.font-400 {
+  font-family: "DM Sans", sans-serif;
   font-weight: 400;
 }
 
-.font-700{
-  font-family: 'DM Sans', sans-serif;
+.font-700 {
+  font-family: "DM Sans", sans-serif;
   font-weight: 700;
 }
 
-.PhoneInputInput{
-  background-color: #16171B !important;
+.PhoneInputInput {
+  background-color: #16171b !important;
   outline: none;
   padding-left: 10px;
 }
