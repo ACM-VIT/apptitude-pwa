@@ -1,6 +1,8 @@
 import React from "react";
 import { signInWithGoogle } from "../../services/firebase";
 
+import Carousel from "../../components/Carousel/Carousel";
+
 // Assets
 import googleLogo from "../../assets/images/googleLogo.svg";
 import appleLogo from "../../assets/images/appleLogo.svg";
@@ -12,8 +14,8 @@ const loginSection = () => {
 
   return (
     <div className="relative h-screen mx-5">
-      <div className="pt-28 text-white text-3xl text-center">
-        Gallery Incoming
+      <div className="absolute right-0 left-0">
+        <Carousel />
       </div>
       <div className="absolute bottom-10 flex flex-col items-center justify-center left-0 right-0">
         <div
