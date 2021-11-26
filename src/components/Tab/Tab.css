@@ -20,6 +20,7 @@
   font-weight: 500;
   @apply text-base sm:text-lg pr-2;
   color: #000000;
+  text-align: center !important;
 }
 
 .displayBorder {
@@ -32,13 +33,12 @@
   border-bottom: none;
 }
 @media screen and (max-height: 700px) {
-
   .tab {
     padding: 0.8em;
     float: left;
     margin-right: auto;
   }
-  
+
   .tab__section {
     display: flex;
     flex-direction: column;
@@ -49,14 +49,14 @@
     /* z-index: -10; */
     @apply w-full mb-4;
   }
-  
+
   /* Style the tab content title */
   .tab__title {
     font-weight: 500;
     @apply text-base sm:text-lg pr-2;
     color: #000000;
   }
-  
+
   .displayBorder {
     background-color: #16171b;
     overflow: auto;
@@ -66,5 +66,4 @@
     border-top: none;
     border-bottom: none;
   }
-  
 }

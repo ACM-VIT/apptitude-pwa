@@ -9,20 +9,21 @@ const tab = (props) => {
   const content = useRef(null);
 
   return (
-    <div className="tab__section z-0">
-      <button type="button" className={`tab ${setActive}`}>
-        <div className={`tab__title ${setActive}`}>{props.title}</div>
-      <div
-        className="tab__text"
-        dangerouslySetInnerHTML={{ __html: props.content }}
-      />
+    <div className="flex flex-col w-full tab__section z-0">
+      <button type="button" className={`flex flex-col tab w-full ${setActive}`}>
+        <div className={`flex justify-center tab__title w-full ${setActive}`}>
+          {props.title}
+        </div>
+        <div
+          className="tab__text"
+          dangerouslySetInnerHTML={{ __html: props.content }}
+        />
       </button>
       <div
         ref={content}
         style={{ maxHeight: `${setHeight}` }}
         className={`${setDisplay}`}
-      >
-      </div>
+      ></div>
     </div>
   );
 };
