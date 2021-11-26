@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import axios from "axios";
+import LoadingOverlay from "react-loading-overlay";
+import { useSnackbar } from "notistack";
 import Navbar from "../../components/Navbar/Navbar";
 import copyYellow from "../../assets/images/copy-yellow.svg";
-import { useSnackbar } from 'notistack';
-import LoadingOverlay from 'react-loading-overlay';
 
 const ProfileSection = () => {
   const [copySuccess, setCopySuccess] = useState(false);
@@ -18,15 +18,15 @@ const ProfileSection = () => {
 
   const showSuccSnack = (message) => {
     enqueueSnackbar(message, {
-      variant: 'success',
+      variant: "success",
       preventDuplicate: true,
       autoHideDuration: 2000,
       anchorOrigin: {
-        vertical: 'top',
-        horizontal: 'center',
+        vertical: "top",
+        horizontal: "center",
       },
     });
-  }
+  };
 
   const headers = {
     "Content-Type": "application/json",
@@ -35,7 +35,7 @@ const ProfileSection = () => {
 
   useEffect(() => {
     axios
-      .get("https://apptitude2021.herokuapp.com/team/", {
+      .get("https://provider.acmvit.in/team/", {
         headers,
       })
       .then((response) => {
@@ -47,7 +47,7 @@ const ProfileSection = () => {
   }, []);
   const onCopyText = () => {
     setCopySuccess(true);
-    showSuccSnack("Your Team Code has been copied!")
+    showSuccSnack("Your Team Code has been copied!");
     setTimeout(() => {
       setCopySuccess(false);
     }, 1000);
@@ -57,7 +57,7 @@ const ProfileSection = () => {
       <LoadingOverlay
         active={loading}
         spinner
-        text='Holup! Looking up who you are'
+        text="Holup! Looking up who you are"
       >
         <div className="relative h-screen pt-28 mx-5">
           <div className="xs:flex xs:flex-col sm:flex sm:flex-col">
@@ -66,9 +66,9 @@ const ProfileSection = () => {
               Team name
             </div>
           </div>
-          <div className="flex flex-row justify-between ">
+          <div className="flex flex-col justify-between ">
             <div className="text-white font-700 text-2xl">{data.name}</div>
-            <div className=" text-yellow-400 font-700 text-2xl">
+            <div className="text-yellow-400 font-700 text-2xl mt-2">
               <CopyToClipboard text={data.code} onCopy={onCopyText}>
                 <div className="flex">
                   {data.code}

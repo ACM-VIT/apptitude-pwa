@@ -1,4 +1,3 @@
-/* eslint-disable import/order */
 /* eslint-disable no-undef */
 /* eslint-disable prefer-arrow-callback */
 /* eslint-disable react/jsx-boolean-value */
@@ -10,6 +9,8 @@ import Countdown from "react-countdown";
 import axios from "axios";
 import "react-phone-number-input/style.css";
 import { useSnackbar } from "notistack";
+
+import { Fab } from "@material-ui/core";
 import LoadingOverlay from "react-loading-overlay";
 
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
@@ -17,8 +18,6 @@ import { auth } from "../../../services/firebase";
 
 // Assets
 import BackArrow from "../../../assets/images/backArrow.svg";
-
-import { Fab } from "@material-ui/core";
 import "./Otp.css";
 
 const phoneNo = () => {
@@ -83,7 +82,7 @@ const phoneNo = () => {
     setLoading(true);
     axios
       .post(
-        "https://apptitude2021.herokuapp.com/participant",
+        "https://provider.acmvit.in/participant",
 
         {
           name: sessionStorage.getItem("NM"),
@@ -98,13 +97,9 @@ const phoneNo = () => {
         window.location.href = "/createteam";
         sessionStorage.removeItem("NM");
         sessionStorage.removeItem("UID");
-        sessionStorage.removeItem("PH");
       })
       .catch((err) => {
         setLoading(false);
-        if (err.response.status === 500) {
-          showErrorSnack("Something went wrong!");
-        }
         if (
           err.response.data.detail ===
           "User can't be created. This user already exists"
@@ -112,7 +107,7 @@ const phoneNo = () => {
           showSuccSnack("Welcome back User!");
 
           axios
-            .get("https://apptitude2021.herokuapp.com/team/name", {
+            .get("https://provider.acmvit.in/team/name", {
               headers,
             })
             .then((res) => {
@@ -138,7 +133,7 @@ const phoneNo = () => {
               }
             });
         } else {
-          showErrorSnack(err.response.data.detail);
+          showErrorSnack("Something went wrong!");
           console.log("From else");
           window.location.href = "/";
         }
@@ -226,12 +221,12 @@ const phoneNo = () => {
   return checkotp === false ? (
     <LoadingOverlay active={loading} spinner text="Sending OTP to the device">
       <div className="relative h-screen pt-28 mx-5">
-        <div className="xs:flex xs:flex-col xs:items-center sm:flex sm:flex-col sm:items-center">
+        <div className="flex flex-col justify-center items-start mx-auto xs:w-80 border-box">
           <div className="text-white font-700 text-3xl">Phone Number</div>
           <div className="text-white font-400 text-sm mt-3 mb-1">
             Enter Mobile Number (with country code)
           </div>
-          <div className="">
+          <div className="w-full">
             <PhoneInput
               limitMaxLength={true}
               value={value}

@@ -3,17 +3,17 @@ import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
+import LoadingOverlay from "react-loading-overlay";
 import "react-vertical-timeline-component/style.min.css";
 import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
-import LoadingOverlay from 'react-loading-overlay';
 
 import "./Timeline.css";
 import Day1 from "../../components/days/day1";
 import Day2 from "../../components/days/day2";
 import Day3 from "../../components/days/day3";
 
-function days() { }
+function days() {}
 
 const Timeline = function () {
   const [data1, setData1] = useState([]);
@@ -30,7 +30,7 @@ const Timeline = function () {
   useEffect(() => {
     axios
       .get(
-        "https://apptitude2021.herokuapp.com/timeline",
+        "https://provider.acmvit.in/timeline",
         {},
         {
           headers,
@@ -55,9 +55,12 @@ const Timeline = function () {
         <LoadingOverlay
           active={loading}
           spinner
-          text='Contacting Organisers for the schedule'
+          text="Contacting Organisers for the schedule"
         >
-          <VerticalTimeline className="vertical-timeline-custom-line">
+          <VerticalTimeline
+            className="vertical-timeline-custom-line"
+            animate={false}
+          >
             {data1.map((info, key) => (
               <Day1
                 key={key.id}

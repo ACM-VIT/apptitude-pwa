@@ -11,7 +11,7 @@ const Sponsers = function () {
         <div className="flex flex-col w-full">
           <div className="flex flex-row justify-between px-10">
             <div className=" text-white font-700 text-1xl pt-1.5 border-b border-yellow-400">
-              <Link to="/sponsers">Sponsors</Link>
+              <Link to="/sponsors">Sponsors</Link>
             </div>
             <div className="text-secondary text-white font-400 text-1xl pt-1.5 ">
               <Link to="/prizes">Prizes</Link>

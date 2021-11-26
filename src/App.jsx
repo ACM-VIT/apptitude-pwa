@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/function-component-definition */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
+import useWindowSize from "./utils";
 
 // Containers
 import LoginSection from "./containers/LoginSection/LoginSection";
@@ -27,9 +28,17 @@ import LargeScreen from "./containers/LargeScreen/LargeScreen";
 import "./App.css";
 
 const App = function () {
+  const size = useWindowSize();
+  const [displayWidth, setDisplayWidth] = useState(size.width);
+  useEffect(() => {
+    setDisplayWidth(size.width);
+  }, [size]);
+
+  if (displayWidth > 515) {
+    return <LargeScreen />;
+  }
   return (
     <>
-      <LargeScreen />
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={LoginSection} />
@@ -45,7 +54,7 @@ const App = function () {
             component={PhoneNo}
             redirect="/"
           />
-          <ProtectedRoute path="/sponsers" component={Sponsers} redirect="/" />
+          <ProtectedRoute path="/sponsors" component={Sponsers} redirect="/" />
           <ProtectedRoute path="/prizes" component={Prizes} redirect="/" />
           <ProtectedRoute path="/aboutus" component={AboutUs} redirect="/" />
           <ProtectedRoute path="/jointeam" component={JoinTeam} redirect="/" />

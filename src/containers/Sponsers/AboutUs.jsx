@@ -9,7 +9,7 @@ const Sponsers = function () {
       <div className="pt-28 mx-3 mb-40">
         <div className="flex flex-row justify-between px-10">
           <div className="text-secondary font-400 text-1xl pt-1.5 ">
-            <Link to="/sponsers">Sponsors</Link>
+            <Link to="/sponsors">Sponsors</Link>
           </div>
           <div className="text-secondary font-400 text-1xl pt-1.5 ">
             <Link to="/prizes">Prizes</Link>

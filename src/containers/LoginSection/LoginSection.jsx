@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import React from "react";
 import { signInWithGoogle } from "../../services/firebase";
 
@@ -12,6 +13,15 @@ const loginSection = () => {
     console.log("Login button clicked");
   };
 
+  if (sessionStorage.getItem("AM") !== null) {
+    if (localStorage.getItem("nixt") === null) {
+      window.location.href = "/phone";
+      return;
+    }
+    window.location.href = "/timeline";
+    return;
+  }
+
   return (
     <div className="relative h-screen mx-5 flex flex-col justify-center items-center">
       <div className="flex justify-center items-center mb-12 xxs:mb-32">
@@ -20,15 +30,15 @@ const loginSection = () => {
       <div className="absolute bottom-10 flex flex-col items-center justify-center left-0 right-0">
         <div
           onClick={signInWithGoogle}
-          className="flex w-96 xs:w-80 xxs:w-full xxs:px-6 h-14 rounded-md google mb-6 cursor-pointer"
+          className="flex w-full relative justify-center items-center xxs:px-6 h-14 rounded-md google mb-6 cursor-pointer"
         >
           <img
-            className="pl-6 pr-20 xs:pr-12 xxs:pl-0 xxs:pr-0"
+            className="absolute left-8 top-4"
             src={googleLogo}
             alt="Google"
           />
           <button
-            className="font-400 text-base text-white pl-8 xs:pl-0 xxs:pl-12"
+            className="font-400 text-base text-white"
             type="submit"
             id="sign-in"
           >
