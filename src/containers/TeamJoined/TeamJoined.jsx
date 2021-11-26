@@ -53,7 +53,7 @@ const TeamJoined = function () {
           alt="ellipse"
           className="absolute w-96 h-96 top-48 -left-6"
         /> */}
-      <Link to="/timetable">
+      <Link to="/timeline">
         <div className="absolute bottom-10 flex  h-14 px-2 rounded-md bg-primary cursor-pointer text-black font-400 items-center justify-center left-2.5 right-2.5">
           Next
         </div>
