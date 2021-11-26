@@ -10,6 +10,9 @@ import teammember from "../../assets/images/teammember.svg";
 import copy from "../../assets/images/copy.svg";
 import { useSnackbar } from 'notistack';
 import { logRoles } from "@testing-library/dom";
+import { useSnackbar } from 'notistack';
+
+
 const secret = sessionStorage.getItem("AM");
 
 const TeamCreated = function () {
@@ -66,7 +69,7 @@ const TeamCreated = function () {
         setName(something.data.name);
         setCode(`${something.data.code}`);
       })
-      .catch((error) => {
+      .catch((_) => {
         showErrorSnack("Something went wrong!");
       });
   }, []);
