@@ -42,7 +42,7 @@ const CreateTeam = function () {
     setloading(true);
     axios
       .post(
-        "https://apptitude2021.herokuapp.com/team",
+        "https://provider.acmvit.in/team",
         {
           name: create,
         },

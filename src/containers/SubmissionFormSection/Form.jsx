@@ -101,7 +101,7 @@ const submissionForm = () => {
     }
 
     const response = axios
-      .get("https://apptitude2021.herokuapp.com/team/submission", {
+      .get("https://provider.acmvit.in/team/submission", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${secret}`,
@@ -128,7 +128,7 @@ const submissionForm = () => {
       setLoading(true);
       axios
         .put(
-          "https://apptitude2021.herokuapp.com/submit",
+          "https://provider.acmvit.in/submit",
           {
             github: `${githubURL}`,
             video: `${googleDriveURL}`,

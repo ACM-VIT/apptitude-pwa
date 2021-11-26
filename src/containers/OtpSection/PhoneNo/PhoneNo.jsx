@@ -78,7 +78,7 @@ const phoneNo = () => {
     setLoading(true);
     axios
       .post(
-        "https://apptitude2021.herokuapp.com/participant",
+        "https://provider.acmvit.in/participant",
 
         {
           name: sessionStorage.getItem("NM"),
@@ -107,7 +107,7 @@ const phoneNo = () => {
           showSuccSnack("Welcome back User!");
 
           axios
-            .get("https://apptitude2021.herokuapp.com/team/name", {
+            .get("https://provider.acmvit.in/team/name", {
               headers,
             })
             .then((res) => {

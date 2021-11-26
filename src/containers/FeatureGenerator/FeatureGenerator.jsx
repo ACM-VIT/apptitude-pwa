@@ -30,7 +30,7 @@ const FeatureGenerator = () => {
     setloading(true);
     axios
       .put(
-        `https://apptitude2021.herokuapp.com/feats/generate`,
+        `https://provider.acmvit.in/feats/generate`,
         {},
         {
           headers: {

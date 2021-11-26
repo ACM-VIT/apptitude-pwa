@@ -39,7 +39,7 @@ const JoinTeam = function () {
   // ];
   // useEffect(() => {
   //   axios
-  //     .get("https://apptitude2021.herokuapp.com/team/", {
+  //     .get("https://provider.acmvit.in/team/", {
   //       headers: {
   //         "content-type": "application/json",
   //         // Authorization: `Bearer ${TK}`,
@@ -67,7 +67,7 @@ const JoinTeam = function () {
     setloading(true);
     axios
       .put(
-        `https://apptitude2021.herokuapp.com/team/${join}`,
+        `https://provider.acmvit.in/team/${join}`,
         {},
         {
           headers: {

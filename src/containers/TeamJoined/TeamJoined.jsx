@@ -12,7 +12,7 @@ const TeamJoined = function () {
   const [name, setName] = useState("");
   useEffect(() => {
     axios
-      .get("https://apptitude2021.herokuapp.com/team/", {
+      .get("https://provider.acmvit.in/team/", {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${secret}`,
