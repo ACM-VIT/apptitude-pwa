@@ -7,8 +7,8 @@ import Tab from "../../components/Tab/Tab";
 
 const ProbStatements = function () {
   return (
-    <div className="mt-24">
-      <div className="flex flex-col w-full px-7">
+    <div className="pt-24 h-screen">
+      <div className="flex flex-col w-full px-2">
         <div className="flex flex-row justify-between text-base xs:text-lg sm:text-xl">
           <Link to="/problems">
             <div className="text-white font-700 border-b border-yellow-400">

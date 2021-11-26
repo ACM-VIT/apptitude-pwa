@@ -8,7 +8,6 @@
     "@brainhubeu/react-carousel": "^2.0.4",
     "@craco/craco": "^6.4.0",
     "@firebase/analytics": "^0.7.4",
-    "@material-ui/core": "^4.12.3",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -16,7 +15,6 @@
     "dotenv": "^10.0.0",
     "firebase": "^9.5.0",
     "i": "^0.3.7",
-    "notistack": "^1.0.10",
     "npm": "^8.1.4",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
@@ -29,8 +27,10 @@
     "react-responsive-carousel": "^3.2.22",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "react-vertical-timeline-component": "^3.5.2",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "@material-ui/core": "^4.12.3",
+    "notistack": "^1.0.10",
+    "react-vertical-timeline-component": "^3.5.2"
   },
   "scripts": {
     "start": "craco start",

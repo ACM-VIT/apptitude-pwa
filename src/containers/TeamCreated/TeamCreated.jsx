@@ -3,13 +3,13 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { logRoles } from "@testing-library/dom";
+import { useSnackbar } from "notistack";
 import ellipse from "../../assets/images/Ellipse1.svg";
 import team from "../../assets/images/team.svg";
 import "./TeamCreated.css";
 import teammember from "../../assets/images/teammember.svg";
 import copy from "../../assets/images/copy.svg";
-import { useSnackbar } from 'notistack';
-import { logRoles } from "@testing-library/dom";
 
 
 const secret = sessionStorage.getItem("AM");
@@ -31,7 +31,7 @@ const TeamCreated = function () {
 
   const showSuccSnack = (message) => {
     enqueueSnackbar(message, {
-      variant: 'success',
+      variant: "success",
       preventDuplicate: true,
       autoHideDuration: 2000,
       anchorOrigin: {
@@ -39,11 +39,11 @@ const TeamCreated = function () {
         horizontal: 'center',
       },
     });
-  }
+  };
 
   const showErrorSnack = (message) => {
     enqueueSnackbar(message, {
-      variant: 'error',
+      variant: "error",
       preventDuplicate: true,
       autoHideDuration: 2000,
       anchorOrigin: {
@@ -51,7 +51,7 @@ const TeamCreated = function () {
         horizontal: 'center',
       },
     });
-  }
+  };
 
   useEffect(() => {
     axios
@@ -75,7 +75,7 @@ const TeamCreated = function () {
       });
   }, []);
   const onCopyText = () => {
-    showSuccSnack("Your Team Code has been copied!")
+    showSuccSnack("Your Team Code has been copied!");
     setCopySuccess(true);
     setTimeout(() => {
       setCopySuccess(false);
@@ -138,8 +138,14 @@ const TeamCreated = function () {
         </div>
       </div>
       <Link to="/timeline">
-        <div className="absolute bottom-20 flex  h-14 px-2 rounded-md bg-primary cursor-pointer text-black font-400 items-center justify-center left-2.5 right-2.5">
-          Next
+        <div className="xs:flex xs:justify-center xs:items-center sm:flex sm:justify-center sm:items-center">
+          <div className="absolute bottom-10 right-0 left-0">
+            <div className="xs:flex xs:justify-center xs:items-center sm:flex sm:justify-center sm:items-center">
+              <div className="flex w-96 h-14 xxs:w-full xs:w-80 rounded-md bg-primary cursor-pointer text-white font-400 items-center justify-center">
+                Next
+              </div>
+            </div>
+          </div>
         </div>
       </Link>
     </div>
