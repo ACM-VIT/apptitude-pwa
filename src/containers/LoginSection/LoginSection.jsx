@@ -13,8 +13,8 @@ const loginSection = () => {
   };
 
   return (
-    <div className="relative h-screen mx-5">
-      <div className="absolute right-0 left-0">
+    <div className="relative h-screen mx-5 flex flex-col justify-center items-center">
+      <div className="flex justify-center items-center mb-12 xxs:mb-32">
         <Carousel />
       </div>
       <div className="absolute bottom-10 flex flex-col items-center justify-center left-0 right-0">
