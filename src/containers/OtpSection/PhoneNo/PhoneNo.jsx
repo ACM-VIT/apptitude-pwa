@@ -1,3 +1,7 @@
+/* eslint-disable no-undef */
+/* eslint-disable prefer-arrow-callback */
+/* eslint-disable react/jsx-boolean-value */
+/* eslint-disable consistent-return */
 /* eslint-disable no-restricted-globals */
 import React, { useEffect, useState } from "react";
 import PhoneInput from "react-phone-number-input";
@@ -5,6 +9,7 @@ import Countdown from "react-countdown";
 import axios from "axios";
 import "react-phone-number-input/style.css";
 import { useSnackbar } from "notistack";
+import { Fab } from "@material-ui/core";
 import LoadingOverlay from "react-loading-overlay";
 
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
@@ -14,7 +19,6 @@ import { auth } from "../../../services/firebase";
 import BackArrow from "../../../assets/images/backArrow.svg";
 
 import "./Otp.css";
-import { Fab } from "@material-ui/core";
 
 const phoneNo = () => {
   const [checkotp, setCheckOtp] = useState(false);
@@ -93,7 +97,6 @@ const phoneNo = () => {
         window.location.href = "/createteam";
         sessionStorage.removeItem("NM");
         sessionStorage.removeItem("UID");
-        sessionStorage.removeItem("PH");
       })
       .catch((err) => {
         setLoading(false);

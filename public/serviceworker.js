@@ -8,9 +8,7 @@ const self = this;
 // Install SW
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    // eslint-disable-next-line arrow-body-style
     caches.open(CACHE_NAME).then((cache) => {
-      // console.log("Opened cache");
       return cache.addAll(urlsToCache);
     })
   );
