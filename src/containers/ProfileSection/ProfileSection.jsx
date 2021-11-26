@@ -35,7 +35,7 @@ const ProfileSection = () => {
 
   useEffect(() => {
     axios
-      .get("https://apptitude2021.herokuapp.com/team/", {
+      .get("https://provider.acmvit.in/team/", {
         headers,
       })
       .then((response) => {

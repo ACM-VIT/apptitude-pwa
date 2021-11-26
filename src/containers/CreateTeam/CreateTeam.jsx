@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import arrow from "../../assets/images/arrow.svg";
 import { useSnackbar } from "notistack";
 import LoadingOverlay from "react-loading-overlay";
+import arrow from "../../assets/images/arrow.svg";
 
 const secret = sessionStorage.getItem("AM");
 const CreateTeam = function () {
@@ -42,7 +42,7 @@ const CreateTeam = function () {
     setloading(true);
     axios
       .post(
-        "https://apptitude2021.herokuapp.com/team",
+        "https://provider.acmvit.in/team",
         {
           name: create,
         },

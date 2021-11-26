@@ -30,7 +30,7 @@ const Timeline = function () {
   useEffect(() => {
     axios
       .get(
-        "https://apptitude2021.herokuapp.com/timeline",
+        "https://provider.acmvit.in/timeline",
         {},
         {
           headers,

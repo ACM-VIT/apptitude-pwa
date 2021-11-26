@@ -5,11 +5,14 @@ import { Route, Redirect } from "react-router-dom";
 
 const ProtectedRoute = ({ component: Component, redirect, ...rest }) => {
   const key = sessionStorage.getItem("AM");
+  const phone = sessionStorage.getItem("PH");
 
   return (
     <Route
       {...rest}
-      render={(props) => (key ? <Component {...props} /> : <Redirect to="/" />)}
+      render={(props) =>
+        key && phone ? <Component {...props} /> : <Redirect to="/" />
+      }
     />
   );
 };
