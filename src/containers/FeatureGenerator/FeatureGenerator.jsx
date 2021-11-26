@@ -76,7 +76,7 @@ const FeatureGenerator = function () {
   return (
     <div className="pt-24 h-screen">
       <div className="flex flex-col w-full px-2">
-        <div className="flex flex-row justify-between text-base xs:text-lg sm:text-xl">
+        <div className="flex flex-row justify-between text-base xs:text-lg sm:text-xl px-4">
           <Link to="/problems">
             <div className="text-white font-700 opacity-50 hover:opacity-100">
               Problem statements
@@ -95,18 +95,16 @@ const FeatureGenerator = function () {
             be added as bonus points
           </div>
         ) : (
-          <div className="flex flex-col w-full">
-            <article id="problems" className="container">
-              <div className="tabscontainer">
-                <Tab title="Esay hello hei asashd as asdsd sdjs asdnsds defefef" />
-                <Tab title="Esay hello hei asashd as asdsd sdjs asdnsds defefef" />
-                <Tab title="Esay hello hei asashd as asdsd sdjs asdnsds defefef" />
-              </div>
-            </article>
-          </div>
+          <article id="problems" className="flex flex-col w-full pt-8 pb-4">
+            <div className="tabscontainer">
+              <Tab title="Esay hello hei asashd as asdsd sdjs asdnsds defefef" />
+              <Tab title="Esay hello hei asashd as asdsd sdjs asdnsds defefef" />
+              <Tab title="Esay hello hei asashd as asdsd sdjs asdnsds defefef" />
+            </div>
+          </article>
         )}
         {disable ? (
-          <div className="absolute bottom-32 align-middle items-center justify-center text-red-400 font-400 mt-2  text-xs xs:text-base sm:text-lg">
+          <div className="flex align-middle items-center justify-center text-red-400 font-400 mt-2  text-xs xs:text-base sm:text-lg">
             {errors}
           </div>
         ) : (
@@ -115,7 +113,7 @@ const FeatureGenerator = function () {
             onClick={() => {
               loadProblemStatements();
             }}
-            className="absolute flex items-center justify-center bottom-32 h-14 px-2 rounded-md bg-primary cursor-pointer text-black font-400 text-center xxs:w-80 xxs:left-5 xs:w-84 xs:left-7 "
+            className=" flex items-center w-full justify-center h-14 rounded-md bg-primary cursor-pointer text-black font-400 text-center "
           >
             Generate features
           </button>
