@@ -9,6 +9,7 @@ import Countdown from "react-countdown";
 import axios from "axios";
 import "react-phone-number-input/style.css";
 import { useSnackbar } from "notistack";
+
 import { Fab } from "@material-ui/core";
 import LoadingOverlay from "react-loading-overlay";
 
@@ -17,7 +18,6 @@ import { auth } from "../../../services/firebase";
 
 // Assets
 import BackArrow from "../../../assets/images/backArrow.svg";
-
 import "./Otp.css";
 
 const phoneNo = () => {
@@ -230,11 +230,11 @@ const phoneNo = () => {
             <PhoneInput
               limitMaxLength={true}
               value={value}
-              className="text-white w-96 xxs:w-full xs:w-80 h-14 px-2 rounded-md border border-yellow-400 "
+              className="text-white bg-main w-96 xxs:w-full xs:w-80 h-14 px-2 rounded-md border border-yellow-400 "
               onChange={setValue}
               defaultCountry="IN"
               country="IN"
-              useNationalFormatForDefaultCountryValue={true}
+              useNationalFormatForDefaultCountryValue
             />
           </div>
         </div>

@@ -34,6 +34,10 @@ body {
   display: none;
 }
 
+.PhoneInputCountrySelect {
+  background-color: #16171b !important;
+}
+
 
 #root::-webkit-scrollbar {
   display: none;
@@ -44,6 +48,7 @@ body {
   -ms-overflow-style: none;  
   scrollbar-width: none; 
 }
+
 
 @media screen and (min-width: 515px) {
   .largescreen {
@@ -60,6 +65,8 @@ body {
   }
 }
 
+
 .grecaptcha-badge {
   visibility: hidden;
 }
+
