@@ -57,8 +57,8 @@ const CreateTeam = function () {
       })
       .catch((error) => {
         showErrorSnack("Something went wrong in creating your team! Please contact us on discord!")
-        console.log(error.response.data.detail);
-        setError(`${error.response.data.detail}`);
+        console.log(error.response.data.detail[0].msg);
+        setError(`${error.response.data.detail[0].msg}`);
       });
   }
   return (
