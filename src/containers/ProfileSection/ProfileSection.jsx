@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import axios from "axios";
+import LoadingOverlay from "react-loading-overlay";
+import { useSnackbar } from "notistack";
 import Navbar from "../../components/Navbar/Navbar";
 import copyYellow from "../../assets/images/copy-yellow.svg";
-import { useSnackbar } from "notistack";
-import LoadingOverlay from "react-loading-overlay";
 
 const ProfileSection = () => {
   const [copySuccess, setCopySuccess] = useState(false);
