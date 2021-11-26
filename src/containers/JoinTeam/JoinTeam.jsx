@@ -93,7 +93,7 @@ const JoinTeam = function () {
           className="absolute w-6 h-8 top-10 left-4"
         />
       </Link>
-      <div className="mt-28 mx-3 sm:mx-0">
+      <div className="relative h-screen pt-28 mx-10">
         <div className="flex flex-col w-full">
           <div className="flex flex-row justify-between ">
             <div className="text-white font-700 text-2xl">Join Team</div>
@@ -116,11 +116,17 @@ const JoinTeam = function () {
             <div className="text-red-400 text-sm font-400 mt-2">{error}</div>
           </div>
         </div>
-        <div
-          onClick={() => joinCode()}
-          className="absolute bottom-20 flex  h-14 px-2 rounded-md bg-primary cursor-pointer text-white font-400 items-center justify-center left-2.5 right-2.5"
-        >
-          Join Team
+        <div className="xs:flex xs:justify-center xs:items-center sm:flex sm:justify-center sm:items-center">
+          <div className="absolute bottom-10 right-0 left-0">
+            <div className="xs:flex xs:justify-center xs:items-center sm:flex sm:justify-center sm:items-center">
+              <div
+                onClick={() => joinCode()}
+                className="flex w-96 h-14 xxs:w-full xs:w-80 rounded-md bg-primary cursor-pointer text-white font-400 items-center justify-center"
+              >
+                Join Team
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

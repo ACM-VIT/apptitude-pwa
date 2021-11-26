@@ -17,6 +17,7 @@ module.exports = {
         main: "#16171B",
       }),
       spacing: {
+        84: "22.37rem",
         96: "27.75rem",
       },
       textColor: {
