@@ -155,7 +155,7 @@ const FeatureGenerator = () => {
                 loadProblemStatements();
               }}
               style={{ width: "92vw" }}
-              className="fixed bottom-28 flex items-center justify-center h-14 rounded-md bg-primary cursor-pointer text-black font-400 text-center "
+              className="fixed bottom-28 flex items-center justify-center h-14 rounded-md bg-primary cursor-pointer text-black font-400 text-center"
             >
               Generate features
             </button>
