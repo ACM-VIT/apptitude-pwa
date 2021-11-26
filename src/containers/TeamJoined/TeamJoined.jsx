@@ -54,14 +54,8 @@ const TeamJoined = function () {
           className="absolute w-96 h-96 top-48 -left-6"
         /> */}
       <Link to="/timetable">
-        <div className="xs:flex xs:justify-center xs:items-center sm:flex sm:justify-center sm:items-center">
-          <div className="absolute bottom-10 right-0 left-0">
-            <div className="xs:flex xs:justify-center xs:items-center sm:flex sm:justify-center sm:items-center">
-              <div className="flex w-96 h-14 xxs:w-full xs:w-80 rounded-md bg-primary cursor-pointer text-white font-400 items-center justify-center">
-                Next
-              </div>
-            </div>
-          </div>
+        <div className="absolute bottom-10 flex  h-14 px-2 rounded-md bg-primary cursor-pointer text-black font-400 items-center justify-center left-2.5 right-2.5">
+          Next
         </div>
       </Link>
     </div>
