@@ -1,10 +1,11 @@
+/* eslint-disable react/function-component-definition */
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import LoadingOverlay from "react-loading-overlay";
 import Navbar from "../../components/Navbar/Navbar";
 import Tab from "../../components/Tab/Tab";
 import "./Feature.css";
-import LoadingOverlay from "react-loading-overlay";
 
 const secret = sessionStorage.getItem("AM");
 
