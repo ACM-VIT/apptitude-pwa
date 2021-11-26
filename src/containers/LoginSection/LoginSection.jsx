@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import React from "react";
 import { signInWithGoogle } from "../../services/firebase";
 
@@ -11,6 +12,15 @@ const loginSection = () => {
   const appleHandler = () => {
     console.log("Login button clicked");
   };
+
+  if (sessionStorage.getItem("AM") !== null) {
+    if (localStorage.getItem("nixt") === null) {
+      window.location.href = "/phone";
+      return;
+    }
+    window.location.href = "/timeline";
+    return;
+  }
 
   return (
     <div className="relative h-screen mx-5 flex flex-col justify-center items-center">
