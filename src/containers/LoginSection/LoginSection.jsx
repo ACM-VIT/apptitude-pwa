@@ -14,10 +14,7 @@ const loginSection = () => {
   };
 
   if (sessionStorage.getItem("AM") !== null) {
-    if (
-      localStorage.getItem("nixt") === null ||
-      localStorage.getItem("PH") === null
-    ) {
+    if (localStorage.getItem("nixt") === null) {
       window.location.href = "/phone";
       return;
     }
