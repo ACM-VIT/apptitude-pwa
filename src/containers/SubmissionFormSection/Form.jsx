@@ -166,7 +166,7 @@ const submissionForm = () => {
         <div className="flex justify-between w-full max-w-96">
           <span className="text-white font-700 text-3xl">Submission</span>
           <span
-            className={`mt-2 text-${timer}-500 text-sm flex justify-center items-center float-right align-bottom`}
+            className={`mt-2 text-${timer} text-sm flex justify-center items-center float-right align-bottom`}
           >
             <CountDown date="2021-11-28T17:00:00" />
           </span>
