@@ -34,6 +34,17 @@ body {
   display: none;
 }
 
+
+#root::-webkit-scrollbar {
+  display: none;
+}
+
+
+#root {
+  -ms-overflow-style: none;  
+  scrollbar-width: none; 
+}
+
 @media screen and (min-width: 515px) {
   .largescreen {
     position: fixed;
