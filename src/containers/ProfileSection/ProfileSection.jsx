@@ -7,6 +7,9 @@ import { useSnackbar } from "notistack";
 import Navbar from "../../components/Navbar/Navbar";
 import copyYellow from "../../assets/images/copy-yellow.svg";
 
+// Assets
+import Logout from "../../assets/images/logout.svg";
+
 const ProfileSection = () => {
   const [copySuccess, setCopySuccess] = useState(false);
   const [data, setData] = useState({});
@@ -61,7 +64,25 @@ const ProfileSection = () => {
       >
         <div className="relative h-screen pt-28 mx-5">
           <div className="xs:flex xs:flex-col sm:flex sm:flex-col">
-            <div className="text-white font-700 text-3xl">Profile Section</div>
+            <div className="flex justify-between items-center">
+              <div className="text-white font-700 text-3xl">
+                Profile Section
+              </div>
+              <div
+                className="cursor-pointer"
+                onClick={() => {
+                  sessionStorage.removeItem("AM");
+                  sessionStorage.removeItem("UID");
+                  sessionStorage.removeItem("NM");
+                  localStorage.removeItem("nixt");
+                  localStorage.removeItem("tixt");
+                  localStorage.removeItem("_grecaptcha");
+                  window.location.href = "/";
+                }}
+              >
+                <img className="h-8" src={Logout} alt="logout" />
+              </div>
+            </div>
             <div className="text-secondary font-400 text-base mt-9 mb-1">
               Team name
             </div>
@@ -91,22 +112,7 @@ const ProfileSection = () => {
             ))}
           </div>
         </div>
-        <button
-          type="submit"
-          onClick={() => {
-            sessionStorage.removeItem("AM");
-            sessionStorage.removeItem("UID");
-            sessionStorage.removeItem("NM");
-            localStorage.removeItem("nixt");
-            localStorage.removeItem("tixt");
-            localStorage.removeItem("_grecaptcha");
-            window.location.href = "/";
-          }}
-          style={{ width: "92vw" }}
-          className="fixed bottom-28 flex items-center justify-center h-14 rounded-md bg-red-600 cursor-pointer text-black font-400 text-center left-4"
-        >
-          Logout
-        </button>
+
         <Navbar />
       </LoadingOverlay>
     </div>
