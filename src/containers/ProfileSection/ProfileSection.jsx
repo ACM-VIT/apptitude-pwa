@@ -91,6 +91,23 @@ const ProfileSection = () => {
             ))}
           </div>
         </div>
+        <button
+          type="submit"
+          onClick={() => {
+            sessionStorage.removeItem("AM");
+            sessionStorage.removeItem("PH");
+            sessionStorage.removeItem("UID");
+            sessionStorage.removeItem("NM");
+            localStorage.removeItem("nixt");
+            localStorage.removeItem("tixt");
+            localStorage.removeItem("_grecaptcha");
+            window.location.href = "/";
+          }}
+          style={{ width: "92vw" }}
+          className="fixed bottom-28 flex items-center justify-center h-14 rounded-md bg-red-600 cursor-pointer text-black font-400 text-center left-4"
+        >
+          Logout
+        </button>
         <Navbar />
       </LoadingOverlay>
     </div>
