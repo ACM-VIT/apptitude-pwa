@@ -10,6 +10,10 @@ import team from "../../assets/images/team.svg";
 import "./TeamCreated.css";
 import teammember from "../../assets/images/teammember.svg";
 import copy from "../../assets/images/copy.svg";
+import { useSnackbar } from 'notistack';
+import { logRoles } from "@testing-library/dom";
+
+
 const secret = sessionStorage.getItem("AM");
 
 const TeamCreated = function () {
@@ -33,8 +37,8 @@ const TeamCreated = function () {
       preventDuplicate: true,
       autoHideDuration: 2000,
       anchorOrigin: {
-        vertical: "top",
-        horizontal: "center",
+        vertical: 'top',
+        horizontal: 'center',
       },
     });
   };
@@ -45,8 +49,8 @@ const TeamCreated = function () {
       preventDuplicate: true,
       autoHideDuration: 2000,
       anchorOrigin: {
-        vertical: "top",
-        horizontal: "center",
+        vertical: 'top',
+        horizontal: 'center',
       },
     });
   };
@@ -66,8 +70,10 @@ const TeamCreated = function () {
         setName(something.data.name);
         setCode(`${something.data.code}`);
       })
-      .catch((error) => {
+      .catch((_) => {
         showErrorSnack("Something went wrong!");
+        sessionStorage.removeItem("AM");
+        window.location.href = "/";
       });
   }, []);
   const onCopyText = () => {
@@ -79,6 +85,7 @@ const TeamCreated = function () {
   };
   return (
     <div className="xxs:mt-16 xs:mt-24 mx-3 sm:mx-0">
+
       <div className="flex flex-col w-full justify-center items-center">
         <div className="text-white font-400 text-base">Team</div>
         <div className="text-white font-700 text-4xl my-1">{name}</div>

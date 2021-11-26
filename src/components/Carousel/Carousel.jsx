@@ -21,34 +21,16 @@ class carousel extends Component {
         infiniteLoop={true}
         showArrows={false}
         showStatus={false}
+        showIndicators={false}
       >
-        <div className="">
-          <img src={apptitude} alt="img1" />
-          <p className="text-white font-700 mt-0 text-xl">
-            Welcome to Apptitude!
-          </p>
-          <p className="font-400 graycolor mt-2 text-base">
-            Test yourself against the best app devs out there!
-          </p>
+        <div>
+          <img className="xxs:h-80" src={apptitude} alt="apptitude" />
         </div>
         <div>
-          <img src={target} alt="img1" />
-          <p className="text-white font-700 mt-0 text-xl">
-            Give yourself a challenge
-          </p>
-          <p className="font-400 graycolor mt-2 text-base">
-            With our unique problem statements!
-          </p>
+          <img className="xxs:h-80" src={target} alt="target" />
         </div>
         <div>
-          <img src={trophy} alt="img1" />
-          <p className="text-white font-700 mt-0 text-xl">
-            Exciting prizes and schwags
-          </p>
-          <p className="font-400 graycolor mt-2 text-base">
-            Keep an eye on the exciting prizes and schwags that we have lined up
-            for you!
-          </p>
+          <img className="xxs:h-80" src={trophy} alt="trophy" />
         </div>
       </Carousel>
     );

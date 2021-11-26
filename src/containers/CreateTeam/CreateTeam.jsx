@@ -3,11 +3,27 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import arrow from "../../assets/images/arrow.svg";
+import { useSnackbar } from 'notistack';
 
 const secret = sessionStorage.getItem("AM");
 const CreateTeam = function () {
   const [create, setName] = useState("");
   const [errors, setError] = useState("");
+  const { enqueueSnackbar } = useSnackbar();
+
+
+  const showErrorSnack = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'error',
+      preventDuplicate: true,
+      autoHideDuration: 2000,
+      anchorOrigin: {
+        vertical: 'top',
+        horizontal: 'center',
+      },
+    });
+  }
+
   // const [data, setData] = useState([]);
 
   function generateCode() {
@@ -40,6 +56,7 @@ const CreateTeam = function () {
         window.location.href = "/teamcreated";
       })
       .catch((error) => {
+        showErrorSnack("Something went wrong in creating your team! Please contact us on discord!")
         console.log(error.response.data.detail);
         setError(`${error.response.data.detail}`);
       });

@@ -5,6 +5,7 @@ import Countdown from "react-countdown";
 import axios from "axios";
 import "react-phone-number-input/style.css";
 import { useSnackbar } from "notistack";
+import LoadingOverlay from 'react-loading-overlay';
 
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from "../../../services/firebase";
@@ -13,6 +14,7 @@ import { auth } from "../../../services/firebase";
 import BackArrow from "../../../assets/images/backArrow.svg";
 
 import "./Otp.css";
+import { Fab } from "@material-ui/core";
 
 const phoneNo = () => {
   const [checkotp, setCheckOtp] = useState(false);
@@ -22,6 +24,7 @@ const phoneNo = () => {
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [data, setData] = useState({ date: Date.now(), delay: 45000 });
+  const [loading, setLoading] = useState(false);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const wantedDelay = 45000;
@@ -41,6 +44,31 @@ const phoneNo = () => {
     window.location.href = "/createteam";
   }
 
+  const showErrorSnack = (message) => {
+    enqueueSnackbar(message, {
+      variant: "error",
+      preventDuplicate: true,
+      autoHideDuration: 2000,
+      anchorOrigin: {
+        vertical: "top",
+        horizontal: "center",
+      },
+    });
+  };
+
+  const showSuccSnack = (message) => {
+    enqueueSnackbar(message, {
+      variant: "success",
+      preventDuplicate: true,
+      autoHideDuration: 2000,
+      anchorOrigin: {
+        vertical: "top",
+        horizontal: "center",
+      },
+    });
+  };
+
+
   const secret = sessionStorage.getItem("AM");
   const headers = {
     "Content-Type": "application/json",
@@ -48,6 +76,7 @@ const phoneNo = () => {
   };
 
   const check = () => {
+    setLoading(true);
     axios
       .post(
         "https://apptitude2021.herokuapp.com/participant",
@@ -68,15 +97,15 @@ const phoneNo = () => {
         sessionStorage.removeItem("PH");
       })
       .catch((err) => {
+        setLoading(false);
         if (err.response.status === 500) {
           showErrorSnack("Something went wrong!");
         }
-        showErrorSnack(err.response.data.detail);
         if (
           err.response.data.detail ===
           "User can't be created. This user already exists"
         ) {
-          showErrorSnack("User already exist!!!");
+          showSuccSnack("Welcome back User!");
 
           axios
             .get("https://apptitude2021.herokuapp.com/team/name", {
@@ -84,6 +113,8 @@ const phoneNo = () => {
             })
             .then((res) => {
               console.log(res.data);
+              localStorage.setItem("tixt", "true");
+              localStorage.setItem("nixt", "true");
               // Team exist
               window.location.href = "/timeline";
             })
@@ -93,6 +124,7 @@ const phoneNo = () => {
                 error.response.data.detail ===
                 "No team available. Join a team first"
               ) {
+                localStorage.setItem("nixt", "true");
                 window.location.href = "/createteam";
               } else {
                 sessionStorage.removeItem("AM");
@@ -102,6 +134,7 @@ const phoneNo = () => {
               }
             });
         } else {
+          showErrorSnack(err.response.data.detail);
           console.log("From else");
           window.location.href = "/";
         }
@@ -129,56 +162,48 @@ const phoneNo = () => {
       "getotp",
       {
         size: "invisible",
-        callback: () => {},
+        callback: () => { },
       },
       auth
     );
   }, []);
 
-  const showErrorSnack = (message) => {
-    enqueueSnackbar(message, {
-      variant: "error",
-      preventDuplicate: true,
-      autoHideDuration: 2000,
-      anchorOrigin: {
-        vertical: "top",
-        horizontal: "center",
-      },
-    });
-  };
 
   const phoneNumber = value;
 
   const otpHandler = () => {
-    window.recaptchaVerifier = new RecaptchaVerifier(
-      "getotp",
-      {
-        size: "invisible",
-        callback: () => {},
-      },
-      auth
-    );
+    setLoading(true);
+    try{
+      window.recaptchaVerifier.render().then(function (widgetId) {
+        grecaptcha.reset(widgetId);
+      });
+    } catch (e) {
+      console.log(e);
+    }
     signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
       .then((confirmationResult) => {
-        let el = window.document.getElementById("__ff-recaptcha-container");
-        if (el != null) {
-          el.style.visibility = "hidden";
-        }
         window.confirmationResult = confirmationResult;
         console.log("Verification code sent");
         console.log(phoneNumber);
+        setLoading(false);
         setCheckOtp(true);
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error);
         showErrorSnack("Something went wrong in sending OTP!");
-        window.recaptchaVerifier.render().then(function (widgetId) {
-          grecaptcha.reset(widgetId);
-        });
+        try{
+          window.recaptchaVerifier.render().then(function (widgetId) {
+            grecaptcha.reset(widgetId);
+          });
+        } catch (e) {
+          console.log(e);
+        }
       });
   };
 
   const verifyHandler = () => {
+    setLoading(true);
     console.log("Verify button clicked");
     window.confirmationResult
       .confirm(otp)
@@ -189,102 +214,115 @@ const phoneNo = () => {
         console.log("After check");
       })
       .catch((err) => {
+        setLoading(false);
         showErrorSnack("Invalid OTP!");
         console.log("Verification failed");
       });
   };
 
   return checkotp === false ? (
-    <div className="relative h-screen pt-28 mx-5">
-      <div className="xs:flex xs:flex-col xs:items-center sm:flex sm:flex-col sm:items-center">
-        <div className="text-white font-700 text-3xl">Phone Number</div>
-        <div className="text-white font-400 text-sm mt-3 mb-1">
-          Enter Mobile Number (with country code)
+    <LoadingOverlay
+      active={loading}
+      spinner
+      text='Sending OTP to the device'
+    >
+      <div className="relative h-screen pt-28 mx-5">
+        <div className="xs:flex xs:flex-col xs:items-center sm:flex sm:flex-col sm:items-center">
+          <div className="text-white font-700 text-3xl">Phone Number</div>
+          <div className="text-white font-400 text-sm mt-3 mb-1">
+            Enter Mobile Number (with country code)
+          </div>
+          <div className="">
+            <PhoneInput
+              limitMaxLength={true}
+              value={value}
+              className="text-white w-96 xxs:w-full xs:w-80 h-14 px-2 rounded-md border border-yellow-400 "
+              onChange={setValue}
+              defaultCountry="IN"
+              country="IN"
+              useNationalFormatForDefaultCountryValue={true}
+            />
+          </div>
+        </div>
+        <div className="xs:flex xs:justify-center xs:items-center sm:flex sm:justify-center sm:items-center">
+          <div className="absolute bottom-10 right-0 left-0">
+            <div className="xs:flex xs:justify-center xs:items-center sm:flex sm:justify-center sm:items-center">
+              <div
+                onClick={otpHandler}
+                id="getotp"
+                className="flex w-96 h-14 xxs:w-full xs:w-80 rounded-md bg-primary cursor-pointer text-white font-400 items-center justify-center"
+              >
+                Get OTP
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </LoadingOverlay>
+  ) : (
+    <LoadingOverlay
+      active={loading}
+      spinner
+      text='Checking if you are the person you claim to be'
+    >
+      <div className="relative h-screen pt-12 mx-5">
+        <div onClick={() => setCheckOtp(false)}>
+          <img className="mb-8" src={BackArrow} alt="arrow" />
+        </div>
+        <div className="sm:flex sm:flex-col sm:items-center">
+          <div className="text-white font-700 text-3xl">Enter OTP</div>
+          <div className="text-white font-400 text-sm mt-3 mb-1">
+            OTP has been sent to your mobile no.
+          </div>
+
+          <div>
+            <input
+              type="text"
+              className="text-white outline-none bg-main w-96 xs:w-full xxs:w-full h-14 px-2 rounded-md border border-yellow-400"
+              onChange={(event) => {
+                setOtp(event.target.value);
+              }}
+            />
+          </div>
+          <div className="flex text-white justify-end font-400">
+            <div>
+              <Countdown date={data.date + data.delay} renderer={renderer} />
+            </div>
+          </div>
         </div>
         <div className="">
-          <PhoneInput
-            limitMaxLength={true}
-            value={value}
-            className="text-white w-96 xxs:w-full xs:w-80 h-14 px-2 rounded-md border border-yellow-400 "
-            onChange={setValue}
-            defaultCountry="IN"
-            country="IN"
-            useNationalFormatForDefaultCountryValue={true}
-          />
-        </div>
-      </div>
-      <div className="xs:flex xs:justify-center xs:items-center sm:flex sm:justify-center sm:items-center">
-        <div className="absolute bottom-10 right-0 left-0">
-          <div className="xs:flex xs:justify-center xs:items-center sm:flex sm:justify-center sm:items-center">
+          <div className="absolute bottom-10 flex flex-col items-center justify-center left-0 right-0">
             <div
-              onClick={otpHandler}
+              onClick={() => {
+                window.recaptchaVerifier = new RecaptchaVerifier(
+                  "getotp",
+                  {
+                    size: "invisible",
+                    callback: () => { },
+                  },
+                  auth
+                );
+                otpHandler();
+              }}
               id="getotp"
-              className="flex w-96 h-14 xxs:w-full xs:w-80 rounded-md bg-primary cursor-pointer text-white font-400 items-center justify-center"
+              className={`${minutesDisplay === "0" && secondsDisplay === "0"
+                ? "text-white cursor-pointer"
+                : "text-secondary btn-disable"
+                } flex justify-center items-center mb-4 font-400 text-center`}
             >
-              Get OTP
+              Resend OTP
+            </div>
+            <div
+              onClick={verifyHandler}
+              className="flex w-96 h-14 xs:w-full xxs:w-full rounded-md bg-primary cursor-pointer text-white font-400 items-center justify-center xs:mx-auto sm:mx-auto"
+            >
+              Verify
             </div>
           </div>
         </div>
       </div>
-    </div>
-  ) : (
-    <div className="relative h-screen pt-12 mx-5">
-      <div onClick={() => setCheckOtp(false)}>
-        <img className="mb-8" src={BackArrow} alt="arrow" />
-      </div>
-      <div className="sm:flex sm:flex-col sm:items-center">
-        <div className="text-white font-700 text-3xl">Enter OTP</div>
-        <div className="text-white font-400 text-sm mt-3 mb-1">
-          OTP has been sent to your mobile no.
-        </div>
-
-        <div>
-          <input
-            type="text"
-            className="text-white outline-none bg-main w-96 xs:w-full xxs:w-full h-14 px-2 rounded-md border border-yellow-400"
-            onChange={(event) => {
-              setOtp(event.target.value);
-            }}
-          />
-        </div>
-        <div className="flex text-white justify-end font-400">
-          <div>
-            <Countdown date={data.date + data.delay} renderer={renderer} />
-          </div>
-        </div>
-      </div>
-      <div className="">
-        <div className="absolute bottom-10 flex flex-col items-center justify-center left-0 right-0">
-          <div
-            onClick={() => {
-              window.recaptchaVerifier = new RecaptchaVerifier(
-                "getotp",
-                {
-                  size: "invisible",
-                  callback: () => {},
-                },
-                auth
-              );
-              otpHandler();
-            }}
-            id="getotp"
-            className={`${
-              minutesDisplay === "0" && secondsDisplay === "0"
-                ? "text-white cursor-pointer"
-                : "text-secondary btn-disable"
-            } flex justify-center items-center mb-4 font-400 text-center`}
-          >
-            Resend OTP
-          </div>
-          <div
-            onClick={verifyHandler}
-            className="flex w-96 h-14 xs:w-full xxs:w-full rounded-md bg-primary cursor-pointer text-white font-400 items-center justify-center xs:mx-auto sm:mx-auto"
-          >
-            Verify
-          </div>
-        </div>
-      </div>
-    </div>
+    </LoadingOverlay>
   );
 };
 
