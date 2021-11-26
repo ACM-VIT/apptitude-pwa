@@ -97,9 +97,6 @@ const phoneNo = () => {
       })
       .catch((err) => {
         setLoading(false);
-        if (err.response.status === 500) {
-          showErrorSnack("Something went wrong!");
-        }
         if (
           err.response.data.detail ===
           "User can't be created. This user already exists"
@@ -133,7 +130,7 @@ const phoneNo = () => {
               }
             });
         } else {
-          showErrorSnack(err.response.data.detail);
+          showErrorSnack("Something went wrong!");
           console.log("From else");
           window.location.href = "/";
         }

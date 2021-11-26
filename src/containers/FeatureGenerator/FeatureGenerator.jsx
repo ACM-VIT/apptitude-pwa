@@ -4,19 +4,24 @@ import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 import Tab from "../../components/Tab/Tab";
 import "./Feature.css";
+import { useSnackbar } from "notistack";
 import LoadingOverlay from "react-loading-overlay";
+
 
 const secret = sessionStorage.getItem("AM");
 
+
+
 const FeatureGenerator = () => {
   // check if generate fixtures are called
-  const [generateFixtures, setGenerateFixtures] = useState(true);
+  const [generateFixtures, setGenerateFixtures] = useState(false);
   // const [show, setShow] = useState(false);
   // save easy, medium and hard feature in state
   const [easy, setEasy] = useState("");
   const [medium, setMedium] = useState("");
   const [hard, setHard] = useState("");
   const [loading, setloading] = useState(false);
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   // store number of times generate fixtures is called
   const [generateFixturesCount, setGenerateFixturesCount] = useState(0);
@@ -24,6 +29,38 @@ const FeatureGenerator = () => {
   const [disable, setDisable] = useState(false);
 
   const [errors, setError] = useState("");
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://apptitude2021.herokuapp.com/team/features`,
+        {
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${secret}`,
+          },
+        }
+      ).then(res => {
+        if (res.data.data.features){
+          setEasy(res.data.data.features.easy);
+          setMedium(res.data.data.features.medium);
+          setHard(res.data.data.features.hard);
+          setGenerateFixtures(true);
+        }
+    }).catch(err => console.log(err));
+  }, []);
+
+const showErrorSnack = (message) => {
+  enqueueSnackbar(message, {
+    variant: "error",
+    preventDuplicate: true,
+    autoHideDuration: 2000,
+    anchorOrigin: {
+      vertical: "top",
+      horizontal: "center",
+    },
+  });
+};
 
   const loadProblemStatements = () => {
     setloading(true);
@@ -74,6 +111,7 @@ const FeatureGenerator = () => {
       .catch((error) => {
         console.error(error);
         setError(error.response.data.detail);
+        showErrorSnack(error.response.data.detail);
         setDisable(true);
         // show error / warning
         // @frontend
@@ -107,28 +145,25 @@ const FeatureGenerator = () => {
             ) : (
               <article id="problems" className="flex flex-col w-full pt-8 pb-4">
                 <div className="tabscontainer">
-                  <Tab title="Esay hello hei asashd as asdsd sdjs asdnsds defefef" />
-                  <Tab title="Esay hello hei asashd as asdsd sdjs asdnsds defefef" />
-                  <Tab title="Esay hello hei asashd as asdsd sdjs asdnsds defefef" />
+                  <Tab title={easy} />
+                  <Tab title={medium} />
+                  <Tab title={hard} />
                 </div>
               </article>
             )}
 
-            {disable ? (
-              <div className="flex align-middle items-center justify-center text-red-400 font-400 mt-2  text-xs xs:text-base sm:text-lg">
-                {errors}
-              </div>
-            ) : (
-              <button
-                type="submit"
-                onClick={() => {
-                  loadProblemStatements();
-                }}
-                className=" flex items-center w-full justify-center h-14 rounded-md bg-primary cursor-pointer text-black font-400 text-center "
-              >
-                Generate features
-              </button>
-            )}
+
+            <button
+              type="submit"
+              onClick={() => {
+                loadProblemStatements();
+              }}
+              style={{ width: "92vw" }}
+              className="fixed bottom-28 flex items-center justify-center h-14 rounded-md bg-primary cursor-pointer text-black font-400 text-center "
+            >
+              Generate features
+            </button>
+
           </div>
         </div>
         <Navbar />
