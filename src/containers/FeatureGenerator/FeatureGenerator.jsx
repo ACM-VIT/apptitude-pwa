@@ -7,7 +7,7 @@ import "./Feature.css";
 const secret = sessionStorage.getItem("AM");
 const FeatureGenerator = function () {
   // check if generate fixtures are called
-  const [generateFixtures, setGenerateFixtures] = useState(false);
+  const [generateFixtures, setGenerateFixtures] = useState(true);
   // const [show, setShow] = useState(false);
   // save easy, medium and hard feature in state
   const [easy, setEasy] = useState("");
@@ -98,9 +98,9 @@ const FeatureGenerator = function () {
           <div className="flex flex-col w-full px-7">
             <article id="problems" className="container">
               <div className="tabscontainer">
-                <Tab title={easy} />
-                <Tab title={medium} />
-                <Tab title={hard} />
+                <Tab title="Esay hello hei asashd as asdsd sdjs asdnsds defefef" />
+                <Tab title="Esay hello hei asashd as asdsd sdjs asdnsds defefef" />
+                <Tab title="Esay hello hei asashd as asdsd sdjs asdnsds defefef" />
               </div>
             </article>
           </div>
