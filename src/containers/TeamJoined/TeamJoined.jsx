@@ -12,7 +12,7 @@ const TeamJoined = function () {
   const [name, setName] = useState("");
   useEffect(() => {
     axios
-      .get("https://apptitude2021.herokuapp.com/team/", {
+      .get("https://provider.acmvit.in/team/", {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${secret}`,
@@ -54,7 +54,7 @@ const TeamJoined = function () {
           className="absolute w-96 h-96 top-48 -left-6"
         /> */}
       <Link to="/timetable">
-        <div className="absolute bottom-20 flex  h-14 px-2 rounded-md bg-primary cursor-pointer text-black font-400 items-center justify-center left-2.5 right-2.5">
+        <div className="absolute bottom-10 flex  h-14 px-2 rounded-md bg-primary cursor-pointer text-black font-400 items-center justify-center left-2.5 right-2.5">
           Next
         </div>
       </Link>

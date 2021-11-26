@@ -7,9 +7,9 @@ import Tab from "../../components/Tab/Tab";
 
 const ProbStatements = function () {
   return (
-    <div className="mt-24">
-      <div className="flex flex-col w-full px-7">
-        <div className="flex flex-row justify-between text-base xs:text-lg sm:text-xl">
+    <div className="pt-24 h-screen no-scrollbar">
+      <div className="flex flex-col w-full px-2 h-full">
+        <div className="flex flex-row justify-between text-sm se:text-base px-4 pb-8">
           <Link to="/problems">
             <div className="text-white font-700 border-b border-yellow-400">
               Problem statements
@@ -22,10 +22,18 @@ const ProbStatements = function () {
           </Link>
         </div>
 
-        <article id="problems" className="container">
+        <article
+          id="problems"
+          className="flex flex-col w-full overflow-scroll mb-24 no-scrollbar"
+        >
           <div className="tabscontainer">
             {Data.map((ques) => (
-              <Tab key={ques.id} id={ques.id} title={ques.question} />
+              <Tab
+                key={ques.id}
+                id={ques.id}
+                title={ques.question}
+                content={ques.content}
+              />
             ))}
           </div>
         </article>

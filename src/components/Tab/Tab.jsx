@@ -12,16 +12,16 @@ const tab = (props) => {
     <div className="tab__section z-0">
       <button type="button" className={`tab ${setActive}`}>
         <div className={`tab__title ${setActive}`}>{props.title}</div>
+      <div
+        className="tab__text"
+        dangerouslySetInnerHTML={{ __html: props.content }}
+      />
       </button>
       <div
         ref={content}
         style={{ maxHeight: `${setHeight}` }}
         className={`${setDisplay}`}
       >
-        <div
-          className="tab__text"
-          dangerouslySetInnerHTML={{ __html: props.content }}
-        />
       </div>
     </div>
   );

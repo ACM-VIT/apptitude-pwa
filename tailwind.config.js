@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     screens: {
       xxs: { min: "320px", max: "400px" },
+      se: {min:"321px", max:"400px"},
       xs: { min: "401px", max: "639px" },
       sm: { min: "640px", max: "767px" },
       md: { min: "768px", max: "1023px" },
@@ -17,6 +18,7 @@ module.exports = {
         main: "#16171B",
       }),
       spacing: {
+        84: "22.37rem",
         96: "27.75rem",
       },
       textColor: {
