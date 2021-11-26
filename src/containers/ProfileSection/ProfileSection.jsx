@@ -95,7 +95,6 @@ const ProfileSection = () => {
           type="submit"
           onClick={() => {
             sessionStorage.removeItem("AM");
-            sessionStorage.removeItem("PH");
             sessionStorage.removeItem("UID");
             sessionStorage.removeItem("NM");
             localStorage.removeItem("nixt");
