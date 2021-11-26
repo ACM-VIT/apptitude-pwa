@@ -10,9 +10,6 @@ import team from "../../assets/images/team.svg";
 import "./TeamCreated.css";
 import teammember from "../../assets/images/teammember.svg";
 import copy from "../../assets/images/copy.svg";
-import { useSnackbar } from 'notistack';
-import { logRoles } from "@testing-library/dom";
-
 
 const secret = sessionStorage.getItem("AM");
 
