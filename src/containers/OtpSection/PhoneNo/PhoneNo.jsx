@@ -5,7 +5,7 @@ import Countdown from "react-countdown";
 import axios from "axios";
 import "react-phone-number-input/style.css";
 import { useSnackbar } from "notistack";
-import LoadingOverlay from 'react-loading-overlay';
+import LoadingOverlay from "react-loading-overlay";
 
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from "../../../services/firebase";
@@ -67,7 +67,6 @@ const phoneNo = () => {
       },
     });
   };
-
 
   const secret = sessionStorage.getItem("AM");
   const headers = {
@@ -162,18 +161,17 @@ const phoneNo = () => {
       "getotp",
       {
         size: "invisible",
-        callback: () => { },
+        callback: () => {},
       },
       auth
     );
   }, []);
 
-
   const phoneNumber = value;
 
   const otpHandler = () => {
     setLoading(true);
-    try{
+    try {
       window.recaptchaVerifier.render().then(function (widgetId) {
         grecaptcha.reset(widgetId);
       });
@@ -192,7 +190,7 @@ const phoneNo = () => {
         setLoading(false);
         console.log(error);
         showErrorSnack("Something went wrong in sending OTP!");
-        try{
+        try {
           window.recaptchaVerifier.render().then(function (widgetId) {
             grecaptcha.reset(widgetId);
           });
@@ -221,18 +219,14 @@ const phoneNo = () => {
   };
 
   return checkotp === false ? (
-    <LoadingOverlay
-      active={loading}
-      spinner
-      text='Sending OTP to the device'
-    >
+    <LoadingOverlay active={loading} spinner text="Sending OTP to the device">
       <div className="relative h-screen pt-28 mx-5">
-        <div className="xs:flex xs:flex-col xs:items-center sm:flex sm:flex-col sm:items-center">
+        <div className="flex flex-col justify-center items-start mx-auto xs:w-80 border-box">
           <div className="text-white font-700 text-3xl">Phone Number</div>
           <div className="text-white font-400 text-sm mt-3 mb-1">
             Enter Mobile Number (with country code)
           </div>
-          <div className="">
+          <div className="w-full">
             <PhoneInput
               limitMaxLength={true}
               value={value}
@@ -257,14 +251,13 @@ const phoneNo = () => {
             </div>
           </div>
         </div>
-
       </div>
     </LoadingOverlay>
   ) : (
     <LoadingOverlay
       active={loading}
       spinner
-      text='Checking if you are the person you claim to be'
+      text="Checking if you are the person you claim to be"
     >
       <div className="relative h-screen pt-12 mx-5">
         <div onClick={() => setCheckOtp(false)}>
@@ -299,17 +292,18 @@ const phoneNo = () => {
                   "getotp",
                   {
                     size: "invisible",
-                    callback: () => { },
+                    callback: () => {},
                   },
                   auth
                 );
                 otpHandler();
               }}
               id="getotp"
-              className={`${minutesDisplay === "0" && secondsDisplay === "0"
-                ? "text-white cursor-pointer"
-                : "text-secondary btn-disable"
-                } flex justify-center items-center mb-4 font-400 text-center`}
+              className={`${
+                minutesDisplay === "0" && secondsDisplay === "0"
+                  ? "text-white cursor-pointer"
+                  : "text-secondary btn-disable"
+              } flex justify-center items-center mb-4 font-400 text-center`}
             >
               Resend OTP
             </div>

@@ -57,7 +57,10 @@ const Timeline = function () {
           spinner
           text="Contacting Organisers for the schedule"
         >
-          <VerticalTimeline className="vertical-timeline-custom-line">
+          <VerticalTimeline
+            className="vertical-timeline-custom-line"
+            animate={false}
+          >
             {data1.map((info, key) => (
               <Day1
                 key={key.id}
