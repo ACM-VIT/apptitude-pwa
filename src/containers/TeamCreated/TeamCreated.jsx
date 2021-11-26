@@ -11,7 +11,6 @@ import "./TeamCreated.css";
 import teammember from "../../assets/images/teammember.svg";
 import copy from "../../assets/images/copy.svg";
 
-
 const secret = sessionStorage.getItem("AM");
 
 const TeamCreated = function () {
@@ -35,8 +34,8 @@ const TeamCreated = function () {
       preventDuplicate: true,
       autoHideDuration: 2000,
       anchorOrigin: {
-        vertical: 'top',
-        horizontal: 'center',
+        vertical: "top",
+        horizontal: "center",
       },
     });
   };
@@ -47,8 +46,8 @@ const TeamCreated = function () {
       preventDuplicate: true,
       autoHideDuration: 2000,
       anchorOrigin: {
-        vertical: 'top',
-        horizontal: 'center',
+        vertical: "top",
+        horizontal: "center",
       },
     });
   };
@@ -83,7 +82,6 @@ const TeamCreated = function () {
   };
   return (
     <div className="xxs:mt-16 xs:mt-24 mx-3 sm:mx-0">
-
       <div className="flex flex-col w-full justify-center items-center">
         <div className="text-white font-400 text-base">Team</div>
         <div className="text-white font-700 text-4xl my-1">{name}</div>
