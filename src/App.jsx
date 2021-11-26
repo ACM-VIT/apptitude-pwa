@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
 
 // Containers
 import LoginSection from "./containers/LoginSection/LoginSection";
@@ -12,36 +12,75 @@ import Sponsers from "./containers/Sponsers/Sponsers";
 import Prizes from "./containers/Sponsers/Prizes";
 import AboutUs from "./containers/Sponsers/AboutUs";
 import ProfileSection from "./containers/ProfileSection/ProfileSection";
-// import ProbStatements from "./containers/ProblemStatements/ProbStatements";
-// import FeatureGenerator from "./containers/FeatureGenerator/FeatureGenerator";
+import ProbStatements from "./containers/ProblemStatements/ProbStatements";
+import FeatureGenerator from "./containers/FeatureGenerator/FeatureGenerator";
 import Countdown from "./containers/Countdown/Countdown";
+import Timeline from "./containers/Timeline/Timeline";
 import SubmissionPage from "./containers/SubmissionFormSection/Form";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 // Styling
 import "./App.css";
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <Switch>
-          <Route path="/profile" exact component={ProfileSection} />
-          <Route path="/phone" exact component={PhoneNo} />
-          <Route path="/" exact component={LoginSection} />
-          <Route path="/sponsers" component={Sponsers} />
-          <Route path="/prizes" component={Prizes} />
-          <Route path="/aboutus" component={AboutUs} />
-          <Route path="/jointeam" component={JoinTeam} />
-          <Route path="/createteam" component={CreateTeam} />
-          <Route path="/teamcreated" component={TeamCreated} />
-          <Route path="/teamjoined" component={TeamJoined} />
-          <Route path="/submission" component={SubmissionPage} />
-          {/* <Route path="/problems" component={ProbStatements} /> */}
-          {/* <Route path="/features" component={FeatureGenerator} /> */}
-          <Route path="/countdown" component={Countdown} />
-        </Switch>
-      </div>
-    );
-  }
-}
+const App = function () {
+  const [authLogin, setAuthLogin] = useState(false);
+  useEffect(() => {
+    if (sessionStorage.getItem("AM")) {
+      setAuthLogin(true);
+    }
+  }, []);
+  console.log(authLogin);
+
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" exact component={LoginSection} />
+        <ProtectedRoute
+          path="/profile"
+          exact
+          component={ProfileSection}
+          redirect="/"
+        />
+        <ProtectedRoute path="/phone" exact component={PhoneNo} redirect="/" />
+        <ProtectedRoute path="/sponsers" component={Sponsers} redirect="/" />
+        <ProtectedRoute path="/prizes" component={Prizes} redirect="/" />
+        <ProtectedRoute path="/aboutus" component={AboutUs} redirect="/" />
+        <ProtectedRoute path="/jointeam" component={JoinTeam} redirect="/" />
+        <ProtectedRoute
+          path="/createteam"
+          component={CreateTeam}
+          redirect="/"
+        />
+        <ProtectedRoute
+          path="/teamcreated"
+          component={TeamCreated}
+          redirect="/"
+        />
+        <ProtectedRoute
+          path="/teamjoined"
+          component={TeamJoined}
+          redirect="/"
+        />
+        <ProtectedRoute
+          path="/submission"
+          component={SubmissionPage}
+          redirect="/"
+        />
+        <ProtectedRoute
+          path="/problems"
+          component={ProbStatements}
+          redirect="/"
+        />
+        <ProtectedRoute
+          path="/features"
+          component={FeatureGenerator}
+          redirect="/"
+        />
+        <ProtectedRoute path="/timeline" component={Timeline} redirect="/" />
+        <ProtectedRoute path="/countdown" component={Countdown} redirect="/" />
+      </Switch>
+    </BrowserRouter>
+  );
+};
+
 export default App;
