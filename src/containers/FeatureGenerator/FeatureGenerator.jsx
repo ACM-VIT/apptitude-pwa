@@ -3,16 +3,12 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import LoadingOverlay from "react-loading-overlay";
+import { useSnackbar } from "notistack";
 import Navbar from "../../components/Navbar/Navbar";
 import Tab from "../../components/Tab/Tab";
 import "./Feature.css";
-import { useSnackbar } from "notistack";
-import LoadingOverlay from "react-loading-overlay";
-
 
 const secret = sessionStorage.getItem("AM");
-
-
 
 const FeatureGenerator = () => {
   // check if generate fixtures are called
@@ -34,35 +30,34 @@ const FeatureGenerator = () => {
 
   useEffect(() => {
     axios
-      .get(
-        `https://apptitude2021.herokuapp.com/team/features`,
-        {
-          headers: {
-            "content-type": "application/json",
-            authorization: `Bearer ${secret}`,
-          },
-        }
-      ).then(res => {
-        if (res.data.data.features){
+      .get(`https://apptitude2021.herokuapp.com/team/features`, {
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${secret}`,
+        },
+      })
+      .then((res) => {
+        if (res.data.data.features) {
           setEasy(res.data.data.features.easy);
           setMedium(res.data.data.features.medium);
           setHard(res.data.data.features.hard);
           setGenerateFixtures(true);
         }
-    }).catch(err => console.log(err));
+      })
+      .catch((err) => console.log(err));
   }, []);
 
-const showErrorSnack = (message) => {
-  enqueueSnackbar(message, {
-    variant: "error",
-    preventDuplicate: true,
-    autoHideDuration: 2000,
-    anchorOrigin: {
-      vertical: "top",
-      horizontal: "center",
-    },
-  });
-};
+  const showErrorSnack = (message) => {
+    enqueueSnackbar(message, {
+      variant: "error",
+      preventDuplicate: true,
+      autoHideDuration: 2000,
+      anchorOrigin: {
+        vertical: "top",
+        horizontal: "center",
+      },
+    });
+  };
 
   const loadProblemStatements = () => {
     setloading(true);
@@ -154,7 +149,6 @@ const showErrorSnack = (message) => {
               </article>
             )}
 
-
             <button
               type="submit"
               onClick={() => {
@@ -165,7 +159,6 @@ const showErrorSnack = (message) => {
             >
               Generate features
             </button>
-
           </div>
         </div>
         <Navbar />
