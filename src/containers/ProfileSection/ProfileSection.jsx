@@ -4,12 +4,27 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 import copyYellow from "../../assets/images/copy-yellow.svg";
+import { useSnackbar } from 'notistack';
 
 const ProfileSection = () => {
   const [copySuccess, setCopySuccess] = useState(false);
   const [data, setData] = useState({});
   const [members, setMembers] = useState([]);
   const secret = sessionStorage.getItem("AM");
+  const { enqueueSnackbar } = useSnackbar();
+
+  const showSuccSnack = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'success',
+      preventDuplicate: true,
+      autoHideDuration: 2000,
+      anchorOrigin: {
+        vertical: 'top',
+        horizontal: 'center',
+    },
+    });
+  }
+
   const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${secret}`,
@@ -28,6 +43,7 @@ const ProfileSection = () => {
   }, []);
   const onCopyText = () => {
     setCopySuccess(true);
+    showSuccSnack("Your Team Code has been copied!")
     setTimeout(() => {
       setCopySuccess(false);
     }, 1000);
