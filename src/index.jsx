@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import { SnackbarProvider } from "notistack";
 import App from "./App";
+// import * as serviceWorker from "../public/serviceworker";
 
 const app = (
   <BrowserRouter>
@@ -17,3 +18,5 @@ ReactDOM.render(
   </SnackbarProvider>,
   document.getElementById("root")
 );
+
+// serviceWorker.register();
