@@ -1,12 +1,13 @@
+/* eslint-disable consistent-return */
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { SnackbarContent, useSnackbar } from "notistack";
 import CountDown from "../../components/CountDown/CountDown";
 
 // Styles
 import "./Form.css";
 import Navbar from "../../components/Navbar/Navbar";
-import { set } from "@firebase/database";
 
 const secret = sessionStorage.getItem("AM");
 const submissionForm = () => {
@@ -41,19 +42,46 @@ const submissionForm = () => {
 
   const [errorMessageG, setErrorMessageG] = useState("");
   const [errorMessageD, setErrorMessageD] = useState("");
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  const showErrorSnack = (message) => {
+    enqueueSnackbar(message, {
+      variant: "error",
+      preventDuplicate: true,
+      autoHideDuration: 2000,
+      anchorOrigin: {
+        vertical: "top",
+        horizontal: "center",
+      },
+    });
+  };
+
+  const showSuccSnack = (message) => {
+    enqueueSnackbar(message, {
+      variant: "success",
+      preventDuplicate: true,
+      autoHideDuration: 2000,
+      anchorOrigin: {
+        vertical: "top",
+        horizontal: "center",
+      },
+    });
+  };
 
   const validate = (value, link) => {
     if (link === "github") {
+      setGithubURL(value);
       if (checkGithubURL(value) || checkGitlabURL(value)) {
-        setGithubURL(value);
         setErrorMessageG("");
-      } else {
-        setErrorMessageG("Is Invalid URL");
+        return true;
       }
+      setErrorMessageG("Is Invalid URL");
     } else if (checkGoogleDriveURL(value)) {
       setGoogleDriveURL(value);
       setErrorMessageD("");
+      return true;
     } else {
+      setGoogleDriveURL(value);
       setErrorMessageD("Is Invalid URL");
     }
   };
@@ -69,11 +97,27 @@ const submissionForm = () => {
     } else if (date === "25-11 10:30") {
       setTimer("yellow");
     }
-  });
+
+    const response = axios
+      .get("https://apptitude2021.herokuapp.com/team/submission", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${secret}`,
+        },
+      })
+      .then((resp) => {
+        console.log(resp.data.data.submission);
+        setGithubURL(resp.data.data.submission.github);
+        setGoogleDriveURL(resp.data.data.submission.video);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const submitForm = () => {
     // check if both URLs are valid
-    if (githubURL && googleDriveURL) {
+    if (validate(githubURL, "github") && validate(googleDriveURL, "google")) {
       /**
        * make the request to backend to submit the github and video
        */
@@ -81,8 +125,8 @@ const submissionForm = () => {
         .put(
           "https://apptitude2021.herokuapp.com/submit",
           {
-            github: githubURL,
-            video: googleDriveURL,
+            github: `${githubURL}`,
+            video: `${googleDriveURL}`,
           },
           {
             headers: {
@@ -92,8 +136,12 @@ const submissionForm = () => {
           }
         )
         .then((response) => {
-          console.log(response);
+          showSuccSnack("Submission Successful");
+        })
+        .catch((err) => {
+          showErrorSnack("Oops! We are not accepting responses anymore!");
         });
+
       setIsSubmitted(true);
     } else {
       setErrorMessageG("Please enter a valid URL");
@@ -119,6 +167,7 @@ const submissionForm = () => {
               type="text"
               onChange={(e) => validate(e.target.value, "googledrive")}
               id="driveLink"
+              value={googleDriveURL}
               className="outline-none text-white bg-main w-full
               max-w-96 h-10 px-8 rounded-md border border-yellow-400 flex
               justify-center items-center center align-top "
@@ -136,6 +185,7 @@ const submissionForm = () => {
             <div className="text-white mb-2">Github Repo Link</div>
             <input
               type="text"
+              value={githubURL}
               onChange={(e) => validate(e.target.value, "github")}
               id="repoLink"
               className="outline-none text-white bg-main w-full
