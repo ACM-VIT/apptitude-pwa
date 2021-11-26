@@ -71,10 +71,10 @@ const Navbar = () => {
             alt="upload"
           />
         </Link>
-        <Link to="/sponsers">
+        <Link to="/sponsors">
           <img
             className={
-              pagePath === "sponsers" ||
+              pagePath === "sponsors" ||
               pagePath === "aboutus" ||
               pagePath === "prizes"
                 ? ""
@@ -85,7 +85,7 @@ const Navbar = () => {
           />
           <img
             className={
-              pagePath === "sponsers" ||
+              pagePath === "sponsors" ||
               pagePath === "aboutus" ||
               pagePath === "prizes"
                 ? "hidden"

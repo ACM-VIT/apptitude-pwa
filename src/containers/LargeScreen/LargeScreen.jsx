@@ -2,12 +2,16 @@
 import React from "react";
 
 import "../../App.css";
+import largeOverlay from "../../assets/images/largeOverlay.svg";
 
 const largeScreen = () => {
   return (
-    <div className="flex flex-col items-center justify-center largescreen">
-      <div className="text-white text-5xl mb-4">Apptitude 2021</div>
-      <div className="text-white text-xl">Please move to smaller screen</div>
+    <div className="w-full h-full flex justify-center items-center largescreen">
+      <img
+        className="mb-8"
+        src={largeOverlay}
+        alt="Please use a smaller screen"
+      />
     </div>
   );
 };

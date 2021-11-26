@@ -45,7 +45,7 @@ const App = function () {
             component={PhoneNo}
             redirect="/"
           />
-          <ProtectedRoute path="/sponsers" component={Sponsers} redirect="/" />
+          <ProtectedRoute path="/sponsors" component={Sponsers} redirect="/" />
           <ProtectedRoute path="/prizes" component={Prizes} redirect="/" />
           <ProtectedRoute path="/aboutus" component={AboutUs} redirect="/" />
           <ProtectedRoute path="/jointeam" component={JoinTeam} redirect="/" />
