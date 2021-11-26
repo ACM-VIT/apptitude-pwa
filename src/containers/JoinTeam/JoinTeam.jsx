@@ -3,11 +3,29 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import arrow from "../../assets/images/arrow.svg";
+import { useSnackbar } from 'notistack';
+
 const secret = sessionStorage.getItem("AM");
 
 const JoinTeam = function () {
   const [join, setName] = useState("");
   const [error, setError] = useState("");
+  const { enqueueSnackbar } = useSnackbar();
+
+
+  const showErrorSnack = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'error',
+      preventDuplicate: true,
+      autoHideDuration: 2000,
+      anchorOrigin: {
+        vertical: 'top',
+        horizontal: 'center',
+      },
+    });
+  }
+
+
   // const code = [
   //   {
   //     code: 827984324,
@@ -62,6 +80,7 @@ const JoinTeam = function () {
         window.location.href = "/teamjoined";
       })
       .catch((err) => {
+        showErrorSnack("Something went wrong! Please contact us on discord");
         setError(`${err.response.data.detail}`);
       });
   }
