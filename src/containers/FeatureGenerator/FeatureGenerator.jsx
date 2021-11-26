@@ -30,7 +30,7 @@ const FeatureGenerator = () => {
 
   useEffect(() => {
     axios
-      .get(`https://apptitude2021.herokuapp.com/team/features`, {
+      .get(`https://provider.acmvit.in/team/features`, {
         headers: {
           "content-type": "application/json",
           authorization: `Bearer ${secret}`,
