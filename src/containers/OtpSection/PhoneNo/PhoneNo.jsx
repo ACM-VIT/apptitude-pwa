@@ -1,3 +1,8 @@
+/* eslint-disable import/order */
+/* eslint-disable no-undef */
+/* eslint-disable prefer-arrow-callback */
+/* eslint-disable react/jsx-boolean-value */
+/* eslint-disable consistent-return */
 /* eslint-disable no-restricted-globals */
 import React, { useEffect, useState } from "react";
 import PhoneInput from "react-phone-number-input";
@@ -5,7 +10,7 @@ import Countdown from "react-countdown";
 import axios from "axios";
 import "react-phone-number-input/style.css";
 import { useSnackbar } from "notistack";
-import LoadingOverlay from 'react-loading-overlay';
+import LoadingOverlay from "react-loading-overlay";
 
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from "../../../services/firebase";
@@ -13,8 +18,8 @@ import { auth } from "../../../services/firebase";
 // Assets
 import BackArrow from "../../../assets/images/backArrow.svg";
 
-import "./Otp.css";
 import { Fab } from "@material-ui/core";
+import "./Otp.css";
 
 const phoneNo = () => {
   const [checkotp, setCheckOtp] = useState(false);
@@ -67,7 +72,6 @@ const phoneNo = () => {
       },
     });
   };
-
 
   const secret = sessionStorage.getItem("AM");
   const headers = {
@@ -162,18 +166,17 @@ const phoneNo = () => {
       "getotp",
       {
         size: "invisible",
-        callback: () => { },
+        callback: () => {},
       },
       auth
     );
   }, []);
 
-
   const phoneNumber = value;
 
   const otpHandler = () => {
     setLoading(true);
-    try{
+    try {
       window.recaptchaVerifier.render().then(function (widgetId) {
         grecaptcha.reset(widgetId);
       });
@@ -192,7 +195,7 @@ const phoneNo = () => {
         setLoading(false);
         console.log(error);
         showErrorSnack("Something went wrong in sending OTP!");
-        try{
+        try {
           window.recaptchaVerifier.render().then(function (widgetId) {
             grecaptcha.reset(widgetId);
           });
@@ -221,11 +224,7 @@ const phoneNo = () => {
   };
 
   return checkotp === false ? (
-    <LoadingOverlay
-      active={loading}
-      spinner
-      text='Sending OTP to the device'
-    >
+    <LoadingOverlay active={loading} spinner text="Sending OTP to the device">
       <div className="relative h-screen pt-28 mx-5">
         <div className="xs:flex xs:flex-col xs:items-center sm:flex sm:flex-col sm:items-center">
           <div className="text-white font-700 text-3xl">Phone Number</div>
@@ -236,11 +235,11 @@ const phoneNo = () => {
             <PhoneInput
               limitMaxLength={true}
               value={value}
-              className="text-white w-96 xxs:w-full xs:w-80 h-14 px-2 rounded-md border border-yellow-400 "
+              className="text-white bg-main w-96 xxs:w-full xs:w-80 h-14 px-2 rounded-md border border-yellow-400 "
               onChange={setValue}
               defaultCountry="IN"
               country="IN"
-              useNationalFormatForDefaultCountryValue={true}
+              useNationalFormatForDefaultCountryValue
             />
           </div>
         </div>
@@ -257,14 +256,13 @@ const phoneNo = () => {
             </div>
           </div>
         </div>
-
       </div>
     </LoadingOverlay>
   ) : (
     <LoadingOverlay
       active={loading}
       spinner
-      text='Checking if you are the person you claim to be'
+      text="Checking if you are the person you claim to be"
     >
       <div className="relative h-screen pt-12 mx-5">
         <div onClick={() => setCheckOtp(false)}>
@@ -299,17 +297,18 @@ const phoneNo = () => {
                   "getotp",
                   {
                     size: "invisible",
-                    callback: () => { },
+                    callback: () => {},
                   },
                   auth
                 );
                 otpHandler();
               }}
               id="getotp"
-              className={`${minutesDisplay === "0" && secondsDisplay === "0"
-                ? "text-white cursor-pointer"
-                : "text-secondary btn-disable"
-                } flex justify-center items-center mb-4 font-400 text-center`}
+              className={`${
+                minutesDisplay === "0" && secondsDisplay === "0"
+                  ? "text-white cursor-pointer"
+                  : "text-secondary btn-disable"
+              } flex justify-center items-center mb-4 font-400 text-center`}
             >
               Resend OTP
             </div>

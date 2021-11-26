@@ -30,12 +30,15 @@ body {
   scrollbar-width: none;
 }
 
-.largescreen{  
+.largescreen {
   display: none;
 }
 
+.PhoneInputCountrySelect {
+  background-color: #16171b !important;
+}
 @media screen and (min-width: 515px) {
-  .largescreen{  
+  .largescreen {
     position: fixed;
     background: #000;
     left: 0;
@@ -48,5 +51,3 @@ body {
     display: flex;
   }
 }
-  
-
