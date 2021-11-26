@@ -1,9 +1,9 @@
 {
-  "theme_color": "#FFFFFF",
-  "background_color": "#16171B",
+  "theme_color": "#DAAA48",
+  "background_color": "#DAAA48",
   "display": "standalone",
   "scope": "/",
-  "start_url": "/",
+  "start_url": ".",
   "name": "Apptitude",
   "short_name": "Apptitude",
   "description": "Apptitude is a 36 hour-long app development hackathon where participants will get a chance to develop creative and innovative applications for noble causes.",
