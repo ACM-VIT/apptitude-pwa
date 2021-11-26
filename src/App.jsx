@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
+/* eslint-disable react/jsx-no-useless-fragment */
+/* eslint-disable react/no-unstable-nested-components */
+/* eslint-disable react/function-component-definition */
+import React from "react";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
 
 // Containers
 import LoginSection from "./containers/LoginSection/LoginSection";
@@ -18,68 +21,73 @@ import Countdown from "./containers/Countdown/Countdown";
 import Timeline from "./containers/Timeline/Timeline";
 import SubmissionPage from "./containers/SubmissionFormSection/Form";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import LargeScreen from "./containers/LargeScreen/LargeScreen";
 
 // Styling
 import "./App.css";
 
 const App = function () {
-  const [authLogin, setAuthLogin] = useState(false);
-  useEffect(() => {
-    if (sessionStorage.getItem("AM")) {
-      setAuthLogin(true);
-    }
-  }, []);
-  console.log(authLogin);
-
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/" exact component={LoginSection} />
-        <ProtectedRoute
-          path="/profile"
-          exact
-          component={ProfileSection}
-          redirect="/"
-        />
-        <ProtectedRoute path="/phone" exact component={PhoneNo} redirect="/" />
-        <ProtectedRoute path="/sponsers" component={Sponsers} redirect="/" />
-        <ProtectedRoute path="/prizes" component={Prizes} redirect="/" />
-        <ProtectedRoute path="/aboutus" component={AboutUs} redirect="/" />
-        <ProtectedRoute path="/jointeam" component={JoinTeam} redirect="/" />
-        <ProtectedRoute
-          path="/createteam"
-          component={CreateTeam}
-          redirect="/"
-        />
-        <ProtectedRoute
-          path="/teamcreated"
-          component={TeamCreated}
-          redirect="/"
-        />
-        <ProtectedRoute
-          path="/teamjoined"
-          component={TeamJoined}
-          redirect="/"
-        />
-        <ProtectedRoute
-          path="/submission"
-          component={SubmissionPage}
-          redirect="/"
-        />
-        <ProtectedRoute
-          path="/problems"
-          component={ProbStatements}
-          redirect="/"
-        />
-        <ProtectedRoute
-          path="/features"
-          component={FeatureGenerator}
-          redirect="/"
-        />
-        <ProtectedRoute path="/timeline" component={Timeline} redirect="/" />
-        <ProtectedRoute path="/countdown" component={Countdown} redirect="/" />
-      </Switch>
-    </BrowserRouter>
+    <>
+      <LargeScreen />
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" exact component={LoginSection} />
+          <ProtectedRoute
+            path="/profile"
+            exact
+            component={ProfileSection}
+            redirect="/"
+          />
+          <ProtectedRoute
+            path="/phone"
+            exact
+            component={PhoneNo}
+            redirect="/"
+          />
+          <ProtectedRoute path="/sponsers" component={Sponsers} redirect="/" />
+          <ProtectedRoute path="/prizes" component={Prizes} redirect="/" />
+          <ProtectedRoute path="/aboutus" component={AboutUs} redirect="/" />
+          <ProtectedRoute path="/jointeam" component={JoinTeam} redirect="/" />
+          <ProtectedRoute
+            path="/createteam"
+            component={CreateTeam}
+            redirect="/"
+          />
+          <ProtectedRoute
+            path="/teamcreated"
+            component={TeamCreated}
+            redirect="/"
+          />
+          <ProtectedRoute
+            path="/teamjoined"
+            component={TeamJoined}
+            redirect="/"
+          />
+          <ProtectedRoute
+            path="/submission"
+            component={SubmissionPage}
+            redirect="/"
+          />
+          <ProtectedRoute
+            path="/problems"
+            component={ProbStatements}
+            redirect="/"
+          />
+          <ProtectedRoute
+            path="/features"
+            component={FeatureGenerator}
+            redirect="/"
+          />
+          <ProtectedRoute path="/timeline" component={Timeline} redirect="/" />
+          <ProtectedRoute
+            path="/countdown"
+            component={Countdown}
+            redirect="/"
+          />
+        </Switch>
+      </BrowserRouter>
+    </>
   );
 };
 

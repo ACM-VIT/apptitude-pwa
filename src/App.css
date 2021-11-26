@@ -29,3 +29,24 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.largescreen{  
+  display: none;
+}
+
+@media screen and (min-width: 515px) {
+  .largescreen{  
+    position: fixed;
+    background: #000;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 100;
+    display: flex;
+  }
+}
+  
+
