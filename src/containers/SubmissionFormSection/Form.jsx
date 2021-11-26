@@ -1,13 +1,14 @@
+/* eslint-disable consistent-return */
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { SnackbarContent, useSnackbar } from "notistack";
 import CountDown from "../../components/CountDown/CountDown";
 import LoadingOverlay from "react-loading-overlay";
 
 // Styles
 import "./Form.css";
 import Navbar from "../../components/Navbar/Navbar";
-import { set } from "@firebase/database";
 
 const secret = sessionStorage.getItem("AM");
 const submissionForm = () => {
@@ -71,16 +72,18 @@ const submissionForm = () => {
 
   const validate = (value, link) => {
     if (link === "github") {
+      setGithubURL(value);
       if (checkGithubURL(value) || checkGitlabURL(value)) {
-        setGithubURL(value);
         setErrorMessageG("");
-      } else {
-        setErrorMessageG("Is Invalid URL");
+        return true;
       }
+      setErrorMessageG("Is Invalid URL");
     } else if (checkGoogleDriveURL(value)) {
       setGoogleDriveURL(value);
       setErrorMessageD("");
+      return true;
     } else {
+      setGoogleDriveURL(value);
       setErrorMessageD("Is Invalid URL");
     }
   };
@@ -118,7 +121,7 @@ const submissionForm = () => {
 
   const submitForm = () => {
     // check if both URLs are valid
-    if (githubURL && googleDriveURL) {
+    if (validate(githubURL, "github") && validate(googleDriveURL, "google")) {
       /**
        * make the request to backend to submit the github and video
        */
@@ -127,8 +130,8 @@ const submissionForm = () => {
         .put(
           "https://apptitude2021.herokuapp.com/submit",
           {
-            github: githubURL,
-            video: googleDriveURL,
+            github: `${githubURL}`,
+            video: `${googleDriveURL}`,
           },
           {
             headers: {
@@ -145,6 +148,7 @@ const submissionForm = () => {
           setLoading(false);
           showErrorSnack("Oops! We are not accepting responses anymore!");
         });
+
       setIsSubmitted(true);
     } else {
       setErrorMessageG("Please enter a valid URL");
