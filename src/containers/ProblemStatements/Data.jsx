@@ -7,8 +7,7 @@ export default [
   },
   {
     id: "two",
-    question:
-      "Good Health and Well Being 2",
+    question: "Good Health and Well Being 2",
     content:
       "During pandemic, there was a chaos to get the appropriate medical resources at the right place and at a right time. Figure an efficient solution of networking to solve this",
   },
@@ -40,7 +39,7 @@ export default [
     id: "seven",
     question: "Industry, Innovation and Infrastructure 1",
     content:
-      "`ts often a painful task to keep track of all the infrastructure/resources and devices in any organization, mobile devices such as phones, tablets, also monitor server instances on the cloud such as EC2, GCP, and local self-hosted instances on different virtualization platforms. (eg: Users and usage records and other metrics)",
+      "It's often a painful task to keep track of all the infrastructure/resources and devices in any organization, mobile devices such as phones, tablets, also monitor server instances on the cloud such as EC2, GCP, and local self-hosted instances on different virtualization platforms. (eg: Users and usage records and other metrics)",
   },
   {
     id: "eight",
