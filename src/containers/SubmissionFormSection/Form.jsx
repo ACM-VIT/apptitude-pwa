@@ -151,8 +151,7 @@ const submissionForm = () => {
 
       setIsSubmitted(true);
     } else {
-      setErrorMessageG("Please enter a valid URL");
-      setErrorMessageD("Please enter a valid URL");
+      showErrorSnack("Please check the URL");
     }
   };
 
@@ -186,7 +185,6 @@ const submissionForm = () => {
               />
               <span
                 style={{
-                  fontWeight: "bold",
                   color: "red",
                 }}
               >
@@ -206,7 +204,6 @@ const submissionForm = () => {
               />
               <span
                 style={{
-                  fontWeight: "bold",
                   color: "red",
                 }}
               >
