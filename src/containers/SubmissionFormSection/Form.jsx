@@ -94,9 +94,10 @@ const submissionForm = () => {
     const date = `${today.getDate()}-${
       today.getMonth() + 1
     } ${today.getHours()}:${today.getMinutes()}`;
-    if (date === "23-11 19:5") {
+    console.log(`date ${date}`);
+    if (date === "28-11 9:0") {
       setTimer("red");
-    } else if (date === "25-11 10:30") {
+    } else if (date === "28-11 8:55") {
       setTimer("yellow");
     }
 
@@ -167,7 +168,7 @@ const submissionForm = () => {
           <span
             className={`mt-2 text-${timer} text-sm flex justify-center items-center float-right align-bottom`}
           >
-            <CountDown date="2021-11-28T17:00:00" />
+            <CountDown date="2021-11-28T09:00:00" />
           </span>
         </div>
         <div className="mt-5 flex w-full flex-col justify-between h-full">
