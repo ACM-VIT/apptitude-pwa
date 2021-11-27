@@ -18,11 +18,12 @@ import AboutUs from "./containers/Sponsers/AboutUs";
 import ProfileSection from "./containers/ProfileSection/ProfileSection";
 import ProbStatements from "./containers/ProblemStatements/ProbStatements";
 import FeatureGenerator from "./containers/FeatureGenerator/FeatureGenerator";
-import Countdown from "./containers/Countdown/Countdown";
+// import Countdown from "./containers/Countdown/Countdown";
 import Timeline from "./containers/Timeline/Timeline";
-import SubmissionPage from "./containers/SubmissionFormSection/Form";
+// import SubmissionPage from "./containers/SubmissionFormSection/Form";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import LargeScreen from "./containers/LargeScreen/LargeScreen";
+import Closing from "./containers/Closing/Closing";
 
 // Styling
 import "./App.css";
@@ -73,11 +74,11 @@ const App = function () {
             component={TeamJoined}
             redirect="/"
           />
-          <ProtectedRoute
+          {/* <ProtectedRoute
             path="/submission"
             component={SubmissionPage}
             redirect="/"
-          />
+          /> */}
           <ProtectedRoute
             path="/problems"
             component={ProbStatements}
@@ -89,9 +90,14 @@ const App = function () {
             redirect="/"
           />
           <ProtectedRoute path="/timeline" component={Timeline} redirect="/" />
-          <ProtectedRoute
+          {/* <ProtectedRoute
             path="/countdown"
             component={Countdown}
+            redirect="/"
+          /> */}
+          <ProtectedRoute
+            path="/valedictory"
+            component={Closing}
             redirect="/"
           />
         </Switch>

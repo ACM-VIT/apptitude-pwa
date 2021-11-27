@@ -59,14 +59,14 @@ const Navbar = () => {
             alt="category"
           />
         </Link>
-        <Link to="/submission">
+        <Link to="/valedictory">
           <img
-            className={pagePath === "submission" ? "" : "hidden"}
+            className={pagePath === "valedictory" ? "" : "hidden"}
             src={uploadfill}
             alt="upload"
           />
           <img
-            className={pagePath === "submission" ? "hidden" : ""}
+            className={pagePath === "valedictory" ? "hidden" : ""}
             src={upload}
             alt="upload"
           />
